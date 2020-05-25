@@ -1,10 +1,23 @@
 const express = require('express');
-const app = express();
+const { PORT } = require('./config');
 
-app.use(express.static('public'));
+const app = express();
+const admin = express();
+
+app.use(express.static('src/travelco'));
 
 app.get('/', (req, res) => {
-    res.send();
+    res.render('index');
 });
 
-app.listen(4445, () => console.log('Gator app listening on port 4445!'));
+admin.use(express.static('src/RuangAdmin-master'));
+
+admin.get('/', (req, res) => {
+    res.render('index');
+});
+
+app.use('/admin', admin);
+
+app.listen(PORT, () => {
+    console.log(`Gator app listening on port ${PORT}`)
+});
