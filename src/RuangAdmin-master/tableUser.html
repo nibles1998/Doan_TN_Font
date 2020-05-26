@@ -165,29 +165,8 @@
                           <th>Role</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>se65f4s89fg4sg65g4</td>
-                          <td>Nibles</td>
-                          <td>VyNguyen</td>
-                          <td>1998-08-04</td>
-                          <td>12 Nguyen Van Bao</td>
-                          <td>nib@gmail.com</td>
-                          <td>+(84) 373 016 238</td>
-                          <td>Viet Name</td>
-                          <td>Admin</td>
-                        </tr>
-                        <tr>
-                          <td>se65f4s89fg4sg65g4</td>
-                          <td>Nibles</td>
-                          <td>VyNguyen</td>
-                          <td>1998-08-04</td>
-                          <td>12 Nguyen Van Bao</td>
-                          <td>nib@gmail.com</td>
-                          <td>+(84) 373 016 238</td>
-                          <td>Viet Name</td>
-                          <td>Admin</td>
-                        </tr>
+                      <tbody id="bodyTable">
+
                       </tbody>
                     </table>
                   </div>
@@ -225,8 +204,33 @@
       <!-- Page level custom scripts -->
       <script>
         $(document).ready(function () {
-          $('#dataTable').DataTable(); // ID From dataTable 
-          $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+          const apiUrl = 'http://localhost:4444/user/s';
+          $.ajax({
+            url: apiUrl,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+          }).done((result) => {
+            let str = "";
+            const data = result.data;
+            for (const i of data) {
+              str +=
+                '<tr><td>' + i.id
+                + '</td><td>' + i.displayName
+                + '</td><td> ' + i.fullName
+                + '</td><td>' + i.dateOfBirth
+                + '</td><td>' + i.address
+                + '</td><td>' + i.email
+                + '</td><td>' + i.phone
+                + '</td><td>' + i.country
+                + '</td><td>' + i.roleId
+                + '</td></tr>';
+            }
+            const table = document.getElementById("bodyTable");
+            table.innerHTML = str;
+            $('#dataTable').DataTable();
+            $('#dataTableHover').DataTable();
+          });
         });
       </script>
 
