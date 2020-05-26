@@ -218,7 +218,7 @@
                 '<tr><td>' + i.id
                 + '</td><td>' + i.displayName
                 + '</td><td> ' + i.fullName
-                + '</td><td>' + i.dateOfBirth
+                + '</td ><td>' + `${new Date(Date.parse(i.dateOfBirth)).getFullYear()}/${new Date(Date.parse(i.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(i.dateOfBirth)).getDate()}`
                 + '</td><td>' + i.address
                 + '</td><td>' + i.email
                 + '</td><td>' + i.phone
