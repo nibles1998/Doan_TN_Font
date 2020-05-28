@@ -153,7 +153,8 @@
               <div class="tab-content" id="nav-tabContent">
                 <div class="card mb-4">
                   <div class="table-responsive p-3">
-                    <button class="mb-3 btn-group-lg btn-success">Create</button>
+                    <button type="button" class="mb-3 btn-group-lg btn-success" data-toggle="modal"
+                      data-target="#exampleModalCenter-Create">Create</button>
                     <table class="table align-items-center table-flush" id="dataTable">
                       <thead class="thead-light">
                         <tr>
@@ -178,15 +179,173 @@
                 </div>
               </div>
 
+              <!-- Modal Create -->
+              <div class="modal fade" id="exampleModalCenter-Create" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Create User</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="user">
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="email" class="form-control" id="email-create" aria-describedby="emailHelp"
+                                placeholder="Enter Email Address">
+                            </div>
+                            <div class="col-lg-6">
+                              <input type="password" class="form-control" id="password-create" placeholder="Password">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="fullName-create" aria-describedby="emailHelp"
+                                placeholder="Enter Full Name">
+                            </div>
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="displayName-create"
+                                aria-describedby="emailHelp" placeholder="Enter Display Name">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="address-create" aria-describedby="emailHelp"
+                            placeholder="Enter Address">
+                        </div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="phone-create" aria-describedby="emailHelp"
+                                placeholder="Enter Phone Number">
+                            </div>
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="dateOfBirth-create"
+                                aria-describedby="emailHelp" placeholder="Enter BirthDay">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="country-create" aria-describedby="emailHelp"
+                                placeholder="Enter Country">
+                            </div>
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="role-create" aria-describedby="emailHelp"
+                                placeholder="Enter Role">
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-success">Create</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <!-- Documentation Link -->
-              <div class="row">
-                <div class="col-lg-12">
-                  <p>DataTables is a third party plugin that is used to generate the demo table below. For more
-                    information
-                    about DataTables, please visit the official <a href="https://datatables.net/"
-                      target="_blank">DataTables
-                      documentation.</a></p>
+              <!-- Modal Update -->
+              <div class="modal fade" id="exampleModalCenter-Update" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Update User</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="user">
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="email" class="form-control" id="email-update" aria-describedby="emailHelp"
+                                placeholder="Enter Email Address">
+                            </div>
+                            <div class="col-lg-6">
+                              <input type="password" class="form-control" id="password-update" placeholder="Password">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="fullName-update" aria-describedby="emailHelp"
+                                placeholder="Enter Full Name">
+                            </div>
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="displayName-update"
+                                aria-describedby="emailHelp" placeholder="Enter Display Name">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="address-update" aria-describedby="emailHelp"
+                            placeholder="Enter Address">
+                        </div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="phone-update" aria-describedby="emailHelp"
+                                placeholder="Enter Phone Number">
+                            </div>
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="dateOfBirth-update"
+                                aria-describedby="emailHelp" placeholder="Enter BirthDay">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="country-update" aria-describedby="emailHelp"
+                                placeholder="Enter Country">
+                            </div>
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" id="role-update" aria-describedby="emailHelp"
+                                placeholder="Enter Role">
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary">Update</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal Delete -->
+              <div class="modal fade" id="exampleModalCenter-Delete" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Delete User</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h3>Do you want delete?</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -210,20 +369,24 @@
       <script>
         $(document).ready(function () {
           const apiUrl = 'http://localhost:4444/user/s';
+          const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
           $.ajax({
             url: apiUrl,
             type: "GET",
             contentType: "application/json",
             dataType: "json",
+            headers: {
+              Authorization: 'Bearer ' + authenticate.token
+            },
           }).done((result) => {
             let str = "";
             const data = result.data;
             for (const i of data) {
               str += '<tr><td>'
-                + '<button class="btn-danger">Delete</button>'
+                + '<button type="button" class="btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
                 + '</td>'
                 + '<td>'
-                + '<button class="btn-primary">Update</button>'
+                + '<button type="button" class="btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
                 + '</td>'
                 + '<td>' + i.id
                 + '</td><td>' + i.displayName
@@ -240,6 +403,20 @@
             table.innerHTML = str;
             $('#dataTable').DataTable();
             $('#dataTableHover').DataTable();
+          });
+        });
+      </script>
+
+      <script>
+        $(document).ready(function () {
+          const apiUrl = 'http://localhost:4444/userrole/s';
+          $.ajax({
+            url: apiUrl,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+          }).done((result) => {
+            console.log("ROLE: ", JSON.stringify(result));
           });
         });
       </script>
