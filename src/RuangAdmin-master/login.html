@@ -39,7 +39,8 @@
                     </div>
                     <hr>
                     <div class="form-group">
-                      <button id="btnLogin" type="submit" class="btn btn-primary btn-block">Login</button>
+                      <!-- <button id="btnLogin" type="submit" class="btn btn-primary btn-block">Login</button> -->
+                      <div id="btnLogin" type="submit" class="btn btn-primary btn-block">Login</div>
                     </div>
                   </form>
                 </div>
@@ -56,21 +57,34 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
   <script type="text/javascript">
-    $(('#btnLogin')).click(() => {
+    $(('#btnLogin')).click(async (e) => {
+      e.preventDefault();
       console.log("CLICKkkkkkkkkkkkkkkkkkkkkkkkk:");
       const apiURL = 'http://localhost:4444/user/login';
       const email = $('#exampleInputEmail').val();
       const password = $('#exampleInputPassword').val();
-      const account = { email, password };
+      const account = {
+        email,
+        password
+      };
       const ajaxReq = $.ajax(apiURL, {
         type: "POST",
         data: JSON.stringify(account),
         contentType: "application/json",
-        dataType: "json"
+        dataType: "json",
+        success: function (data) {
+          console.log(data);
+          window.location.assign('http://localhost:4445/admin/index.html');
+        },
+        error: function (error) {
+          console.log(error);
+        }
       });
-      ajaxReq.success(function (data, status, jqXhr) {
-        window.location.assign('http://localhost:4445/admin/index.html');
-      });
+
+      // ajaxReq.success(function (data, status, jqXhr) {
+      //   window.location.assign('http://localhost:4445/admin/index.html');
+      // });
+
     });
   </script>
 </body>
