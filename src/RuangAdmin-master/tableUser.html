@@ -19,7 +19,7 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
         <div class="sidebar-brand-icon">
           <img src="img/logo/biglogo.png">
         </div>
@@ -37,39 +37,41 @@
       </div>
       <li class="nav-item">
         <a class="nav-link " href="tableUser.html">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-users"></i>
           <span>User List</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="tableTour.html">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-images"></i>
           <span>Tour List</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="tableTypeTour.html">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-image"></i>
           <span>TypeTour List</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="tableBill.html">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-money-bill"></i>
           <span>Bill List</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="tableCompany.html">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-user-friends"></i>
           <span>Company List</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="tableRole.html">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-user-cog"></i>
           <span>Role List</span>
         </a>
+      </li>
+
       </li>
 
       <hr class="sidebar-divider">
@@ -151,9 +153,12 @@
               <div class="tab-content" id="nav-tabContent">
                 <div class="card mb-4">
                   <div class="table-responsive p-3">
+                    <button class="mb-3 btn-group-lg btn-success">Create</button>
                     <table class="table align-items-center table-flush" id="dataTable">
                       <thead class="thead-light">
                         <tr>
+                          <th></th>
+                          <th></th>
                           <th>ID</th>
                           <th>DisplayName</th>
                           <th>FullName</th>
@@ -214,8 +219,13 @@
             let str = "";
             const data = result.data;
             for (const i of data) {
-              str +=
-                '<tr><td>' + i.id
+              str += '<tr><td>'
+                + '<button class="btn-danger">Delete</button>'
+                + '</td>'
+                + '<td>'
+                + '<button class="btn-primary">Update</button>'
+                + '</td>'
+                + '<td>' + i.id
                 + '</td><td>' + i.displayName
                 + '</td><td> ' + i.fullName
                 + '</td ><td>' + `${new Date(Date.parse(i.dateOfBirth)).getFullYear()}/${new Date(Date.parse(i.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(i.dateOfBirth)).getDate()}`

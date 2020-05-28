@@ -19,7 +19,7 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
                 <div class="sidebar-brand-icon">
                     <img src="img/logo/biglogo.png">
                 </div>
@@ -37,39 +37,41 @@
             </div>
             <li class="nav-item">
                 <a class="nav-link " href="tableUser.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>User List</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="tableTour.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-images"></i>
                     <span>Tour List</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="tableTypeTour.html">
-                  <i class="fas fa-fw fa-table"></i>
-                  <span>TypeTour List</span>
+                    <i class="fas fa-image"></i>
+                    <span>TypeTour List</span>
                 </a>
-              </li>
+            </li>
             <li class="nav-item">
                 <a class="nav-link " href="tableBill.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-money-bill"></i>
                     <span>Bill List</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="tableCompany.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-user-friends"></i>
                     <span>Company List</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="tableRole.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-user-cog"></i>
                     <span>Role List</span>
                 </a>
+            </li>
+
             </li>
 
             <hr class="sidebar-divider">
@@ -152,9 +154,12 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="card mb-4">
                                     <div class="table-responsive p-3">
+                                        <button class="mb-3 btn-group-lg btn-success">Create</button>
                                         <table class="table align-items-center table-flush" id="dataTable">
                                             <thead class="thead-light">
                                                 <tr>
+                                                    <th></th>
+                                                    <th></th>
                                                     <th>ID</th>
                                                     <th>TourCode</th>
                                                     <th>TourName</th>
@@ -173,6 +178,8 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
+                                                    <td><button class="btn-danger">Delete</button></td>
+                                                    <td><button class="btn-primary">Update</button></td>
                                                     <td>se65f4s89fg4sg65g4</td>
                                                     <td>T001</td>
                                                     <td>VinperLand</td>
@@ -189,6 +196,8 @@
                                                     <td>VTC</td>
                                                 </tr>
                                                 <tr>
+                                                    <td><button class="btn-danger">Delete</button></td>
+                                                    <td><button class="btn-primary">Update</button></td>
                                                     <td>se65f4s89fg4sg65g4</td>
                                                     <td>T001</td>
                                                     <td>VinperLand</td>

@@ -39,7 +39,7 @@
                     </div>
                     <hr>
                     <div class="form-group">
-                      <a href="index.html" class="btn btn-primary btn-block">Login</a>
+                      <button id="btnLogin" type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>
                   </form>
                 </div>
@@ -55,6 +55,24 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
+  <script type="text/javascript">
+    $(('#btnLogin')).click(() => {
+      console.log("CLICKkkkkkkkkkkkkkkkkkkkkkkkk:");
+      const apiURL = 'http://localhost:4444/user/login';
+      const email = $('#exampleInputEmail').val();
+      const password = $('#exampleInputPassword').val();
+      const account = { email, password };
+      const ajaxReq = $.ajax(apiURL, {
+        type: "POST",
+        data: JSON.stringify(account),
+        contentType: "application/json",
+        dataType: "json"
+      });
+      ajaxReq.success(function (data, status, jqXhr) {
+        window.location.assign('http://localhost:4445/admin/index.html');
+      });
+    });
+  </script>
 </body>
 
 </html>
