@@ -95,7 +95,7 @@
                                 <form class="navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-1 small"
-                                            placeholder="What do you want to look for?" aria-label="Search"
+                                            placeholder="What do you want to look for?" aria-label="Search required"
                                             aria-describedby="basic-addon2" style="border-color: #3f51b5;">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
@@ -154,7 +154,8 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="card mb-4">
                                     <div class="table-responsive p-3">
-                                        <button class="mb-3 btn-group-lg btn-success">Create</button>
+                                        <button type="button" class="btn mb-3 btn-group-lg btn-success" data-toggle="modal"
+                                            data-target="#exampleModalCenter-Create">Create</button>
                                         <table class="table align-items-center table-flush" id="dataTable">
                                             <thead class="thead-light">
                                                 <tr>
@@ -176,43 +177,8 @@
                                                     <th>Company</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><button class="btn-danger">Delete</button></td>
-                                                    <td><button class="btn-primary">Update</button></td>
-                                                    <td>se65f4s89fg4sg65g4</td>
-                                                    <td>T001</td>
-                                                    <td>VinperLand</td>
-                                                    <td>NhaTrang</td>
-                                                    <td>40</td>
-                                                    <td>38</td>
-                                                    <td>100000</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>3</td>
-                                                    <td>2020-05-1</td>
-                                                    <td>2020-05-30</td>
-                                                    <td>Welcome to Nha Trang</td>
-                                                    <td>VTC</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><button class="btn-danger">Delete</button></td>
-                                                    <td><button class="btn-primary">Update</button></td>
-                                                    <td>se65f4s89fg4sg65g4</td>
-                                                    <td>T001</td>
-                                                    <td>VinperLand</td>
-                                                    <td>NhaTrang</td>
-                                                    <td>40</td>
-                                                    <td>38</td>
-                                                    <td>100000</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>3</td>
-                                                    <td>2020-05-1</td>
-                                                    <td>2020-05-30</td>
-                                                    <td>Welcome to Nha Trang</td>
-                                                    <td>VTC</td>
-                                                </tr>
+                                            <tbody id="bodyTable">
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -220,15 +186,206 @@
                             </div>
 
 
-                            <!-- Documentation Link -->
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <p>DataTables is a third party plugin that is used to generate the demo table below.
-                                        For more
-                                        information
-                                        about DataTables, please visit the official <a href="https://datatables.net/"
-                                            target="_blank">DataTables
-                                            documentation.</a></p>
+                            <!-- Modal Create -->
+                            <div class="modal fade" id="exampleModalCenter-Create" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Create Tour</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="user">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="tourCode-create"
+                                                                aria-describedby="emailHelp"
+                                                                placeholder="Enter Tour Code" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="tourName-create"
+                                                                placeholder="Enter Tour Name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="location-create"
+                                                                aria-describedby="emailHelp"
+                                                                placeholder="Enter Location" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="price-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Price"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control"
+                                                                id="startedDate-create" aria-describedby="emailHelp"
+                                                                placeholder="Enter Started Date" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="endDate-create"
+                                                                aria-describedby="emailHelp"
+                                                                placeholder="Enter End Date" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="seat-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Seat"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="company-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Company"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="note-create"
+                                                        aria-describedby="emailHelp" placeholder="Enter Note" required>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-success">Create</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Update -->
+                            <div class="modal fade" id="exampleModalCenter-Update" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Update Tour</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="user">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="tourCode-update"
+                                                                aria-describedby="emailHelp"
+                                                                placeholder="Enter Tour Code" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="tourName-update"
+                                                                placeholder="Enter Tour Name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="location-update"
+                                                                aria-describedby="emailHelp"
+                                                                placeholder="Enter Location" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="price-update"
+                                                                aria-describedby="emailHelp" placeholder="Enter Price"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control"
+                                                                id="startedDate-update" aria-describedby="emailHelp"
+                                                                placeholder="Enter Started Date" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="endDate-update"
+                                                                aria-describedby="emailHelp"
+                                                                placeholder="Enter End Date" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="seat-update"
+                                                                aria-describedby="emailHelp" placeholder="Enter Seat"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="company-update"
+                                                                aria-describedby="emailHelp" placeholder="Enter Company"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="child-update"
+                                                                aria-describedby="emailHelp" placeholder="Enter Child"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="adult-update"
+                                                                aria-describedby="emailHelp" placeholder="Enter Adult"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="note-update"
+                                                        aria-describedby="emailHelp" placeholder="Enter Note" required>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Delete -->
+                            <div class="modal fade" id="exampleModalCenter-Delete" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Tour</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Do you want delete?</h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -251,8 +408,47 @@
             <!-- Page level custom scripts -->
             <script>
                 $(document).ready(function () {
-                    $('#dataTable').DataTable(); // ID From dataTable 
-                    $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+                    const apiUrl = 'http://localhost:4444/tour/s';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                    }).done((result) => {
+                        let str = "";
+                        const data = result.data;
+                        for (const i of data) {
+                            str += '<tr><td>'
+                                + '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
+                                + '</td>'
+                                + '<td>'
+                                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
+                                + '</td>'
+                                + '<td>' + i.id
+                                + '</td><td>' + i.tourCode
+                                + '</td><td> ' + i.tourName
+                                + '</td><td> ' + i.location
+                                + '</td><td> ' + i.seat
+                                + '</td><td> ' + i.emptySeat
+                                + '</td><td> ' + i.price
+                                + '</td><td> ' + i.child
+                                + '</td><td> ' + i.adult
+                                + '</td><td> ' + i.time
+                                + '</td ><td>' + `${new Date(Date.parse(i.startedDate)).getDate()}/${new Date(Date.parse(i.startedDate)).getMonth() + 1}/${new Date(Date.parse(i.startedDate)).getFullYear()}`
+                                + '</td ><td>' + `${new Date(Date.parse(i.endDate)).getDate()}/${new Date(Date.parse(i.endDate)).getMonth() + 1}/${new Date(Date.parse(i.endDate)).getFullYear()}`
+                                + '</td><td> ' + i.note
+                                + '</td><td> ' + i.companyId
+                                + '</td></tr>';
+                        }
+                        const table = document.getElementById("bodyTable");
+                        table.innerHTML = str;
+                        $('#dataTable').DataTable();
+                        $('#dataTableHover').DataTable();
+                    });
                 });
             </script>
 

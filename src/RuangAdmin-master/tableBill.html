@@ -95,7 +95,7 @@
                                 <form class="navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-1 small"
-                                            placeholder="What do you want to look for?" aria-label="Search"
+                                            placeholder="What do you want to look for?" aria-label="Search required"
                                             aria-describedby="basic-addon2" style="border-color: #3f51b5;">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
@@ -154,12 +154,15 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="card mb-4">
                                     <div class="table-responsive p-3">
+                                        <button type="button" class="btn mb-3 btn-group-lg btn-success" data-toggle="modal"
+                                            data-target="#exampleModalCenter-Create">Create</button>
                                         <table class="table align-items-center table-flush" id="dataTable">
                                             <thead class="thead-light">
                                                 <tr>
+                                                    <th></th>
                                                     <th>ID</th>
-                                                    <th>User</th>
-                                                    <th>Tour</th>
+                                                    <th>UserID</th>
+                                                    <th>TourID</th>
                                                     <th>Price</th>
                                                     <th>Child</th>
                                                     <th>Adult</th>
@@ -171,35 +174,8 @@
                                                     <th>PaymentMethod</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>se65f4s89fg4sg65g4</td>
-                                                    <td>Nibles</td>
-                                                    <td>NhaTrang</td>
-                                                    <td>100000</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>180000</td>
-                                                    <td>Yes</td>
-                                                    <td>No</td>
-                                                    <td>2020-05-11</td>
-                                                    <td>2020-05-20</td>
-                                                    <td>ATM</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>se65f4s89fg4sg65g4</td>
-                                                    <td>Nibles</td>
-                                                    <td>NhaTrang</td>
-                                                    <td>100000</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>180000</td>
-                                                    <td>Yes</td>
-                                                    <td>No</td>
-                                                    <td>2020-05-11</td>
-                                                    <td>2020-05-20</td>
-                                                    <td>ATM</td>
-                                                </tr>
+                                            <tbody id="bodyTable">
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -207,15 +183,176 @@
                             </div>
 
 
-                            <!-- Documentation Link -->
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <p>DataTables is a third party plugin that is used to generate the demo table below.
-                                        For more
-                                        information
-                                        about DataTables, please visit the official <a href="https://datatables.net/"
-                                            target="_blank">DataTables
-                                            documentation.</a></p>
+                            <!-- Modal Create -->
+                            <div class="modal fade" id="exampleModalCenter-Create" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Create Bill</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="user">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="userId-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter User Id"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="tourId-create"
+                                                                placeholder="Enter Tour Id" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="price-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Price"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control"
+                                                                id="applyDate-create" aria-describedby="emailHelp"
+                                                                placeholder="Enter Apply Date" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="child-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Child"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="adult-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Adult"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="hasPaied-create"
+                                                                aria-describedby="emailHelp"
+                                                                placeholder="Enter Has Paied" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control"
+                                                                id="paymentMethod-create" aria-describedby="emailHelp"
+                                                                placeholder="Enter PaymentMethod" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-success">Create</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Update -->
+                            <div class="modal fade" id="exampleModalCenter-Update" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Update Bill</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="user">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="price-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Price"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control"
+                                                                id="applyDate-create" aria-describedby="emailHelp"
+                                                                placeholder="Enter Apply Date" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="child-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Child"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="adult-create"
+                                                                aria-describedby="emailHelp" placeholder="Enter Adult"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control" id="hasPaied-create"
+                                                                aria-describedby="emailHelp"
+                                                                placeholder="Enter Has Paied" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" class="form-control"
+                                                                id="hasCancel-create" aria-describedby="emailHelp"
+                                                                placeholder="Enter Has Cancel" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="paymentMethod-create"
+                                                        aria-describedby="emailHelp" placeholder="Enter PaymentMethod"
+                                                        required>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Delete -->
+                            <div class="modal fade" id="exampleModalCenter-Delete" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Bill</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Do you want delete?</h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -238,8 +375,42 @@
             <!-- Page level custom scripts -->
             <script>
                 $(document).ready(function () {
-                    $('#dataTable').DataTable(); // ID From dataTable 
-                    $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+                    const apiUrl = 'http://localhost:4444/bill/s';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                    }).done((result) => {
+                        let str = "";
+                        const data = result.data;
+                        for (const i of data) {
+                            str += '<tr><td>'
+                                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
+                                + '</td>'
+                                + '<td>' + i._id
+                                + '</td><td>' + i.userId
+                                + '</td><td> ' + i.tourId
+                                + '</td><td> ' + i.price
+                                + '</td><td> ' + i.child
+                                + '</td><td> ' + i.adult
+                                + '</td><td> ' + i.total
+                                + '</td><td> ' + i.hasPaied
+                                + '</td><td> ' + i.hasCancel
+                                + '</td ><td>' + `${new Date(Date.parse(i.paiedDate)).getDate()}/${new Date(Date.parse(i.paiedDate)).getMonth() + 1}/${new Date(Date.parse(i.paiedDate)).getFullYear()}`
+                                + '</td ><td>' + `${new Date(Date.parse(i.applyDate)).getDate()}/${new Date(Date.parse(i.applyDate)).getMonth() + 1}/${new Date(Date.parse(i.applyDate)).getFullYear()}`
+                                + '</td><td> ' + i.paymentMethod
+                                + '</td></tr>';
+                        }
+                        const table = document.getElementById("bodyTable");
+                        table.innerHTML = str;
+                        $('#dataTable').DataTable();
+                        $('#dataTableHover').DataTable();
+                    });
                 });
             </script>
 

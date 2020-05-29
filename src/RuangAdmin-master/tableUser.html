@@ -95,8 +95,8 @@
                 <form class="navbar-search">
                   <div class="input-group">
                     <input type="text" class="form-control bg-light border-1 small"
-                      placeholder="What do you want to look for?" aria-label="Search" aria-describedby="basic-addon2"
-                      style="border-color: #3f51b5;">
+                      placeholder="What do you want to look for?" aria-label="Search"
+                      aria-describedby="basic-addon2 required" style="border-color: #3f51b5;">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -153,7 +153,7 @@
               <div class="tab-content" id="nav-tabContent">
                 <div class="card mb-4">
                   <div class="table-responsive p-3">
-                    <button type="button" class="mb-3 btn-group-lg btn-success" data-toggle="modal"
+                    <button type="button" class="btn mb-3 btn-group-lg btn-success" data-toggle="modal"
                       data-target="#exampleModalCenter-Create">Create</button>
                     <table class="table align-items-center table-flush" id="dataTable">
                       <thead class="thead-light">
@@ -196,10 +196,11 @@
                           <div class="row">
                             <div class="col-lg-6">
                               <input type="email" class="form-control" id="email-create" aria-describedby="emailHelp"
-                                placeholder="Enter Email Address">
+                                placeholder="Enter Email Address" required>
                             </div>
                             <div class="col-lg-6">
-                              <input type="password" class="form-control" id="password-create" placeholder="Password">
+                              <input type="password" class="form-control" id="password-create" placeholder="Password"
+                                required>
                             </div>
                           </div>
                         </div>
@@ -207,27 +208,27 @@
                           <div class="row">
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="fullName-create" aria-describedby="emailHelp"
-                                placeholder="Enter Full Name">
+                                placeholder="Enter Full Name" required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="displayName-create"
-                                aria-describedby="emailHelp" placeholder="Enter Display Name">
+                                aria-describedby="emailHelp" placeholder="Enter Display Name" required>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <input type="text" class="form-control" id="address-create" aria-describedby="emailHelp"
-                            placeholder="Enter Address">
+                            placeholder="Enter Address" required>
                         </div>
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="phone-create" aria-describedby="emailHelp"
-                                placeholder="Enter Phone Number">
+                                placeholder="Enter Phone Number" required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="dateOfBirth-create"
-                                aria-describedby="emailHelp" placeholder="Enter BirthDay">
+                                aria-describedby="emailHelp" placeholder="Enter BirthDay" required>
                             </div>
                           </div>
                         </div>
@@ -235,11 +236,11 @@
                           <div class="row">
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="country-create" aria-describedby="emailHelp"
-                                placeholder="Enter Country">
+                                placeholder="Enter Country" required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="role-create" aria-describedby="emailHelp"
-                                placeholder="Enter Role">
+                                placeholder="Enter Role" required>
                             </div>
                           </div>
                         </div>
@@ -269,39 +270,28 @@
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="email" class="form-control" id="email-update" aria-describedby="emailHelp"
-                                placeholder="Enter Email Address">
-                            </div>
-                            <div class="col-lg-6">
-                              <input type="password" class="form-control" id="password-update" placeholder="Password">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-lg-6">
                               <input type="text" class="form-control" id="fullName-update" aria-describedby="emailHelp"
-                                placeholder="Enter Full Name">
+                                placeholder="Enter Full Name" required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="displayName-update"
-                                aria-describedby="emailHelp" placeholder="Enter Display Name">
+                                aria-describedby="emailHelp" placeholder="Enter Display Name" required>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <input type="text" class="form-control" id="address-update" aria-describedby="emailHelp"
-                            placeholder="Enter Address">
+                            placeholder="Enter Address" required>
                         </div>
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="phone-update" aria-describedby="emailHelp"
-                                placeholder="Enter Phone Number">
+                                placeholder="Enter Phone Number" required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="dateOfBirth-update"
-                                aria-describedby="emailHelp" placeholder="Enter BirthDay">
+                                aria-describedby="emailHelp" placeholder="Enter BirthDay" required>
                             </div>
                           </div>
                         </div>
@@ -309,11 +299,11 @@
                           <div class="row">
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="country-update" aria-describedby="emailHelp"
-                                placeholder="Enter Country">
+                                placeholder="Enter Country" required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="role-update" aria-describedby="emailHelp"
-                                placeholder="Enter Role">
+                                placeholder="Enter Role" required>
                             </div>
                           </div>
                         </div>
@@ -383,15 +373,15 @@
             const data = result.data;
             for (const i of data) {
               str += '<tr><td>'
-                + '<button type="button" class="btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
+                + '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
                 + '</td>'
                 + '<td>'
-                + '<button type="button" class="btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
+                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
                 + '</td>'
                 + '<td>' + i.id
                 + '</td><td>' + i.displayName
                 + '</td><td> ' + i.fullName
-                + '</td ><td>' + `${new Date(Date.parse(i.dateOfBirth)).getFullYear()}/${new Date(Date.parse(i.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(i.dateOfBirth)).getDate()}`
+                + '</td ><td>' + `${new Date(Date.parse(i.dateOfBirth)).getDate()}/${new Date(Date.parse(i.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(i.dateOfBirth)).getFullYear()}`
                 + '</td><td>' + i.address
                 + '</td><td>' + i.email
                 + '</td><td>' + i.phone
