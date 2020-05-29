@@ -111,7 +111,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                                <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                                <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
@@ -154,8 +154,8 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="card mb-4">
                                     <div class="table-responsive p-3">
-                                        <button type="button" class="btn mb-3 btn-group-lg btn-success" data-toggle="modal"
-                                            data-target="#exampleModalCenter-Create">Create</button>
+                                        <button type="button" class="btn mb-3 btn-group-lg btn-success"
+                                            data-toggle="modal" data-target="#exampleModalCenter-Create">Create</button>
                                         <table class="table align-items-center table-flush" id="dataTable">
                                             <thead class="thead-light">
                                                 <tr>
@@ -406,6 +406,12 @@
             <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
             <!-- Page level custom scripts -->
+            <script>
+                const displayName = JSON.parse(localStorage.getItem("displayName"));
+                const userNameLogin = document.getElementById("userNameLogin");
+                userNameLogin.innerHTML = displayName;
+            </script>
+
             <script>
                 $(document).ready(function () {
                     const apiUrl = 'http://localhost:4444/tour/s';

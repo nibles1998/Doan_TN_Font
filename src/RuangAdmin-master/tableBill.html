@@ -111,7 +111,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                                <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                                <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
@@ -154,8 +154,8 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="card mb-4">
                                     <div class="table-responsive p-3">
-                                        <button type="button" class="btn mb-3 btn-group-lg btn-success" data-toggle="modal"
-                                            data-target="#exampleModalCenter-Create">Create</button>
+                                        <button type="button" class="btn mb-3 btn-group-lg btn-success"
+                                            data-toggle="modal" data-target="#exampleModalCenter-Create">Create</button>
                                         <table class="table align-items-center table-flush" id="dataTable">
                                             <thead class="thead-light">
                                                 <tr>
@@ -278,13 +278,13 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input type="text" class="form-control" id="price-create"
+                                                            <input type="text" class="form-control" id="price-update"
                                                                 aria-describedby="emailHelp" placeholder="Enter Price"
                                                                 required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control"
-                                                                id="applyDate-create" aria-describedby="emailHelp"
+                                                                id="applyDate-update" aria-describedby="emailHelp"
                                                                 placeholder="Enter Apply Date" required>
                                                         </div>
                                                     </div>
@@ -292,12 +292,12 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input type="text" class="form-control" id="child-create"
+                                                            <input type="text" class="form-control" id="child-update"
                                                                 aria-describedby="emailHelp" placeholder="Enter Child"
                                                                 required>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <input type="text" class="form-control" id="adult-create"
+                                                            <input type="text" class="form-control" id="adult-update"
                                                                 aria-describedby="emailHelp" placeholder="Enter Adult"
                                                                 required>
                                                         </div>
@@ -306,19 +306,19 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input type="text" class="form-control" id="hasPaied-create"
+                                                            <input type="text" class="form-control" id="hasPaied-update"
                                                                 aria-describedby="emailHelp"
                                                                 placeholder="Enter Has Paied" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control"
-                                                                id="hasCancel-create" aria-describedby="emailHelp"
+                                                                id="hasCancel-update" aria-describedby="emailHelp"
                                                                 placeholder="Enter Has Cancel" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="paymentMethod-create"
+                                                    <input type="text" class="form-control" id="paymentMethod-update"
                                                         aria-describedby="emailHelp" placeholder="Enter PaymentMethod"
                                                         required>
                                                 </div>
@@ -373,6 +373,12 @@
             <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
             <!-- Page level custom scripts -->
+            <script>
+                const displayName = JSON.parse(localStorage.getItem("displayName"));
+                const userNameLogin = document.getElementById("userNameLogin");
+                userNameLogin.innerHTML = displayName;
+            </script>
+
             <script>
                 $(document).ready(function () {
                     const apiUrl = 'http://localhost:4444/bill/s';

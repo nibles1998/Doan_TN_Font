@@ -55,7 +55,7 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
-  
+
   <script type="text/javascript">
     $(('#btnLogin')).click(async (e) => {
       e.preventDefault();
@@ -71,15 +71,9 @@
         data: JSON.stringify(account),
         contentType: "application/json",
         dataType: "json",
-        // headers: {
-        //   // token:......
-
-        // },
         success: function async(data) {
           if (data && data.token) {
             localStorage.setItem("dataLogin", JSON.stringify(data))
-            // const data = JSON.parse(localStorage.getItem("dataLogin"));
-            // dòng này để lấy từ localStorage ra dùng á anh
           }
           window.location.assign('http://localhost:4445/admin/dashboard.html');
         },

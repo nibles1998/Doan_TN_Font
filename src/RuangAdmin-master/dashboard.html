@@ -318,6 +318,7 @@
                     }
                     const userNameLogin = document.getElementById("userNameLogin");
                     userNameLogin.innerHTML = name;
+                    localStorage.setItem("displayName", JSON.stringify(name));
                     const totalUser = document.getElementById("totalUser");
                     totalUser.innerHTML = (data ? data.length : 0).toLocaleString();
                 });
