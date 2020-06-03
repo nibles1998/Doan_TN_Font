@@ -10,5 +10,5 @@ app.use(bodyParser.urlencoded({ extended: false }));
 initRoute(app);
 
 app.listen(PORT, () => {
-    console.log(`Gator app listening on port ${PORT}`);
+    console.log('\x1b[33m%s\x1b[0m', `WebsiteAppication listening on port ${PORT}`);
 });

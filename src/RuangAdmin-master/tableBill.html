@@ -128,7 +128,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.html">
+                                <a id="killToken" class="dropdown-item" href="login.html">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -200,8 +200,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="userId-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter User Id"
-                                                                required>
+                                                                placeholder="Enter User Id" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="tourId-create"
@@ -213,13 +212,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="price-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Price"
-                                                                required>
+                                                                placeholder="Enter Price" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control"
-                                                                id="applyDate-create" aria-describedby="emailHelp"
-                                                                placeholder="Enter Apply Date" required>
+                                                                id="applyDate-create" placeholder="Enter Apply Date"
+                                                                required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -227,13 +225,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="child-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Child"
-                                                                required>
+                                                                placeholder="Enter Child" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="adult-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Adult"
-                                                                required>
+                                                                placeholder="Enter Adult" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -241,12 +237,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="hasPaied-create"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Has Paied" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control"
-                                                                id="paymentMethod-create" aria-describedby="emailHelp"
+                                                                id="paymentMethod-create"
                                                                 placeholder="Enter PaymentMethod" required>
                                                         </div>
                                                     </div>
@@ -256,7 +251,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-success">Create</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="createBill()">Create</button>
                                         </div>
                                     </div>
                                 </div>
@@ -279,13 +275,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="price-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Price"
-                                                                required>
+                                                                placeholder="Enter Price" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control"
-                                                                id="applyDate-update" aria-describedby="emailHelp"
-                                                                placeholder="Enter Apply Date" required>
+                                                                id="applyDate-update" placeholder="Enter Apply Date"
+                                                                required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -293,13 +288,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="child-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Child"
-                                                                required>
+                                                                placeholder="Enter Child" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="adult-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Adult"
-                                                                required>
+                                                                placeholder="Enter Adult" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -307,27 +300,26 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="hasPaied-update"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Has Paied" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control"
-                                                                id="hasCancel-update" aria-describedby="emailHelp"
-                                                                placeholder="Enter Has Cancel" required>
+                                                                id="hasCancel-update" placeholder="Enter Has Cancel"
+                                                                required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="paymentMethod-update"
-                                                        aria-describedby="emailHelp" placeholder="Enter PaymentMethod"
-                                                        required>
+                                                        placeholder="Enter PaymentMethod" required>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Update</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="updateBillInfo()">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -350,7 +342,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="deleteBill()">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -394,11 +387,12 @@
                     }).done((result) => {
                         let str = "";
                         const data = result.data;
+                        let currentIndex = 0;
                         for (const i of data) {
                             str += '<tr><td>'
-                                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
+                                + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
                                 + '</td>'
-                                + '<td>' + i._id
+                                + `<td><span id="billId-${currentIndex}">` + i._id
                                 + '</td><td>' + i.userId
                                 + '</td><td> ' + i.tourId
                                 + '</td><td> ' + i.price
@@ -411,6 +405,7 @@
                                 + '</td ><td>' + `${new Date(Date.parse(i.applyDate)).getDate()}/${new Date(Date.parse(i.applyDate)).getMonth() + 1}/${new Date(Date.parse(i.applyDate)).getFullYear()}`
                                 + '</td><td> ' + i.paymentMethod
                                 + '</td></tr>';
+                            currentIndex++;
                         }
                         const table = document.getElementById("bodyTable");
                         table.innerHTML = str;
@@ -420,6 +415,127 @@
                 });
             </script>
 
+            <script>
+                function getData(index) {
+                    localStorage.setItem("billId", $(`#billId-${index}`).html());
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const apiUrl = `http://localhost:4444/bill/${localStorage.getItem("billId")}`;
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        dataType: "json",
+                        success: function async(data) {
+                            const info = data.data;
+                            $("#price-update").val(info.price);
+                            $("#applyDate-update").val(`${new Date(Date.parse(info.applyDate)).getDate()}/${new Date(Date.parse(info.applyDate)).getMonth() + 1}/${new Date(Date.parse(info.applyDate)).getFullYear()}`);
+                            $("#child-update").val(info.child);
+                            $("#adult-update").val(info.adult);
+                            $("#hasPaied-update").val(info.hasPaied);
+                            $("#hasCancel-update").val(info.hasCancel);
+                            $("#paymentMethod-update").val(info.paymentMethod);
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    })
+                }
+
+                function updateBillInfo() {
+                    const billId = localStorage.getItem("billId");
+                    const apiUrl = `http://localhost:4444/bill/${billId}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const billInfo = {
+                        price: $("#price-update").val(),
+                        applyDate: $("#applyDate-update").val(),
+                        child: $("#child-update").val(),
+                        adult: $("#adult-update").val(),
+                        hasPaied: $("#hasPaied-update").val(),
+                        hasCancel: $("#hasCancel-update").val(),
+                        paymentMethod: $("#paymentMethod-update").val()
+                    };
+                    $.ajax(apiUrl, {
+                        type: "PUT",
+                        data: JSON.stringify(billInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("billId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function createBill() {
+                    const apiUrl = 'http://localhost:4444/bill';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const billInfo = {
+                        userId: $("#userId-create").val(),
+                        tourId: $("#tourId-create").val(),
+                        price: $("#price-create").val(),
+                        applyDate: $("#applyDate-create").val(),
+                        child: $("#child-create").val(),
+                        adult: $("#adult-create").val(),
+                        hasPaied: $("#hasPaied-create").val(),
+                        hasCancel: $("#hasCancel-create").val(),
+                        paymentMethod: $("#paymentMethod-create").val()
+                    };
+                    $.ajax(apiUrl, {
+                        type: "POST",
+                        data: JSON.stringify(billInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function deleteBill() {
+                    const apiUrl = `http://localhost:4444/bill/${localStorage.getItem("billId")}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax(apiUrl, {
+                        type: "DELETE",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("billId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+            </script>
+
+            <script>
+                $("#killToken").click(function () {
+                    localStorage.removeItem("dataLogin");
+                    localStorage.removeItem("displayName");
+                })
+            </script>
 </body>
 
 </html>

@@ -128,7 +128,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.html">
+                                <a id="killToken" class="dropdown-item" href="login.html">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -192,24 +192,20 @@
                                             <form class="user">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="companyName-create"
-                                                        aria-describedby="emailHelp" placeholder="Enter Company Name"
-                                                        required>
+                                                        placeholder="Enter Company Name" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="address-create"
-                                                        aria-describedby="emailHelp" placeholder="Enter Address"
-                                                        required>
+                                                        placeholder="Enter Address" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="phone-create"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Phone Number" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="fax-create"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Fax Number" required>
                                                         </div>
                                                     </div>
@@ -219,7 +215,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-success">Create</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="createCompany()">Create</button>
                                         </div>
                                     </div>
                                 </div>
@@ -240,24 +237,20 @@
                                             <form class="user">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="companyName-update"
-                                                        aria-describedby="emailHelp" placeholder="Enter Company Name"
-                                                        required>
+                                                        placeholder="Enter Company Name" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="address-update"
-                                                        aria-describedby="emailHelp" placeholder="Enter Address"
-                                                        required>
+                                                        placeholder="Enter Address" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="phone-update"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Phone Number" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="fax-update"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Fax Number" required>
                                                         </div>
                                                     </div>
@@ -267,7 +260,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Update</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="updateCompanyInfo()">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -290,7 +284,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="deleteCompany()">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -334,19 +329,20 @@
                     }).done((result) => {
                         let str = "";
                         const data = result.data;
+                        let currentIndex = 0;
                         for (const i of data) {
                             str += '<tr><td>'
-                                + '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
+                                + `<button type="button" id="btnDelete-${currentIndex}" onclick="getCompanyId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
+                                + '</td><td>'
+                                + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
                                 + '</td>'
-                                + '<td>'
-                                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
-                                + '</td>'
-                                + '<td>' + i.id
+                                + `<td><span id="companyId-${currentIndex}">` + i.id
                                 + '</td><td>' + i.companyName
                                 + '</td><td>' + i.address
                                 + '</td><td>' + i.phone
                                 + '</td><td>' + i.fax
                                 + '</td></tr>';
+                            currentIndex++;
                         }
                         const table = document.getElementById("bodyTable");
                         table.innerHTML = str;
@@ -356,6 +352,120 @@
                 });
             </script>
 
+            <script>
+                function getData(index) {
+                    localStorage.setItem("companyId", $(`#companyId-${index}`).html());
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const apiUrl = `http://localhost:4444/company/${localStorage.getItem("companyId")}`;
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        dataType: "json",
+                        success: function async(data) {
+                            const info = data.data;
+                            $("#companyName-update").val(info.companyName);
+                            $("#address-update").val(info.address);
+                            $("#phone-update").val(info.phone);
+                            $("#fax-update").val(info.fax);
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    })
+                }
+
+                function getCompanyId(index) {
+                    localStorage.setItem("companyId", $(`#companyId-${index}`).html());
+                }
+
+                function updateCompanyInfo() {
+                    const companyId = localStorage.getItem("companyId");
+                    const apiUrl = `http://localhost:4444/company/${companyId}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const companyInfo = {
+                        companyName: $("#companyName-update").val(),
+                        address: $("#address-update").val(),
+                        phone: $("#phone-update").val(),
+                        fax: $("#fax-update").val()
+                    };
+                    $.ajax(apiUrl, {
+                        type: "PUT",
+                        data: JSON.stringify(companyInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("companyId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function createCompany() {
+                    const apiUrl = 'http://localhost:4444/company';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const companyInfo = {
+                        companyName: $("#companyName-create").val(),
+                        address: $("#address-create").val(),
+                        phone: $("#phone-create").val(),
+                        fax: $("#fax-create").val()
+                    };
+                    $.ajax(apiUrl, {
+                        type: "POST",
+                        data: JSON.stringify(companyInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function deleteCompany() {
+                    const apiUrl = `http://localhost:4444/company/${localStorage.getItem("companyId")}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax(apiUrl, {
+                        type: "DELETE",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("companyId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+            </script>
+
+            <script>
+                $("#killToken").click(function () {
+                    localStorage.removeItem("dataLogin");
+                    localStorage.removeItem("displayName");
+                })
+            </script>
 </body>
 
 </html>

@@ -128,7 +128,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.html">
+                                <a id="killToken" class="dropdown-item" href="login.html">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -203,7 +203,6 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="tourCode-create"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Tour Code" required>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -216,13 +215,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="location-create"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Location" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="price-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Price"
-                                                                required>
+                                                                placeholder="Enter Price" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -230,12 +227,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control"
-                                                                id="startedDate-create" aria-describedby="emailHelp"
-                                                                placeholder="Enter Started Date" required>
+                                                                id="startedDate-create" placeholder="Enter Started Date"
+                                                                required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="endDate-create"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter End Date" required>
                                                         </div>
                                                     </div>
@@ -244,26 +240,25 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="seat-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Seat"
-                                                                required>
+                                                                placeholder="Enter Seat" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="company-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Company"
-                                                                required>
+                                                                placeholder="Enter Company" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="note-create"
-                                                        aria-describedby="emailHelp" placeholder="Enter Note" required>
+                                                        placeholder="Enter Note" required>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-success">Create</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="createTour()">Create</button>
                                         </div>
                                     </div>
                                 </div>
@@ -286,7 +281,6 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="tourCode-update"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Tour Code" required>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -299,13 +293,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="location-update"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter Location" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="price-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Price"
-                                                                required>
+                                                                placeholder="Enter Price" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -313,12 +305,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control"
-                                                                id="startedDate-update" aria-describedby="emailHelp"
-                                                                placeholder="Enter Started Date" required>
+                                                                id="startedDate-update" placeholder="Enter Started Date"
+                                                                required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="endDate-update"
-                                                                aria-describedby="emailHelp"
                                                                 placeholder="Enter End Date" required>
                                                         </div>
                                                     </div>
@@ -327,13 +318,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="seat-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Seat"
-                                                                required>
+                                                                placeholder="Enter Seat" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="company-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Company"
-                                                                required>
+                                                                placeholder="Enter Company" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -341,26 +330,25 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="child-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Child"
-                                                                required>
+                                                                placeholder="Enter Child" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="adult-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Adult"
-                                                                required>
+                                                                placeholder="Enter Adult" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="note-update"
-                                                        aria-describedby="emailHelp" placeholder="Enter Note" required>
+                                                        placeholder="Enter Note" required>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Update</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="updateTourInfo()">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -383,7 +371,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="deleteTour()">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -427,14 +416,14 @@
                     }).done((result) => {
                         let str = "";
                         const data = result.data;
+                        let currentIndex = 0;
                         for (const i of data) {
                             str += '<tr><td>'
-                                + '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
+                                + `<button type="button" id="btnDelete-${currentIndex}" onclick="getTourId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
+                                + '</td><td>'
+                                + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
                                 + '</td>'
-                                + '<td>'
-                                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
-                                + '</td>'
-                                + '<td>' + i.id
+                                + `<td><span id="tourId-${currentIndex}">` + i.id
                                 + '</td><td>' + i.tourCode
                                 + '</td><td> ' + i.tourName
                                 + '</td><td> ' + i.location
@@ -456,6 +445,142 @@
                         $('#dataTableHover').DataTable();
                     });
                 });
+            </script>
+
+            <script>
+                function getData(index) {
+                    localStorage.setItem("tourId", $(`#tourId-${index}`).html());
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const apiUrl = `http://localhost:4444/tour/${localStorage.getItem("tourId")}`;
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        dataType: "json",
+                        success: function async(data) {
+                            const info = data.data;
+                            $("#tourCode-update").val(info.tourCode);
+                            $("#tourName-update").val(info.tourName);
+                            $("#location-update").val(info.location);
+                            $("#price-update").val(info.price);
+                            $("#startedDate-update").val(`${new Date(Date.parse(info.startedDate)).getDate()}/${new Date(Date.parse(info.startedDate)).getMonth() + 1}/${new Date(Date.parse(info.startedDate)).getFullYear()}`);
+                            $("#endDate-update").val(`${new Date(Date.parse(info.endDate)).getDate()}/${new Date(Date.parse(info.endDate)).getMonth() + 1}/${new Date(Date.parse(info.endDate)).getFullYear()}`);
+                            $("#seat-update").val(info.seat);
+                            $("#company-update").val(info.companyId);
+                            $("#child-update").val(info.child);
+                            $("#adult-update").val(info.adult);
+                            $("#note-update").val(info.note);
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    })
+                }
+
+                function getTourId(index) {
+                    localStorage.setItem("tourId", $(`#tourId-${index}`).html());
+                }
+
+                function updateTourInfo() {
+                    const tourId = localStorage.getItem("tourId");
+                    const apiUrl = `http://localhost:4444/tour/${tourId}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const tourInfo = {
+                        tourCode: $("#tourCode-update").val(),
+                        tourName: $("#tourName-update").val(),
+                        location: $("#location-update").val(),
+                        price: $("#price-update").val(),
+                        startedDate: $("#startedDate-update").val(),
+                        endDate: $("#endDate-update").val(),
+                        seat: $("#seat-update").val(),
+                        companyId: $("#company-update").val(),
+                        child: $("#child-update").val(),
+                        adult: $("#adult-update").val(),
+                        note: $("#note-update").val()
+                    };
+                    $.ajax(apiUrl, {
+                        type: "PUT",
+                        data: JSON.stringify(tourInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("tourId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function createTour() {
+                    const apiUrl = 'http://localhost:4444/tour';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const tourInfo = {
+                        tourCode: $("#tourCode-create").val(),
+                        tourName: $("#tourName-create").val(),
+                        location: $("#location-create").val(),
+                        price: $("#price-create").val(),
+                        startedDate: $("#startedDate-create").val(),
+                        endDate: $("#endDate-create").val(),
+                        seat: $("#seat-create").val(),
+                        companyId: $("#company-create").val(),
+                        child: $("#child-create").val(),
+                        adult: $("#adult-create").val(),
+                        note: $("#note-create").val()
+                    };
+                    $.ajax(apiUrl, {
+                        type: "POST",
+                        data: JSON.stringify(tourInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function deleteTour() {
+                    const apiUrl = `http://localhost:4444/tour/${localStorage.getItem("tourId")}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax(apiUrl, {
+                        type: "DELETE",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("tourId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+            </script>
+
+            <script>
+                $("#killToken").click(function () {
+                    localStorage.removeItem("dataLogin");
+                    localStorage.removeItem("displayName");
+                })
             </script>
 
 </body>

@@ -128,7 +128,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.html">
+                                <a id="killToken" class="dropdown-item" href="login.html">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -193,19 +193,17 @@
                                             <form class="user">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="type-create"
-                                                        aria-describedby="emailHelp" placeholder="Enter Type" required>
+                                                        placeholder="Enter Type" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="create-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Create"
-                                                                required>
+                                                                placeholder="Enter Create" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="read-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Read"
-                                                                required>
+                                                                placeholder="Enter Read" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -214,13 +212,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="up-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Update"
-                                                                required>
+                                                                placeholder="Enter Update" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="del-create"
-                                                                aria-describedby="emailHelp" placeholder="Enter Delete"
-                                                                required>
+                                                                placeholder="Enter Delete" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -229,7 +225,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-success">Create</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="createRole()">Create</button>
                                         </div>
                                     </div>
                                 </div>
@@ -250,19 +247,17 @@
                                             <form class="user">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="type-update"
-                                                        aria-describedby="emailHelp" placeholder="Enter Type" required>
+                                                        placeholder="Enter Type" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="create-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Create"
-                                                                required>
+                                                                placeholder="Enter Create" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="read-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Read"
-                                                                required>
+                                                                placeholder="Enter Read" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -271,13 +266,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="up-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Update"
-                                                                required>
+                                                                placeholder="Enter Update" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" id="del-update"
-                                                                aria-describedby="emailHelp" placeholder="Enter Delete"
-                                                                required>
+                                                                placeholder="Enter Delete" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -286,7 +279,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Update</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="updateRoleInfo()">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -309,7 +303,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="deleteRole()">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -353,20 +348,21 @@
                     }).done((result) => {
                         let str = "";
                         const data = result.data;
+                        let currentIndex = 0;
                         for (const i of data) {
                             str += '<tr><td>'
-                                + '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
+                                + `<button type="button" id="btnDelete-${currentIndex}" onclick="getRoleId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
+                                + '</td><td>'
+                                + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
                                 + '</td>'
-                                + '<td>'
-                                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
-                                + '</td>'
-                                + '<td>' + i.id
-                                + '</td><td>' + i.type
+                                + `<td><span id="roleId-${currentIndex}">` + i.id
+                                + '</span></td><td>' + i.type
                                 + '</td><td>' + i.create
                                 + '</td><td>' + i.read
                                 + '</td><td>' + i.up
                                 + '</td><td>' + i.del
                                 + '</td></tr>';
+                            currentIndex++;
                         }
                         const table = document.getElementById("bodyTable");
                         table.innerHTML = str;
@@ -376,6 +372,123 @@
                 });
             </script>
 
+            <script>
+                function getData(index) {
+                    localStorage.setItem("roleId", $(`#roleId-${index}`).html());
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const apiUrl = `http://localhost:4444/userrole/${localStorage.getItem("roleId")}`;
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        dataType: "json",
+                        success: function async(data) {
+                            const info = data.data;
+                            $("#type-update").val(info.type);
+                            $("#create-update").val(info.create);
+                            $("#read-update").val(info.read);
+                            $("#up-update").val(info.up);
+                            $("#del-update").val(info.del);
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    })
+                }
+
+                function getRoleId(index) {
+                    localStorage.setItem("roleId", $(`#roleId-${index}`).html());
+                }
+
+                function updateRoleInfo() {
+                    const roleId = localStorage.getItem("roleId");
+                    const apiUrl = `http://localhost:4444/userrole/${roleId}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const roleInfo = {
+                        type: $("#type-update").val(),
+                        create: $("#create-update").val(),
+                        read: $("#read-update").val(),
+                        up: $("#up-update").val(),
+                        del: $("#del-update").val(),
+                    };
+                    $.ajax(apiUrl, {
+                        type: "PUT",
+                        data: JSON.stringify(roleInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("roleId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function createRole() {
+                    const apiUrl = 'http://localhost:4444/userrole';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const roleInfo = {
+                        type: $("#type-create").val(),
+                        create: $("#create-create").val(),
+                        read: $("#read-create").val(),
+                        up: $("#up-create").val(),
+                        del: $("#del-create").val(),
+                    };
+                    $.ajax(apiUrl, {
+                        type: "POST",
+                        data: JSON.stringify(roleInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function deleteRole() {
+                    const apiUrl = `http://localhost:4444/userrole/${localStorage.getItem("roleId")}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax(apiUrl, {
+                        type: "DELETE",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("roleId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+            </script>
+
+            <script>
+                $("#killToken").click(function () {
+                    localStorage.removeItem("dataLogin");
+                    localStorage.removeItem("displayName");
+                })
+            </script>
 </body>
 
 </html>

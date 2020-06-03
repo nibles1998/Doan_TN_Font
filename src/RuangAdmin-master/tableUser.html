@@ -13,6 +13,7 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -127,7 +128,7 @@
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="login.html">
+                <a id="killToken" class="dropdown-item" href="login.html">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -195,7 +196,7 @@
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="email" class="form-control" id="email-create" aria-describedby="emailHelp"
+                              <input type="email" class="form-control" id="email-create"
                                 placeholder="Enter Email Address" required>
                             </div>
                             <div class="col-lg-6">
@@ -207,40 +208,40 @@
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="fullName-create" aria-describedby="emailHelp"
-                                placeholder="Enter Full Name" required>
+                              <input type="text" class="form-control" id="fullName-create" placeholder="Enter Full Name"
+                                required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="displayName-create"
-                                aria-describedby="emailHelp" placeholder="Enter Display Name" required>
+                                placeholder="Enter Display Name" required>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control" id="address-create" aria-describedby="emailHelp"
-                            placeholder="Enter Address" required>
+                          <input type="text" class="form-control" id="address-create" placeholder="Enter Address"
+                            required>
                         </div>
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="phone-create" aria-describedby="emailHelp"
-                                placeholder="Enter Phone Number" required>
+                              <input type="text" class="form-control" id="phone-create" placeholder="Enter Phone Number"
+                                required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="dateOfBirth-create"
-                                aria-describedby="emailHelp" placeholder="Enter BirthDay" required>
+                                placeholder="Enter BirthDay" required>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="country-create" aria-describedby="emailHelp"
-                                placeholder="Enter Country" required>
+                              <input type="text" class="form-control" id="country-create" placeholder="Enter Country"
+                                required>
                             </div>
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="role-create" aria-describedby="emailHelp"
-                                placeholder="Enter Role" required>
+                              <input type="text" class="form-control" id="role-create" placeholder="Enter Role"
+                                required>
                             </div>
                           </div>
                         </div>
@@ -248,7 +249,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-success">Create</button>
+                      <button type="button" class="btn btn-success" onclick="createUser()">Create</button>
                     </div>
                   </div>
                 </div>
@@ -270,40 +271,40 @@
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="fullName-update" aria-describedby="emailHelp"
-                                placeholder="Enter Full Name" required>
+                              <input type="text" class="form-control" id="fullName-update" placeholder="Enter Full Name"
+                                required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="displayName-update"
-                                aria-describedby="emailHelp" placeholder="Enter Display Name" required>
+                                placeholder="Enter Display Name" required>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control" id="address-update" aria-describedby="emailHelp"
-                            placeholder="Enter Address" required>
+                          <input type="text" class="form-control" id="address-update" placeholder="Enter Address"
+                            required>
                         </div>
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="phone-update" aria-describedby="emailHelp"
-                                placeholder="Enter Phone Number" required>
+                              <input type="text" class="form-control" id="phone-update" placeholder="Enter Phone Number"
+                                required>
                             </div>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="dateOfBirth-update"
-                                aria-describedby="emailHelp" placeholder="Enter BirthDay" required>
+                                placeholder="Enter BirthDay" required>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="country-update" aria-describedby="emailHelp"
-                                placeholder="Enter Country" required>
+                              <input type="text" class="form-control" id="country-update" placeholder="Enter Country"
+                                required>
                             </div>
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="role-update" aria-describedby="emailHelp"
-                                placeholder="Enter Role" required>
+                              <input type="text" class="form-control" id="role-update" placeholder="Enter Role"
+                                required>
                             </div>
                           </div>
                         </div>
@@ -311,7 +312,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary">Update</button>
+                      <button type="button" class="btn btn-primary" onclick="updateUserInfo()">Update</button>
                     </div>
                   </div>
                 </div>
@@ -333,7 +334,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-danger">Delete</button>
+                      <button type="button" class="btn btn-danger" onclick="deleteUser()">Delete</button>
                     </div>
                   </div>
                 </div>
@@ -355,13 +356,14 @@
       <script src="vendor/datatables/jquery.dataTables.min.js"></script>
       <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-      <!-- Page level custom scripts -->
+      <!-- Set display name for account -->
       <script>
         const displayName = JSON.parse(localStorage.getItem("displayName"));
         const userNameLogin = document.getElementById("userNameLogin");
         userNameLogin.innerHTML = displayName;
       </script>
 
+      <!-- Get data in table -->
       <script>
         $(document).ready(function () {
           const apiUrl = 'http://localhost:4444/user/s';
@@ -377,23 +379,23 @@
           }).done((result) => {
             let str = "";
             const data = result.data;
+            let currentIndex = 0;
             for (const i of data) {
               str += '<tr><td>'
-                + '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
-                + '</td>'
-                + '<td>'
-                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
-                + '</td>'
-                + '<td>' + i.id
-                + '</td><td>' + i.displayName
-                + '</td><td> ' + i.fullName
-                + '</td ><td>' + `${new Date(Date.parse(i.dateOfBirth)).getDate()}/${new Date(Date.parse(i.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(i.dateOfBirth)).getFullYear()}`
+                + `<button type="button" id="btnDelete-${currentIndex}" onclick="getUserId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
+                + '</td><td>'
+                + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
+                + `</td><td><span id="userId-${currentIndex}">` + i.id
+                + '</span></td><td>' + i.displayName
+                + '</td><td>' + i.fullName
+                + `</td><td>${new Date(Date.parse(i.dateOfBirth)).getDate()}/${new Date(Date.parse(i.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(i.dateOfBirth)).getFullYear()}`
                 + '</td><td>' + i.address
                 + '</td><td>' + i.email
                 + '</td><td>' + i.phone
                 + '</td><td>' + i.country
                 + '</td><td>' + i.roleId
                 + '</td></tr>';
+              currentIndex++;
             }
             const table = document.getElementById("bodyTable");
             table.innerHTML = str;
@@ -402,7 +404,7 @@
           });
         });
       </script>
-
+      <!-- Get role -->
       <script>
         $(document).ready(function () {
           const apiUrl = 'http://localhost:4444/userrole/s';
@@ -415,6 +417,139 @@
             console.log("ROLE: ", JSON.stringify(result));
           });
         });
+      </script>
+      <!-- Function for button -->
+      <script>
+        function getData(index) {
+          localStorage.setItem("userId", $(`#userId-${index}`).html());
+          const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+          const apiUrl = `http://localhost:4444/user/${localStorage.getItem("userId")}`;
+          $.ajax({
+            url: apiUrl,
+            type: "GET",
+            contentType: "application/json",
+            headers: {
+              Authorization: 'Bearer ' + authenticate.token
+            },
+            dataType: "json",
+            success: function async(data) {
+              const info = data.data;
+              $("#fullName-update").val(info.fullName);
+              $("#displayName-update").val(info.displayName);
+              $("#dateOfBirth-update").val(`${new Date(Date.parse(info.dateOfBirth)).getDate()}/${new Date(Date.parse(info.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(info.dateOfBirth)).getFullYear()}`);
+              $("#address-update").val(info.address);
+              $("#email-update").val(info.email);
+              $("#phone-update").val(info.phone);
+              $("#country-update").val(info.country);
+              $("#role-update").val(info.roleId);
+            },
+            error: function (error) {
+              alert(error.responseJSON.message);
+            }
+          })
+        }
+
+        function getUserId(index) {
+          localStorage.setItem("userId", $(`#userId-${index}`).html());
+        }
+
+        function updateUserInfo() {
+          const userId = localStorage.getItem("userId");
+          const apiUrl = `http://localhost:4444/user/${userId}`;
+          const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+          const userInfo = {
+            fullName: $("#fullName-update").val(),
+            address: $("#address-update").val(),
+            phone: $("#phone-update").val(),
+            dateOfBirth: $("#dateOfBirth-update").val(),
+            country: $("#country-update").val(),
+            displayName: $("#displayName-update").val(),
+            roleId: $("#role-update").val(),
+            paymentMethod: ["Momo"]
+          };
+          $.ajax(apiUrl, {
+            type: "PUT",
+            data: JSON.stringify(userInfo),
+            contentType: "application/json",
+            dataType: "json",
+            headers: {
+              Authorization: 'Bearer ' + authenticate.token
+            },
+            success: function async(data) {
+              if (userId === authenticate.userId) {
+                localStorage.setItem("displayName", JSON.stringify($("#displayName-update").val()));
+              }
+              alert(data.message);
+              localStorage.removeItem("userId");
+              location.reload();
+            },
+            error: function (error) {
+              alert(error.responseJSON.message);
+            }
+          });
+        }
+
+        function createUser() {
+          const apiUrl = 'http://localhost:4444/user';
+          const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+          const userInfo = {
+            fullName: $("#fullName-create").val(),
+            address: $("#address-create").val(),
+            phone: $("#phone-create").val(),
+            dateOfBirth: $("#dateOfBirth-create").val(),
+            email: $("#email-create").val(),
+            password: $("#password-create").val(),
+            country: $("#country-create").val(),
+            displayName: $("#displayName-create").val(),
+            roleId: $("#role-create").val(),
+            description: "",
+            paymentMethod: ["Momo"]
+          };
+          $.ajax(apiUrl, {
+            type: "POST",
+            data: JSON.stringify(userInfo),
+            contentType: "application/json",
+            dataType: "json",
+            headers: {
+              Authorization: 'Bearer ' + authenticate.token
+            },
+            success: function async(data) {
+              alert(data.message);
+              location.reload();
+            },
+            error: function (error) {
+              alert(error.responseJSON.message);
+            }
+          });
+        }
+
+        function deleteUser() {
+          const apiUrl = `http://localhost:4444/user/${localStorage.getItem("userId")}`;
+          const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+          $.ajax(apiUrl, {
+            type: "DELETE",
+            contentType: "application/json",
+            dataType: "json",
+            headers: {
+              Authorization: 'Bearer ' + authenticate.token
+            },
+            success: function async(data) {
+              alert(data.message);
+              localStorage.removeItem("userId");
+              location.reload();
+            },
+            error: function (error) {
+              alert(error.responseJSON.message);
+            }
+          });
+        }
+      </script>
+
+      <script>
+        $("#killToken").click(function () {
+          localStorage.removeItem("dataLogin");
+          localStorage.removeItem("displayName");
+        })
       </script>
 
 </body>

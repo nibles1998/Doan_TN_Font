@@ -128,7 +128,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.html">
+                                <a id="killToken" class="dropdown-item" href="login.html">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -190,8 +190,7 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <input type="text" class="form-control" id="type-create"
-                                                            aria-describedby="emailHelp" placeholder="Enter Type Tour"
-                                                            required>
+                                                            placeholder="Enter Type Tour" required>
                                                     </div>
                                                 </div>
                                             </form>
@@ -199,7 +198,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-success">Create</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="createTypeTour()">Create</button>
                                         </div>
                                     </div>
                                 </div>
@@ -221,8 +221,7 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <input type="text" class="form-control" id="type-update"
-                                                            aria-describedby="emailHelp" placeholder="Enter Type Tour"
-                                                            required>
+                                                            placeholder="Enter Type Tour" required>
                                                     </div>
                                                 </div>
                                             </form>
@@ -230,7 +229,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Update</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="updateTypeTourInfo()">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +253,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="deleteTypeTour()">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -297,16 +298,17 @@
                     }).done((result) => {
                         let str = "";
                         const data = result.data;
+                        let currentIndex = 0;
                         for (const i of data) {
                             str += '<tr><td>'
-                                + '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>'
+                                + `<button type="button" id="btnDelete-${currentIndex}" onclick="getTypeTourId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
+                                + '</td><td>'
+                                + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
                                 + '</td>'
-                                + '<td>'
-                                + '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>'
-                                + '</td>'
-                                + '<td>' + i.id
-                                + '</td><td>' + i.type
+                                + `<td><span id="typeTourId-${currentIndex}">` + i.id
+                                + '</span></td><td>' + i.type
                                 + '</td></tr>';
+                            currentIndex++;
                         }
                         const table = document.getElementById("bodyTable");
                         table.innerHTML = str;
@@ -316,6 +318,111 @@
                 });
             </script>
 
+            <script>
+                function getData(index) {
+                    localStorage.setItem("typeTourId", $(`#typeTourId-${index}`).html());
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const apiUrl = `http://localhost:4444/typetour/${localStorage.getItem("typeTourId")}`;
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        dataType: "json",
+                        success: function async(data) {
+                            const info = data.data;
+                            $("#type-update").val(info.type);
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    })
+                }
+
+                function getTypeTourId(index) {
+                    localStorage.setItem("typeTourId", $(`#typeTourId-${index}`).html());
+                }
+
+                function updateTypeTourInfo() {
+                    const typeTourId = localStorage.getItem("typeTourId");
+                    const apiUrl = `http://localhost:4444/typetour/${typeTourId}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const typeTourInfo = {
+                        type: $("#type-update").val()
+                    };
+                    $.ajax(apiUrl, {
+                        type: "PUT",
+                        data: JSON.stringify(typeTourInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("typeTourId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function createTypeTour() {
+                    const apiUrl = 'http://localhost:4444/typetour';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const typeTourInfo = {
+                        type: $("#type-create").val()
+                    };
+                    $.ajax(apiUrl, {
+                        type: "POST",
+                        data: JSON.stringify(typeTourInfo),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+
+                function deleteTypeTour() {
+                    const apiUrl = `http://localhost:4444/typeTour/${localStorage.getItem("typeTourId")}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax(apiUrl, {
+                        type: "DELETE",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function async(data) {
+                            alert(data.message);
+                            localStorage.removeItem("typeTourId");
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                }
+            </script>
+
+            <script>
+                $("#killToken").click(function () {
+                    localStorage.removeItem("dataLogin");
+                    localStorage.removeItem("displayName");
+                })
+            </script>
 </body>
 
 </html>

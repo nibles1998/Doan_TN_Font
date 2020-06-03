@@ -108,7 +108,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.html">
+                                <a id="killToken" class="dropdown-item" href="login.html">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -249,6 +249,15 @@
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
         <script src="js/ruang-admin.min.js"></script>
 
+        <script>
+            $(document).ready(function () {
+                const dataLogin = localStorage.getItem("dataLogin");
+                if (dataLogin === null || dataLogin === undefined) {
+                    window.location.assign('http://localhost:4445/admin');
+                }
+            });
+        </script>
+
         <!---- Get data for Dashboard ---->
         <script type="text/javascript">
             $(document).ready(function () {
@@ -343,6 +352,14 @@
                 });
             });
         </script>
+
+        <script>
+            $("#killToken").click(function () {
+                localStorage.removeItem("dataLogin");
+                localStorage.removeItem("displayName");
+            })
+        </script>
+
 </body>
 
 </html>
