@@ -161,14 +161,13 @@
                                                 <tr>
                                                     <th></th>
                                                     <th>ID</th>
-                                                    <th>UserID</th>
-                                                    <th>TourID</th>
+                                                    <th>User</th>
+                                                    <th>Tour</th>
                                                     <th>Price</th>
                                                     <th>Child</th>
                                                     <th>Adult</th>
                                                     <th>Total</th>
-                                                    <th>HasPaied</th>
-                                                    <th>HasCancel</th>
+                                                    <th>Status</th>
                                                     <th>PaiedDate</th>
                                                     <th>ApplyDate</th>
                                                     <th>PaymentMethod</th>
@@ -200,13 +199,16 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="userId-create">User:</label>
-                                                            <input type="text" class="form-control" id="userId-create"
-                                                                placeholder="Enter User Id" required>
+                                                            <select class="form-control" id="userId-create">
+
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="tourId-create">Tour:</label>
-                                                            <input type="text" class="form-control" id="tourId-create"
-                                                                placeholder="Enter Tour Id" required>
+                                                            <select class="form-control" id="tourId-create"
+                                                                onclick="getPriceTour()">
+
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -215,7 +217,7 @@
                                                         <div class="col-lg-6">
                                                             <label for="price-create">Price:</label>
                                                             <input type="text" class="form-control" id="price-create"
-                                                                placeholder="Enter Price" required>
+                                                                readonly required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="applyDate-create">Apply Date:</label>
@@ -229,12 +231,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="child-create">Child:</label>
-                                                            <input type="text" class="form-control" id="child-create"
+                                                            <input type="number" class="form-control" id="child-create"
                                                                 placeholder="Enter Child" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="adult-create">Adult:</label>
-                                                            <input type="text" class="form-control" id="adult-create"
+                                                            <input type="number" class="form-control" id="adult-create"
                                                                 placeholder="Enter Adult" required>
                                                         </div>
                                                     </div>
@@ -243,8 +245,10 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="hasPaied-create">Has Paied:</label>
-                                                            <input type="text" class="form-control" id="hasPaied-create"
-                                                                placeholder="Enter Has Paied" required>
+                                                            <select class="form-control" id="hasPaied-create">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="paymentMethod-create">Payment Method:</label>
@@ -284,7 +288,7 @@
                                                         <div class="col-lg-6">
                                                             <label for="price-update">Price:</label>
                                                             <input type="text" class="form-control" id="price-update"
-                                                                placeholder="Enter Price" required>
+                                                                placeholder="Enter Price" readonly required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="applyDate-update">Apply Date:</label>
@@ -298,12 +302,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="child-update">Child:</label>
-                                                            <input type="text" class="form-control" id="child-update"
+                                                            <input type="number" class="form-control" id="child-update"
                                                                 placeholder="Enter Child" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="adult-update">Adult:</label>
-                                                            <input type="text" class="form-control" id="adult-update"
+                                                            <input type="number" class="form-control" id="adult-update"
                                                                 placeholder="Enter Adult" required>
                                                         </div>
                                                     </div>
@@ -312,14 +316,17 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="hasPaied-update">Has Paied:</label>
-                                                            <input type="text" class="form-control" id="hasPaied-update"
-                                                                placeholder="Enter Has Paied" required>
+                                                            <select class="form-control" id="hasPaied-update">
+                                                                <option value="true">True</option>
+                                                                <option value="false">False</option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="hasCancel-update">Has Cancel:</label>
-                                                            <input type="text" class="form-control"
-                                                                id="hasCancel-update" placeholder="Enter Has Cancel"
-                                                                required>
+                                                            <select class="form-control" id="hasCancel-update">
+                                                                <option value="true">True</option>
+                                                                <option value="false">False</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -389,6 +396,48 @@
 
             <script>
                 $(document).ready(function () {
+                    const apiUrlUser = 'http://localhost:4444/user/s';
+                    const apiUrlTour = 'http://localhost:4444/tour/s';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax({
+                        url: apiUrlUser,
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function (result) {
+                            let str = "";
+                            const data = result.data;
+                            for (const i of data) {
+                                str += `<option value="${i.id}">${i.fullName}</option>`;
+                            }
+                            $('#userId-create').html(str);
+                        }
+                    });
+                    $.ajax({
+                        url: apiUrlTour,
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function (result) {
+                            let str = "";
+                            const data = result.data;
+                            for (const i of data) {
+                                str += `<option value="${i.id}">${i.tourName}</option>`;
+                            }
+                            $('#tourId-create').html(str);
+                        }
+                    });
+                });
+            </script>
+
+            <script>
+                $(document).ready(function () {
                     const apiUrl = 'http://localhost:4444/bill/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
@@ -399,23 +448,59 @@
                         headers: {
                             Authorization: 'Bearer ' + authenticate.token
                         },
-                    }).done((result) => {
+                    }).done(async (result) => {
                         let str = "";
                         const data = result.data;
                         let currentIndex = 0;
                         for (const i of data) {
+                            let status = "";
+                            if (i.hasCancel) {
+                                status += '</td><td><span class="badge badge-danger">Reject</span>'
+                            } else {
+                                if (i.hasPaied) {
+                                    status += '</td><td><span class="badge badge-success">Complete</span>'
+                                } else {
+                                    status += '</td><td><span class="badge badge-primary">Processing</span>'
+                                }
+                            }
+
+                            const apiUrlUser = `http://localhost:4444/user/${i.userId}`;
+                            let userName = "";
+                            await $.ajax({
+                                url: apiUrlUser,
+                                type: "GET",
+                                contentType: "application/json",
+                                dataType: "json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                }, success: function (data) {
+                                    userName += data.data.fullName;
+                                }
+                            });
+                            const apiUrlTour = `http://localhost:4444/tour/${i.tourId}`;
+                            let tourName = "";
+                            await $.ajax({
+                                url: apiUrlTour,
+                                type: "GET",
+                                contentType: "application/json",
+                                dataType: "json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                }, success: function (data) {
+                                    tourName += data.data.tourName;
+                                }
+                            });
                             str += '<tr><td>'
                                 + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
                                 + '</td>'
                                 + `<td><span id="billId-${currentIndex}">` + i._id
-                                + '</td><td>' + i.userId
-                                + '</td><td> ' + i.tourId
+                                + '</td><td>' + userName
+                                + '</td><td> ' + tourName
                                 + '</td><td> ' + i.price
                                 + '</td><td> ' + i.child
                                 + '</td><td> ' + i.adult
                                 + '</td><td> ' + i.total
-                                + '</td><td> ' + i.hasPaied
-                                + '</td><td> ' + i.hasCancel
+                                + status
                                 + '</td ><td>' + `${new Date(Date.parse(i.paiedDate)).getDate()}/${new Date(Date.parse(i.paiedDate)).getMonth() + 1}/${new Date(Date.parse(i.paiedDate)).getFullYear()}`
                                 + '</td ><td>' + `${new Date(Date.parse(i.applyDate)).getDate()}/${new Date(Date.parse(i.applyDate)).getMonth() + 1}/${new Date(Date.parse(i.applyDate)).getFullYear()}`
                                 + '</td><td> ' + i.paymentMethod
@@ -449,8 +534,16 @@
                             $("#applyDate-update").val(`${new Date(Date.parse(info.applyDate)).getDate()}/${new Date(Date.parse(info.applyDate)).getMonth() + 1}/${new Date(Date.parse(info.applyDate)).getFullYear()}`);
                             $("#child-update").val(info.child);
                             $("#adult-update").val(info.adult);
-                            $("#hasPaied-update").val(info.hasPaied);
-                            $("#hasCancel-update").val(info.hasCancel);
+                            if (info.hasPaied) {
+                                $("#hasPaied-update").val('true');
+                            } else {
+                                $("#hasPaied-update").val('false');
+                            }
+                            if (info.hasCancel) {
+                                $("#hasCancel-update").val('true');
+                            } else {
+                                $("#hasCancel-update").val('false');
+                            }
                             $("#paymentMethod-update").val(info.paymentMethod);
                         },
                         error: function (error) {
@@ -463,13 +556,17 @@
                     const billId = localStorage.getItem("billId");
                     const apiUrl = `http://localhost:4444/bill/${billId}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const selectBoxPaied = document.getElementById("hasPaied-update");
+                    const hasPaied = selectBoxPaied.options[selectBoxPaied.selectedIndex].value;
+                    const selectBoxCancel = document.getElementById("hasCancel-update");
+                    const hasCancel = selectBoxCancel.options[selectBoxCancel.selectedIndex].value;
                     const billInfo = {
                         price: $("#price-update").val(),
-                        applyDate: $("#applyDate-update").val(),
-                        child: $("#child-update").val(),
-                        adult: $("#adult-update").val(),
-                        hasPaied: $("#hasPaied-update").val(),
-                        hasCancel: $("#hasCancel-update").val(),
+                        applyDate: ($("#applyDate-update").val()).split("/").reverse().join("/"),
+                        child: $("#child-update").val() - 0,
+                        adult: $("#adult-update").val() - 0,
+                        hasPaied: hasPaied === 'true' ? true : false,
+                        hasCancel: hasCancel === 'true' ? true : false,
                         paymentMethod: $("#paymentMethod-update").val()
                     };
                     $.ajax(apiUrl, {
@@ -487,6 +584,7 @@
                         },
                         error: function (error) {
                             alert(error.responseJSON.message);
+                            location.reload();
                         }
                     });
                 }
@@ -494,15 +592,16 @@
                 function createBill() {
                     const apiUrl = 'http://localhost:4444/bill';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const selectBox = document.getElementById("hasPaied-create");
+                    const hasPaied = selectBox.options[selectBox.selectedIndex].value;
                     const billInfo = {
                         userId: $("#userId-create").val(),
                         tourId: $("#tourId-create").val(),
                         price: $("#price-create").val(),
-                        applyDate: $("#applyDate-create").val(),
-                        child: $("#child-create").val(),
-                        adult: $("#adult-create").val(),
-                        hasPaied: $("#hasPaied-create").val(),
-                        hasCancel: $("#hasCancel-create").val(),
+                        applyDate: ($("#applyDate-create").val().split("/").reverse().join("/")),
+                        child: $("#child-create").val() - 0,
+                        adult: $("#adult-create").val() - 0,
+                        hasPaied: hasPaied === 'true' ? true : false,
                         paymentMethod: $("#paymentMethod-create").val()
                     };
                     $.ajax(apiUrl, {
@@ -519,6 +618,7 @@
                         },
                         error: function (error) {
                             alert(error.responseJSON.message);
+                            location.reload();
                         }
                     });
                 }
@@ -540,6 +640,28 @@
                         },
                         error: function (error) {
                             alert(error.responseJSON.message);
+                            location.reload();
+                        }
+                    });
+                }
+
+                function getPriceTour() {
+                    const selectBox = document.getElementById("tourId-create");
+                    const id = selectBox.options[selectBox.selectedIndex].value;
+
+                    const apiUrl = `http://localhost:4444/tour/${id}`;
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function (result) {
+                            const data = result.data;
+                            $('#price-create').val(data.price);
                         }
                     });
                 }
@@ -551,6 +673,7 @@
                     localStorage.removeItem("displayName");
                 })
             </script>
+
 </body>
 
 </html>

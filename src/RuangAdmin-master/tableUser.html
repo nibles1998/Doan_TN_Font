@@ -249,8 +249,9 @@
                             </div>
                             <div class="col-lg-6">
                               <label for="role-create">Role:</label>
-                              <input type="text" class="form-control" id="role-create" placeholder="Enter Role"
-                                required>
+                              <select class="form-control" id="role-create">
+
+                              </select>
                             </div>
                           </div>
                         </div>
@@ -319,8 +320,9 @@
                             </div>
                             <div class="col-lg-6">
                               <label for="role-update">Role:</label>
-                              <input type="text" class="form-control" id="role-update" placeholder="Enter Role"
-                                required>
+                              <select class="form-control" id="role-update">
+
+                              </select>
                             </div>
                           </div>
                         </div>
@@ -377,6 +379,31 @@
         const displayName = JSON.parse(localStorage.getItem("displayName"));
         const userNameLogin = document.getElementById("userNameLogin");
         userNameLogin.innerHTML = displayName;
+      </script>
+
+      <script>
+        $(document).ready(function () {
+          const apiUrl = 'http://localhost:4444/userrole/s';
+          const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+          $.ajax({
+            url: apiUrl,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            headers: {
+              Authorization: 'Bearer ' + authenticate.token
+            },
+            success: function (result) {
+              let str = "";
+              const data = result.data;
+              for (const i of data) {
+                str += `<option value="${i.id}">${i.type}</option>`;
+              }
+              $('#role-create').html(str);
+              $('#role-update').html(str);
+            }
+          });
+        });
       </script>
 
       <!-- Get data in table -->
@@ -473,6 +500,8 @@
           const userId = localStorage.getItem("userId");
           const apiUrl = `http://localhost:4444/user/${userId}`;
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+          const selectBox = document.getElementById("role-update");
+          const role = selectBox.options[selectBox.selectedIndex].value;
           const userInfo = {
             fullName: $("#fullName-update").val(),
             address: $("#address-update").val(),
@@ -480,7 +509,7 @@
             dateOfBirth: $("#dateOfBirth-update").val(),
             country: $("#country-update").val(),
             displayName: $("#displayName-update").val(),
-            roleId: $("#role-update").val(),
+            roleId: role,
             paymentMethod: ["Momo"]
           };
           $.ajax(apiUrl, {
@@ -508,6 +537,8 @@
         function createUser() {
           const apiUrl = 'http://localhost:4444/user';
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+          const selectBox = document.getElementById("role-create");
+          const role = selectBox.options[selectBox.selectedIndex].value;
           const userInfo = {
             fullName: $("#fullName-create").val(),
             address: $("#address-create").val(),
@@ -517,7 +548,7 @@
             password: $("#password-create").val(),
             country: $("#country-create").val(),
             displayName: $("#displayName-create").val(),
-            roleId: $("#role-create").val(),
+            roleId: role,
             description: "",
             paymentMethod: ["Momo"]
           };

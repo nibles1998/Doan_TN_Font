@@ -272,30 +272,59 @@
                     headers: {
                         Authorization: 'Bearer ' + authenticate.token
                     },
-                }).done((result) => {
+                }).done(async (result) => {
                     let str = "";
                     const data = result.data;
                     let sum = 0;
 
                     for (const i of data) {
                         let status = "";
-                        if (i.hasCancel === true) {
-                            status += '</td><td class="badge badge-danger">Reject'
+                        if (i.hasCancel) {
+                            status += '</td><td><span class="badge badge-danger">Reject</span>'
+                            if (i.hasPaied) {
+                                sum += i.total;
+                            }
                         } else {
-                            if (i.hasPaied === true) {
+                            if (i.hasPaied) {
                                 status += '</td><td><span class="badge badge-success">Complete</span>'
+                                sum += i.total;
                             } else {
                                 status += '</td><td><span class="badge badge-primary">Processing</span>'
                             }
                         }
+                        const apiUrlUser = `http://localhost:4444/user/${i.userId}`;
+                        let userName = "";
+                        await $.ajax({
+                            url: apiUrlUser,
+                            type: "GET",
+                            contentType: "application/json",
+                            dataType: "json",
+                            headers: {
+                                Authorization: 'Bearer ' + authenticate.token
+                            }, success: function (data) {
+                                userName += data.data.fullName;
+                            }
+                        });
+                        const apiUrlTour = `http://localhost:4444/tour/${i.tourId}`;
+                        let tourName = "";
+                        await $.ajax({
+                            url: apiUrlTour,
+                            type: "GET",
+                            contentType: "application/json",
+                            dataType: "json",
+                            headers: {
+                                Authorization: 'Bearer ' + authenticate.token
+                            }, success: function (data) {
+                                tourName += data.data.tourName;
+                            }
+                        });
                         str += '<tr>'
                             + '<td>' + i._id
-                            + '</td><td>' + i.userId
-                            + '</td><td> ' + i.tourId
+                            + '</td><td>' + userName
+                            + '</td><td> ' + tourName
                             + status
                             + '</td ><td>' + `${new Date(Date.parse(i.applyDate)).getDate()}/${new Date(Date.parse(i.applyDate)).getMonth() + 1}/${new Date(Date.parse(i.applyDate)).getFullYear()}`
                             + '</td></tr>';
-                        sum += i.total;
                     }
                     const table = document.getElementById("bodyTable");
                     table.innerHTML = str;

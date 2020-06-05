@@ -200,13 +200,17 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="create-create">Create:</label>
-                                                            <input type="text" class="form-control" id="create-create"
-                                                                placeholder="Enter Create" required>
+                                                            <select class="form-control" id="create-create">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="read-create">Read:</label>
-                                                            <input type="text" class="form-control" id="read-create"
-                                                                placeholder="Enter Read" required>
+                                                            <select class="form-control" id="read-create">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -215,13 +219,17 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="up-create">Update:</label>
-                                                            <input type="text" class="form-control" id="up-create"
-                                                                placeholder="Enter Update" required>
+                                                            <select class="form-control" id="up-create">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="del-create">Delete:</label>
-                                                            <input type="text" class="form-control" id="del-create"
-                                                                placeholder="Enter Delete" required>
+                                                            <select class="form-control" id="del-create">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -253,19 +261,23 @@
                                                 <div class="form-group">
                                                     <label for="type-update">Type:</label>
                                                     <input type="text" class="form-control" id="type-update"
-                                                        placeholder="Enter Type" required>
+                                                        placeholder="Enter Type" readonly required>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="create-update">Create:</label>
-                                                            <input type="text" class="form-control" id="create-update"
-                                                                placeholder="Enter Create" required>
+                                                            <select class="form-control" id="create-update">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="read-update">Read:</label>
-                                                            <input type="text" class="form-control" id="read-update"
-                                                                placeholder="Enter Read" required>
+                                                            <select class="form-control" id="read-update">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -274,13 +286,17 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="up-update">Update:</label>
-                                                            <input type="text" class="form-control" id="up-update"
-                                                                placeholder="Enter Update" required>
+                                                            <select class="form-control" id="up-update">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="del-update">Delete:</label>
-                                                            <input type="text" class="form-control" id="del-update"
-                                                                placeholder="Enter Delete" required>
+                                                            <select class="form-control" id="del-update">
+                                                                <option value="false">False</option>
+                                                                <option value="true">True</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -397,11 +413,27 @@
                         dataType: "json",
                         success: function async(data) {
                             const info = data.data;
+                            if (info.create) {
+                                $("#create-update").val('true');
+                            } else {
+                                $("#create-update").val('false');
+                            }
+                            if (info.read) {
+                                $("#read-update").val('true');
+                            } else {
+                                $("#read-update").val('false');
+                            }
+                            if (info.up) {
+                                $("#up-update").val('true');
+                            } else {
+                                $("#up-update").val('false');
+                            }
+                            if (info.del) {
+                                $("#del-update").val('true');
+                            } else {
+                                $("#del-update").val('false');
+                            }
                             $("#type-update").val(info.type);
-                            $("#create-update").val(info.create);
-                            $("#read-update").val(info.read);
-                            $("#up-update").val(info.up);
-                            $("#del-update").val(info.del);
                         },
                         error: function (error) {
                             alert(error.responseJSON.message);
@@ -417,12 +449,20 @@
                     const roleId = localStorage.getItem("roleId");
                     const apiUrl = `http://localhost:4444/userrole/${roleId}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const selectBoxCreate = document.getElementById("create-update");
+                    const create = selectBoxCreate.options[selectBoxCreate.selectedIndex].value;
+                    const selectBoxRead = document.getElementById("read-update");
+                    const read = selectBoxRead.options[selectBoxRead.selectedIndex].value;
+                    const selectBoxUpdate = document.getElementById("up-update");
+                    const up = selectBoxUpdate.options[selectBoxUpdate.selectedIndex].value;
+                    const selectBoxDelete = document.getElementById("del-update");
+                    const del = selectBoxDelete.options[selectBoxDelete.selectedIndex].value;
                     const roleInfo = {
                         type: $("#type-update").val(),
-                        create: $("#create-update").val(),
-                        read: $("#read-update").val(),
-                        up: $("#up-update").val(),
-                        del: $("#del-update").val(),
+                        create: create === 'true' ? true : false,
+                        read: read === 'true' ? true : false,
+                        up: up === 'true' ? true : false,
+                        del: del === 'true' ? true : false,
                     };
                     $.ajax(apiUrl, {
                         type: "PUT",

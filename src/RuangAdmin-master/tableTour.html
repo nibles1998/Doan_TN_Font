@@ -244,15 +244,21 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-4">
                                                             <label for="seat-create">Seat:</label>
-                                                            <input type="text" class="form-control" id="seat-create"
+                                                            <input type="number" class="form-control" id="seat-create"
                                                                 placeholder="Enter Seat" required>
                                                         </div>
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-4">
+                                                            <label for="time-create">Time:</label>
+                                                            <input type="number" class="form-control" id="time-create"
+                                                                placeholder="Enter Time" required>
+                                                        </div>
+                                                        <div class="col-lg-4">
                                                             <label for="company-create">Company:</label>
-                                                            <input type="text" class="form-control" id="company-create"
-                                                                placeholder="Enter Company" required>
+                                                            <select class="form-control" id="company-create">
+
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -291,7 +297,7 @@
                                                         <div class="col-lg-6">
                                                             <label for="tourCode-update">Tour Code:</label>
                                                             <input type="text" class="form-control" id="tourCode-update"
-                                                                placeholder="Enter Tour Code" required>
+                                                                placeholder="Enter Tour Code" readonly required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="tourName-update">Tour Name:</label>
@@ -310,7 +316,7 @@
                                                         <div class="col-lg-6">
                                                             <label for="price-update">Price:</label>
                                                             <input type="text" class="form-control" id="price-update"
-                                                                placeholder="Enter Price" required>
+                                                                placeholder="Enter Price" readonly required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -331,29 +337,21 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-4">
                                                             <label for="seat-update">Seat:</label>
-                                                            <input type="text" class="form-control" id="seat-update"
+                                                            <input type="number" class="form-control" id="seat-update"
                                                                 placeholder="Enter Seat" required>
                                                         </div>
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-4">
+                                                            <label for="time-update">Time:</label>
+                                                            <input type="number" class="form-control" id="time-update"
+                                                                placeholder="Enter Time" required>
+                                                        </div>
+                                                        <div class="col-lg-4">
                                                             <label for="company-update">Company:</label>
-                                                            <input type="text" class="form-control" id="company-update"
-                                                                placeholder="Enter Company" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label for="child-update">Child:</label>
-                                                            <input type="text" class="form-control" id="child-update"
-                                                                placeholder="Enter Child" required>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label for="adult-update">Adult:</label>
-                                                            <input type="text" class="form-control" id="adult-update"
-                                                                placeholder="Enter Adult" required>
+                                                            <select class="form-control" id="company-update">
+
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -423,6 +421,31 @@
 
             <script>
                 $(document).ready(function () {
+                    const apiUrl = 'http://localhost:4444/company/s';
+                    const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    $.ajax({
+                        url: apiUrl,
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function (result) {
+                            let str = "";
+                            const data = result.data;
+                            for (const i of data) {
+                                str += `<option value="${i.id}">${i.companyName}</option>`;
+                            }
+                            $('#company-create').html(str);
+                            $('#company-update').html(str);
+                        }
+                    });
+                });
+            </script>
+
+            <script>
+                $(document).ready(function () {
                     const apiUrl = 'http://localhost:4444/tour/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
@@ -458,6 +481,7 @@
                                 + '</td><td> ' + i.note
                                 + '</td><td> ' + i.companyId
                                 + '</td></tr>';
+                            currentIndex++;
                         }
                         const table = document.getElementById("bodyTable");
                         table.innerHTML = str;
@@ -482,10 +506,12 @@
                         dataType: "json",
                         success: function async(data) {
                             const info = data.data;
+                            console.log("DATA: ", JSON.stringify(info));
                             $("#tourCode-update").val(info.tourCode);
                             $("#tourName-update").val(info.tourName);
                             $("#location-update").val(info.location);
                             $("#price-update").val(info.price);
+                            $("#time-update").val(info.time);
                             $("#startedDate-update").val(`${new Date(Date.parse(info.startedDate)).getDate()}/${new Date(Date.parse(info.startedDate)).getMonth() + 1}/${new Date(Date.parse(info.startedDate)).getFullYear()}`);
                             $("#endDate-update").val(`${new Date(Date.parse(info.endDate)).getDate()}/${new Date(Date.parse(info.endDate)).getMonth() + 1}/${new Date(Date.parse(info.endDate)).getFullYear()}`);
                             $("#seat-update").val(info.seat);
@@ -508,6 +534,8 @@
                     const tourId = localStorage.getItem("tourId");
                     const apiUrl = `http://localhost:4444/tour/${tourId}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const selectBox = document.getElementById("company-update");
+                    const company = selectBox.options[selectBox.selectedIndex].value;
                     const tourInfo = {
                         tourCode: $("#tourCode-update").val(),
                         tourName: $("#tourName-update").val(),
@@ -516,7 +544,8 @@
                         startedDate: $("#startedDate-update").val(),
                         endDate: $("#endDate-update").val(),
                         seat: $("#seat-update").val(),
-                        companyId: $("#company-update").val(),
+                        time: $("#time-update").val(),
+                        companyId: company,
                         child: $("#child-update").val(),
                         adult: $("#adult-update").val(),
                         note: $("#note-update").val()
@@ -543,6 +572,8 @@
                 function createTour() {
                     const apiUrl = 'http://localhost:4444/tour';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
+                    const selectBox = document.getElementById("company-create");
+                    const company = selectBox.options[selectBox.selectedIndex].value;
                     const tourInfo = {
                         tourCode: $("#tourCode-create").val(),
                         tourName: $("#tourName-create").val(),
@@ -551,7 +582,8 @@
                         startedDate: $("#startedDate-create").val(),
                         endDate: $("#endDate-create").val(),
                         seat: $("#seat-create").val(),
-                        companyId: $("#company-create").val(),
+                        time: $("#time-create").val(),
+                        companyId: company,
                         child: $("#child-create").val(),
                         adult: $("#adult-create").val(),
                         note: $("#note-create").val()
