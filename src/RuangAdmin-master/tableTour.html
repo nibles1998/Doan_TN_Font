@@ -115,17 +115,9 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="profile.html">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a id="killToken" class="dropdown-item" href="login.html">
@@ -156,7 +148,8 @@
                                     <div class="table-responsive p-3">
                                         <button type="button" class="btn mb-3 btn-group-lg btn-success"
                                             data-toggle="modal" data-target="#exampleModalCenter-Create">Create</button>
-                                        <table class="table align-items-center table-flush" id="dataTable">
+                                        <table class="table align-items-center table-flush table-responsive"
+                                            id="dataTable">
                                             <thead class="thead-light">
                                                 <tr>
                                                     <th></th>
@@ -231,13 +224,13 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="startedDate-create">Start Date:</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="date" class="form-control"
                                                                 id="startedDate-create" placeholder="Enter Started Date"
                                                                 required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="endDate-create">End Date:</label>
-                                                            <input type="text" class="form-control" id="endDate-create"
+                                                            <input type="date" class="form-control" id="endDate-create"
                                                                 placeholder="Enter End Date" required>
                                                         </div>
                                                     </div>
@@ -324,13 +317,13 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="startedDate-update">Start Date:</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="date" class="form-control"
                                                                 id="startedDate-update" placeholder="Enter Started Date"
                                                                 required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="endDate-update">End Date:</label>
-                                                            <input type="text" class="form-control" id="endDate-update"
+                                                            <input type="date" class="form-control" id="endDate-update"
                                                                 placeholder="Enter End Date" required>
                                                         </div>
                                                     </div>
@@ -456,11 +449,24 @@
                         headers: {
                             Authorization: 'Bearer ' + authenticate.token
                         },
-                    }).done((result) => {
+                    }).done(async (result) => {
                         let str = "";
                         const data = result.data;
                         let currentIndex = 0;
                         for (const i of data) {
+                            const apiUrlUser = `http://localhost:4444/company/${i.companyId}`;
+                            let companyName = "";
+                            await $.ajax({
+                                url: apiUrlUser,
+                                type: "GET",
+                                contentType: "application/json",
+                                dataType: "json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                }, success: function (data) {
+                                    companyName += data.data.companyName;
+                                }
+                            });
                             str += '<tr><td>'
                                 + `<button type="button" id="btnDelete-${currentIndex}" onclick="getTourId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
                                 + '</td><td>'
@@ -479,7 +485,7 @@
                                 + '</td ><td>' + `${new Date(Date.parse(i.startedDate)).getDate()}/${new Date(Date.parse(i.startedDate)).getMonth() + 1}/${new Date(Date.parse(i.startedDate)).getFullYear()}`
                                 + '</td ><td>' + `${new Date(Date.parse(i.endDate)).getDate()}/${new Date(Date.parse(i.endDate)).getMonth() + 1}/${new Date(Date.parse(i.endDate)).getFullYear()}`
                                 + '</td><td> ' + i.note
-                                + '</td><td> ' + i.companyId
+                                + '</td><td> ' + companyName
                                 + '</td></tr>';
                             currentIndex++;
                         }
@@ -512,8 +518,8 @@
                             $("#location-update").val(info.location);
                             $("#price-update").val(info.price);
                             $("#time-update").val(info.time);
-                            $("#startedDate-update").val(`${new Date(Date.parse(info.startedDate)).getDate()}/${new Date(Date.parse(info.startedDate)).getMonth() + 1}/${new Date(Date.parse(info.startedDate)).getFullYear()}`);
-                            $("#endDate-update").val(`${new Date(Date.parse(info.endDate)).getDate()}/${new Date(Date.parse(info.endDate)).getMonth() + 1}/${new Date(Date.parse(info.endDate)).getFullYear()}`);
+                            $("#startedDate-update").val((info.startedDate).toString().split("T")[0]);
+                            $("#endDate-update").val((info.endDate).toString().split("T")[0]);
                             $("#seat-update").val(info.seat);
                             $("#company-update").val(info.companyId);
                             $("#child-update").val(info.child);
@@ -564,7 +570,9 @@
                             location.reload();
                         },
                         error: function (error) {
+                            localStorage.removeItem("tourId");
                             alert(error.responseJSON.message);
+                            location.reload();
                         }
                     });
                 }
@@ -602,6 +610,7 @@
                         },
                         error: function (error) {
                             alert(error.responseJSON.message);
+                            location.reload();
                         }
                     });
                 }
@@ -622,7 +631,9 @@
                             location.reload();
                         },
                         error: function (error) {
+                            localStorage.removeItem("tourId");
                             alert(error.responseJSON.message);
+                            location.reload();
                         }
                     });
                 }
@@ -630,6 +641,12 @@
 
             <script>
                 $("#killToken").click(function () {
+                    localStorage.removeItem("userId");
+                    localStorage.removeItem("roleId");
+                    localStorage.removeItem("tourId");
+                    localStorage.removeItem("typeTourId");
+                    localStorage.removeItem("billId");
+                    localStorage.removeItem("companyId");
                     localStorage.removeItem("dataLogin");
                     localStorage.removeItem("displayName");
                 })

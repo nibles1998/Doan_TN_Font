@@ -115,17 +115,9 @@
                 <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="profile.html">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
                 <a id="killToken" class="dropdown-item" href="login.html">
@@ -156,7 +148,7 @@
                   <div class="table-responsive p-3">
                     <button type="button" class="btn mb-3 btn-group-lg btn-success" data-toggle="modal"
                       data-target="#exampleModalCenter-Create">Create</button>
-                    <table class="table align-items-center table-flush" id="dataTable">
+                    <table class="table align-items-center table-flush table-responsive" id="dataTable">
                       <thead class="thead-light">
                         <tr>
                           <th></th>
@@ -235,7 +227,7 @@
                             </div>
                             <div class="col-lg-6">
                               <label for="dateOfBirth">Date Of Birth:</label>
-                              <input type="text" class="form-control" id="dateOfBirth-create"
+                              <input type="date" class="form-control" id="dateOfBirth-create"
                                 placeholder="Enter BirthDay" required>
                             </div>
                           </div>
@@ -306,7 +298,7 @@
                             </div>
                             <div class="col-lg-6">
                               <label for="dateOfBirth-update">Date Of Birth:</label>
-                              <input type="text" class="form-control" id="dateOfBirth-update"
+                              <input type="date" class="form-control" id="dateOfBirth-update"
                                 placeholder="Enter BirthDay" required>
                             </div>
                           </div>
@@ -419,11 +411,26 @@
             headers: {
               Authorization: 'Bearer ' + authenticate.token
             },
-          }).done((result) => {
+          }).done(async (result) => {
             let str = "";
             const data = result.data;
             let currentIndex = 0;
             for (const i of data) {
+
+              const apiUrlUser = `http://localhost:4444/userrole/${i.roleId}`;
+              let userRole = "";
+              await $.ajax({
+                url: apiUrlUser,
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                headers: {
+                  Authorization: 'Bearer ' + authenticate.token
+                }, success: function (data) {
+                  userRole += data.data.type;
+                }
+              });
+
               str += '<tr><td>'
                 + `<button type="button" id="btnDelete-${currentIndex}" onclick="getUserId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
                 + '</td><td>'
@@ -436,7 +443,7 @@
                 + '</td><td>' + i.email
                 + '</td><td>' + i.phone
                 + '</td><td>' + i.country
-                + '</td><td>' + i.roleId
+                + '</td><td>' + userRole
                 + '</td></tr>';
               currentIndex++;
             }
@@ -444,20 +451,6 @@
             table.innerHTML = str;
             $('#dataTable').DataTable();
             $('#dataTableHover').DataTable();
-          });
-        });
-      </script>
-      <!-- Get role -->
-      <script>
-        $(document).ready(function () {
-          const apiUrl = 'http://localhost:4444/userrole/s';
-          $.ajax({
-            url: apiUrl,
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-          }).done((result) => {
-            console.log("ROLE: ", JSON.stringify(result));
           });
         });
       </script>
@@ -479,7 +472,7 @@
               const info = data.data;
               $("#fullName-update").val(info.fullName);
               $("#displayName-update").val(info.displayName);
-              $("#dateOfBirth-update").val(`${new Date(Date.parse(info.dateOfBirth)).getDate()}/${new Date(Date.parse(info.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(info.dateOfBirth)).getFullYear()}`);
+              $("#dateOfBirth-update").val((info.dateOfBirth).toString().split("T")[0]);
               $("#address-update").val(info.address);
               $("#email-update").val(info.email);
               $("#phone-update").val(info.phone);
@@ -529,6 +522,7 @@
               location.reload();
             },
             error: function (error) {
+              localStorage.removeItem("userId");
               alert(error.responseJSON.message);
             }
           });
@@ -566,6 +560,7 @@
             },
             error: function (error) {
               alert(error.responseJSON.message);
+              location.reload();
             }
           });
         }
@@ -586,7 +581,9 @@
               location.reload();
             },
             error: function (error) {
+              localStorage.removeItem("userId");
               alert(error.responseJSON.message);
+              location.reload();
             }
           });
         }
@@ -594,6 +591,12 @@
 
       <script>
         $("#killToken").click(function () {
+          localStorage.removeItem("userId");
+          localStorage.removeItem("roleId");
+          localStorage.removeItem("tourId");
+          localStorage.removeItem("typeTourId");
+          localStorage.removeItem("billId");
+          localStorage.removeItem("companyId");
           localStorage.removeItem("dataLogin");
           localStorage.removeItem("displayName");
         })

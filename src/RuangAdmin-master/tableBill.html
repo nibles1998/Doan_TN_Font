@@ -115,17 +115,9 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="profile.html">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a id="killToken" class="dropdown-item" href="login.html">
@@ -156,7 +148,8 @@
                                     <div class="table-responsive p-3">
                                         <button type="button" class="btn mb-3 btn-group-lg btn-success"
                                             data-toggle="modal" data-target="#exampleModalCenter-Create">Create</button>
-                                        <table class="table align-items-center table-flush" id="dataTable">
+                                        <table class="table align-items-center table-flush table-responsive"
+                                            id="dataTable">
                                             <thead class="thead-light">
                                                 <tr>
                                                     <th></th>
@@ -221,7 +214,7 @@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="applyDate-create">Apply Date:</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="date" class="form-control"
                                                                 id="applyDate-create" placeholder="Enter Apply Date"
                                                                 required>
                                                         </div>
@@ -292,7 +285,7 @@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="applyDate-update">Apply Date:</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="date" class="form-control"
                                                                 id="applyDate-update" placeholder="Enter Apply Date"
                                                                 required>
                                                         </div>
@@ -531,7 +524,7 @@
                         success: function async(data) {
                             const info = data.data;
                             $("#price-update").val(info.price);
-                            $("#applyDate-update").val(`${new Date(Date.parse(info.applyDate)).getDate()}/${new Date(Date.parse(info.applyDate)).getMonth() + 1}/${new Date(Date.parse(info.applyDate)).getFullYear()}`);
+                            $("#applyDate-update").val((info.applyDate).toString().split("T")[0]);
                             $("#child-update").val(info.child);
                             $("#adult-update").val(info.adult);
                             if (info.hasPaied) {
@@ -640,6 +633,7 @@
                         },
                         error: function (error) {
                             alert(error.responseJSON.message);
+                            localStorage.removeItem("billId");
                             location.reload();
                         }
                     });
@@ -669,6 +663,12 @@
 
             <script>
                 $("#killToken").click(function () {
+                    localStorage.removeItem("userId");
+                    localStorage.removeItem("roleId");
+                    localStorage.removeItem("tourId");
+                    localStorage.removeItem("typeTourId");
+                    localStorage.removeItem("billId");
+                    localStorage.removeItem("companyId");
                     localStorage.removeItem("dataLogin");
                     localStorage.removeItem("displayName");
                 })

@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from shmai.com/preview/travelco/tours.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 04:21:40 GMT -->
+
 <head>
     <!-- META -->
     <meta charset="utf-8">
@@ -12,7 +13,7 @@
     <meta name="keywords" content="new, html, bootstrap, new html template, design, creative, clean, modern">
     <meta name="author" content="Nauman Anwar">
     <!--PAGE FAVICON-->
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
     <!-- PAGE TITLE -->
     <title>TravelCo</title>
     <!-- BOOTSTRAP CSS -->
@@ -27,7 +28,7 @@
     <link rel="stylesheet" href="assets/owlcarousel/css/owl.carousel.css">
     <link rel="stylesheet" href="assets/owlcarousel/css/owl.theme.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <!-- MAGNIFIC CSS -->
+    <!-- MAGNIFIC CSS -->
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <!-- ANIMATE CSS -->
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -72,7 +73,8 @@
                         <div class="mainmenu">
                             <div class="navbar navbar-nobg">
                                 <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                        data-target=".navbar-collapse">
                                         <span class="sr-only">Toggle navigation</span>
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
@@ -82,17 +84,18 @@
                                 <div class="navbar-collapse collapse no-padding">
                                     <ul class="nav navbar-nav navbar-left">
                                         <li><a href="index.html">Home </a></li>
-                                        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">Tour<span class="caret"></span></a>
+                                        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
+                                                href="#">Tour<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="tours.html">List</a></li>
-                                                <li><a href="activities.html">Activites</a></li> 
+                                                <li><a href="activities.html">Activites</a></li>
                                             </ul>
-                                    </li>
+                                        </li>
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
-                                    
-                                </div>                            
+
+                                </div>
                             </div>
                         </div>
                         <!-- END MENU DESIGN AREA -->
@@ -115,7 +118,7 @@
                     </div>
                     <div class="site-page-breadcrumb-2">
                         <span>
-                            <a style="" href="#">Home </a> 
+                            <a style="" href="#">Home </a>
                             <i class="fa fa-angle-double-right"></i> Tours
                         </span>
                     </div>
@@ -130,7 +133,35 @@
     <section id="tour" class="tour-area section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12 sidebar">
+                    <div class="widget formwidget">
+                        <form class="tourform">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label>Keywords</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Enter a Keyword">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Where</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Choose Location">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Start Date</label>
+                                    <input type="date" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Enter email">
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                <input type="submit" value="Search" class="button">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="tours-info">
                             <img alt="image" src="assets/images/tours/tours1.jpg">
@@ -227,40 +258,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4 sidebar">
-                    <div class="widget formwidget">
-                        <form class="tourform">
-                            <div class="form-group">
-                                <label >Keywords</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter a Keyword">
-                            </div>
-                            <div class="form-group">
-                                <label >Where</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Choose Location">
-                            </div>
-                            <div class="form-group">
-                                <label >Start Date</label>
-                                <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Search" class="button">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="widget">
-                        <div class="section-title">
-                            <h2>Price Range</h2>
-                            <div class="title-separator-outer ">
-                                <div class="title-separator bg-primary style-liner"></div>
-                            </div>
-                        </div>
-                        <div class="rangeslider">
-                            <input id="bslider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="9000" data-slider-step="5" data-slider-value="[0,8900]" />
-                            <span class="range_min light left"> $0</span>
-                            <span class="range_max light right">$9000</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -275,7 +272,7 @@
             <div id="owl-brands" class="company-logo-list owl-carousel unicase-owl-carousel owl-outer-nav">
                 <div class="item">
                     <div class="item_inner">
-                       <img alt="image" src="assets/images/company-logo/company_1.png">
+                        <img alt="image" src="assets/images/company-logo/company_1.png">
                     </div>
                 </div>
                 <!-- /.item -->
@@ -307,14 +304,14 @@
                 <div class="owl-buttons">
                     <div class="owl-prev"></div>
                     <div class="owl-next"></div>
-                </div>            
+                </div>
             </div>
         </div>
     </div>
     <!-- / END COMPANY DESIGN AREA -->
     <!-- START FOOTER DESIGN AREA -->
     <footer class="footer-area">
-         <div class="footer-bottom">
+        <div class="footer-bottom">
             <div class="container">
                 <div class="row">
                     <div class="col-md-5">
@@ -323,14 +320,14 @@
                         </div>
                     </div>
                     <div style="text-align: right;color: white;">
-                        <i class="fa fa-map-marker" aria-hidden="true" ></i> 14 Tottenham Court Road, NewYork<br/>
-                            <i class="fa fa-phone" aria-hidden="true"></i> 1(784)-775-95-377,
-                                1(784)-678-26-567N<br/>
-                            
-                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                <a href="#">info@yoursite.com/
-                                    </a><a href="">www.TravelCo.com</a>
-                        </div>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> 14 Tottenham Court Road, NewYork<br />
+                        <i class="fa fa-phone" aria-hidden="true"></i> 1(784)-775-95-377,
+                        1(784)-678-26-567N<br />
+
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <a href="#">info@yoursite.com/
+                        </a><a href="">www.TravelCo.com</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -371,4 +368,5 @@
 
 
 <!-- Mirrored from shmai.com/preview/travelco/tours.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 04:21:40 GMT -->
+
 </html>
