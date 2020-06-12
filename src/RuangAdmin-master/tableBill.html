@@ -407,6 +407,7 @@
                                 str += `<option value="${i.id}">${i.fullName}</option>`;
                             }
                             $('#userId-create').html(str);
+                            $('#userId-create').val("");
                         }
                     });
                     $.ajax({
@@ -424,6 +425,7 @@
                                 str += `<option value="${i.id}">${i.tourName}</option>`;
                             }
                             $('#tourId-create').html(str);
+                            $('#tourId-create').val("");
                         }
                     });
                 });

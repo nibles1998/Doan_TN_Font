@@ -193,27 +193,18 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form class="user">
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <label for="tourCode-create">Image:</label>
-                                                            <input type="file" class="form-control" id="image-create"
-                                                                required>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <form class="user" onsubmit="return createTour(event)">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="tourCode-create">Tour Code:</label>
                                                             <input type="text" class="form-control" id="tourCode-create"
-                                                                placeholder="Enter Tour Code" required>
+                                                                placeholder="Enter Tour Code" name="tourCode" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="tourName-create">Tour Name:</label>
                                                             <input type="text" class="form-control" id="tourName-create"
-                                                                placeholder="Enter Tour Name" required>
+                                                                placeholder="Enter Tour Name" name="tourName" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -222,12 +213,12 @@
                                                         <div class="col-lg-6">
                                                             <label for="location-create">Location:</label>
                                                             <input type="text" class="form-control" id="location-create"
-                                                                placeholder="Enter Location" required>
+                                                                placeholder="Enter Location" name="location" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="price-create">Price:</label>
                                                             <input type="text" class="form-control" id="price-create"
-                                                                placeholder="Enter Price" required>
+                                                                placeholder="Enter Price" name="price" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -237,12 +228,12 @@
                                                             <label for="startedDate-create">Start Date:</label>
                                                             <input type="date" class="form-control"
                                                                 id="startedDate-create" placeholder="Enter Started Date"
-                                                                required>
+                                                                name="startedDate" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="endDate-create">End Date:</label>
                                                             <input type="date" class="form-control" id="endDate-create"
-                                                                placeholder="Enter End Date" required>
+                                                                name="endDate" placeholder="Enter End Date" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -251,12 +242,12 @@
                                                         <div class="col-lg-6">
                                                             <label for="seat-create">Seat:</label>
                                                             <input type="number" class="form-control" id="seat-create"
-                                                                placeholder="Enter Seat" required>
+                                                                name="seat" placeholder="Enter Seat" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="time-create">Time:</label>
                                                             <input type="number" class="form-control" id="time-create"
-                                                                placeholder="Enter Time" required>
+                                                                name="time" placeholder="Enter Time" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -270,7 +261,8 @@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="company-create">Company:</label>
-                                                            <select class="form-control" id="company-create">
+                                                            <select class="form-control" id="company-create"
+                                                                name="companyId">
 
                                                             </select>
                                                         </div>
@@ -278,17 +270,26 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="note-create">Note:</label>
-                                                    <input type="text" class="form-control" id="note-create"
-                                                        placeholder="Enter Note" required>
+                                                    <input type="text" class="form-control" id="note-create" name="note"
+                                                        placeholder="Enter Note">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <label for="tourCode-create">Image:</label>
+                                                            <input type="file" class="form-control" id="image-create"
+                                                                name="photo" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-success">Create</button>
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-success"
-                                                onclick="createTour()">Create</button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -305,17 +306,8 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form class="user">
+                                            <form class="user" onsubmit="return updateTourInfo(event)">
                                                 <div class="form-group">
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <label for="tourCode-create">Image:</label>
-                                                                <input type="file" class="form-control"
-                                                                    id="image-update" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="tourCode-update">Tour Code:</label>
@@ -325,7 +317,7 @@
                                                         <div class="col-lg-6">
                                                             <label for="tourName-update">Tour Name:</label>
                                                             <input type="text" class="form-control" id="tourName-update"
-                                                                placeholder="Enter Tour Name" required>
+                                                                placeholder="Enter Tour Name" name="tourName" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -334,12 +326,12 @@
                                                         <div class="col-lg-6">
                                                             <label for="location-update">Location:</label>
                                                             <input type="text" class="form-control" id="location-update"
-                                                                placeholder="Enter Location" required>
+                                                                placeholder="Enter Location" name="location" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="price-update">Price:</label>
                                                             <input type="text" class="form-control" id="price-update"
-                                                                placeholder="Enter Price" required>
+                                                                placeholder="Enter Price" name="price" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -348,13 +340,13 @@
                                                         <div class="col-lg-6">
                                                             <label for="startedDate-update">Start Date:</label>
                                                             <input type="date" class="form-control"
-                                                                id="startedDate-update" placeholder="Enter Started Date"
-                                                                required>
+                                                                id="startedDate-update" name="startedDate"
+                                                                placeholder="Enter Started Date" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="endDate-update">End Date:</label>
                                                             <input type="date" class="form-control" id="endDate-update"
-                                                                placeholder="Enter End Date" required>
+                                                                placeholder="Enter End Date" name="endDate" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -363,12 +355,12 @@
                                                         <div class="col-lg-6">
                                                             <label for="seat-update">Seat:</label>
                                                             <input type="number" class="form-control" id="seat-update"
-                                                                placeholder="Enter Seat" required>
+                                                                placeholder="Enter Seat" name="seat" required>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="time-update">Time:</label>
                                                             <input type="number" class="form-control" id="time-update"
-                                                                placeholder="Enter Time" required>
+                                                                placeholder="Enter Time" name="time" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -382,7 +374,8 @@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="company-update">Company:</label>
-                                                            <select class="form-control" id="company-update">
+                                                            <select class="form-control" id="company-update"
+                                                                name="companyId">
 
                                                             </select>
                                                         </div>
@@ -391,15 +384,24 @@
                                                 <div class="form-group">
                                                     <label for="note-update">Note:</label>
                                                     <input type="text" class="form-control" id="note-update"
-                                                        placeholder="Enter Note" required>
+                                                        placeholder="Enter Note" name="note">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <img class="w-100" id="image-pre-update" src="">
+                                                            <label for="image-update">Image:</label>
+                                                            <input type="file" class="form-control" id="image-update"
+                                                                name="photo">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
                                                 </div>
                                             </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary"
-                                                onclick="updateTourInfo()">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -606,7 +608,7 @@
                                     }
                                 }
                             });
-                            $("#image-update").val(`http://localhost:4444/${info.photo}`);
+                            $("#image-pre-update").attr("src", `http://localhost:4444/${info.photo}`);
                             $("#tourCode-update").val(info.tourCode);
                             $("#tourName-update").val(info.tourName);
                             $("#location-update").val(info.location);
@@ -631,37 +633,26 @@
                     localStorage.setItem("tourId", $(`#tourId-${index}`).html());
                 }
 
-                function updateTourInfo() {
-                    const tourId = localStorage.getItem("tourId");
-                    const apiUrl = `http://localhost:4444/tour/${tourId}`;
+                function updateTourInfo(event) {
+                    event.preventDefault();
+                    const apiUrl = `http://localhost:4444/tour/${localStorage.getItem("tourId")}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const selectBoxCompany = document.getElementById("company-update");
                     const company = selectBoxCompany.options[selectBoxCompany.selectedIndex].value;
-                    const tourInfo = {
-                        tourName: $("#tourName-update").val(),
-                        location: $("#location-update").val(),
-                        price: $("#price-update").val(),
-                        startedDate: $("#startedDate-update").val(),
-                        endDate: $("#endDate-update").val(),
-                        seat: $("#seat-update").val(),
-                        time: $("#time-update").val(),
-                        companyId: company,
-                        child: $("#child-update").val(),
-                        adult: $("#adult-update").val(),
-                        note: $("#note-update").val()
-                    };
+                    const tourData = new FormData(event.target);
+
                     $.ajax(apiUrl, {
                         type: "PUT",
-                        data: JSON.stringify(tourInfo),
-                        contentType: "application/json",
-                        dataType: "json",
+                        data: tourData,
+                        processData: false,
+                        contentType: false,
                         headers: {
                             Authorization: 'Bearer ' + authenticate.token
                         },
-                        success: function (result) {
-                            const apiUrlTour_TypeTourGetId = `http://localhost:4444/tour_typetour?tourId=${tourId}`;
+                        success: async function (result) {
+                            const apiUrlTour_TypeTourGetId = `http://localhost:4444/tour_typetour/s?tourid=${localStorage.getItem("tourId")}`;
                             let tour_TypeTourId = '';
-                            $.ajax(apiUrlTour_TypeTourGetId, {
+                            await $.ajax(apiUrlTour_TypeTourGetId, {
                                 type: "GET",
                                 contentType: "application/json",
                                 headers: {
@@ -669,7 +660,7 @@
                                 },
                                 dataType: "json",
                                 success: function (result) {
-                                    for (const type of result) {
+                                    for (const type of result.data) {
                                         tour_TypeTourId += type.id;
                                     }
                                 }
@@ -678,7 +669,7 @@
                             const selectBoxTypeTour = document.getElementById("typeTour-update");
                             const typeTour = selectBoxTypeTour.options[selectBoxTypeTour.selectedIndex].value;
                             const tour_TypeTour = {
-                                tourId: tourId,
+                                tourId: localStorage.getItem("tourId"),
                                 typeTourId: typeTour
                             };
                             $.ajax(apiUrlTour_TypeTour, {
@@ -705,33 +696,22 @@
                     });
                 }
 
-                function createTour() {
+                function createTour(event) {
+                    event.preventDefault();
                     const apiUrl = 'http://localhost:4444/tour';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const selectBoxCompany = document.getElementById("company-create");
                     const company = selectBoxCompany.options[selectBoxCompany.selectedIndex].value;
-                    const tourInfo = {
-                        tourCode: $("#tourCode-create").val(),
-                        tourName: $("#tourName-create").val(),
-                        location: $("#location-create").val(),
-                        price: $("#price-create").val(),
-                        startedDate: $("#startedDate-create").val(),
-                        endDate: $("#endDate-create").val(),
-                        seat: $("#seat-create").val(),
-                        time: $("#time-create").val(),
-                        companyId: company,
-                        child: $("#child-create").val(),
-                        adult: $("#adult-create").val(),
-                        note: $("#note-create").val()
-                    };
+                    const tourData = new FormData(event.target);
+
                     $.ajax(apiUrl, {
                         type: "POST",
-                        data: JSON.stringify(tourInfo),
-                        contentType: "application/json",
-                        dataType: "json",
+                        data: tourData,
                         headers: {
                             Authorization: 'Bearer ' + authenticate.token
                         },
+                        processData: false,
+                        contentType: false,
                         success: function (data) {
                             const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour`;
                             const selectBoxTypeTour = document.getElementById("typeTour-update");
@@ -772,8 +752,8 @@
                         headers: {
                             Authorization: 'Bearer ' + authenticate.token
                         },
-                        success: function (data) {
-                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour/s?tourId=${tourId}`;
+                        success: async function (data) {
+                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour/s?tourid=${localStorage.getItem("tourId")}`;
                             await $.ajax({
                                 url: apiUrlTour_TypeTour,
                                 type: "GET",
