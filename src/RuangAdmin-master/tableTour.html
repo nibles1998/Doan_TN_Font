@@ -154,6 +154,7 @@
                                                 <tr>
                                                     <th></th>
                                                     <th></th>
+                                                    <th>Image</th>
                                                     <th>ID</th>
                                                     <th>TourCode</th>
                                                     <th>TourName</th>
@@ -168,6 +169,7 @@
                                                     <th>EndDate</th>
                                                     <th>Note</th>
                                                     <th>Company</th>
+                                                    <th>Type</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="bodyTable">
@@ -192,6 +194,15 @@
                                         </div>
                                         <div class="modal-body">
                                             <form class="user">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <label for="tourCode-create">Image:</label>
+                                                            <input type="file" class="form-control" id="image-create"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-6">
@@ -237,17 +248,27 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-6">
                                                             <label for="seat-create">Seat:</label>
                                                             <input type="number" class="form-control" id="seat-create"
                                                                 placeholder="Enter Seat" required>
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-6">
                                                             <label for="time-create">Time:</label>
                                                             <input type="number" class="form-control" id="time-create"
                                                                 placeholder="Enter Time" required>
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label for="typeTour-create">Type:</label>
+                                                            <select class="form-control" id="typeTour-create">
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-6">
                                                             <label for="company-create">Company:</label>
                                                             <select class="form-control" id="company-create">
 
@@ -286,6 +307,15 @@
                                         <div class="modal-body">
                                             <form class="user">
                                                 <div class="form-group">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label for="tourCode-create">Image:</label>
+                                                                <input type="file" class="form-control"
+                                                                    id="image-update" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label for="tourCode-update">Tour Code:</label>
@@ -309,7 +339,7 @@
                                                         <div class="col-lg-6">
                                                             <label for="price-update">Price:</label>
                                                             <input type="text" class="form-control" id="price-update"
-                                                                placeholder="Enter Price" readonly required>
+                                                                placeholder="Enter Price" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -330,17 +360,27 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-6">
                                                             <label for="seat-update">Seat:</label>
                                                             <input type="number" class="form-control" id="seat-update"
                                                                 placeholder="Enter Seat" required>
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-6">
                                                             <label for="time-update">Time:</label>
                                                             <input type="number" class="form-control" id="time-update"
                                                                 placeholder="Enter Time" required>
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label for="typeTour-update">Type:</label>
+                                                            <select class="form-control" id="typeTour-update">
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-6">
                                                             <label for="company-update">Company:</label>
                                                             <select class="form-control" id="company-update">
 
@@ -414,10 +454,11 @@
 
             <script>
                 $(document).ready(function () {
-                    const apiUrl = 'http://localhost:4444/company/s';
+                    const apiUrlCompany = 'http://localhost:4444/company/s';
+                    const apiUrlTypeTour = 'http://localhost:4444/typetour/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
-                        url: apiUrl,
+                        url: apiUrlCompany,
                         type: "GET",
                         contentType: "application/json",
                         dataType: "json",
@@ -431,7 +472,27 @@
                                 str += `<option value="${i.id}">${i.companyName}</option>`;
                             }
                             $('#company-create').html(str);
+                            $('#company-create').val("");
                             $('#company-update').html(str);
+                        }
+                    });
+                    $.ajax({
+                        url: apiUrlTypeTour,
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + authenticate.token
+                        },
+                        success: function (result) {
+                            let str = "";
+                            const data = result.data;
+                            for (const i of data) {
+                                str += `<option value="${i.id}">${i.type}</option>`;
+                            }
+                            $('#typeTour-create').html(str);
+                            $('#typeTour-create').val("");
+                            $('#typeTour-update').html(str);
                         }
                     });
                 });
@@ -454,10 +515,11 @@
                         const data = result.data;
                         let currentIndex = 0;
                         for (const i of data) {
-                            const apiUrlUser = `http://localhost:4444/company/${i.companyId}`;
+                            const apiUrlCompany = `http://localhost:4444/company/${i.companyId}`;
+                            const apiUrlTypeTour = `http://localhost:4444/typetour/${i.typeTours[0].id}`;
                             let companyName = "";
                             await $.ajax({
-                                url: apiUrlUser,
+                                url: apiUrlCompany,
                                 type: "GET",
                                 contentType: "application/json",
                                 dataType: "json",
@@ -467,11 +529,24 @@
                                     companyName += data.data.companyName;
                                 }
                             });
+                            let typeTour = "";
+                            await $.ajax({
+                                url: apiUrlTypeTour,
+                                type: "GET",
+                                contentType: "application/json",
+                                dataType: "json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                }, success: async function (data) {
+                                    typeTour += data.data.type;
+                                }
+                            });
                             str += '<tr><td>'
                                 + `<button type="button" id="btnDelete-${currentIndex}" onclick="getTourId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
                                 + '</td><td>'
                                 + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
                                 + '</td>'
+                                + `</td><td><img class="w-100" src="http://localhost:4444/${i.photo}"/>`
                                 + `<td><span id="tourId-${currentIndex}">` + i.id
                                 + '</td><td>' + i.tourCode
                                 + '</td><td> ' + i.tourName
@@ -486,6 +561,7 @@
                                 + '</td ><td>' + `${new Date(Date.parse(i.endDate)).getDate()}/${new Date(Date.parse(i.endDate)).getMonth() + 1}/${new Date(Date.parse(i.endDate)).getFullYear()}`
                                 + '</td><td> ' + i.note
                                 + '</td><td> ' + companyName
+                                + '</td><td> ' + typeTour
                                 + '</td></tr>';
                             currentIndex++;
                         }
@@ -510,9 +586,27 @@
                             Authorization: 'Bearer ' + authenticate.token
                         },
                         dataType: "json",
-                        success: function async(data) {
+                        success: async function (data) {
                             const info = data.data;
-                            console.log("DATA: ", JSON.stringify(info));
+                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour/s`;
+                            let typeTour = '';
+                            await $.ajax({
+                                url: apiUrlTour_TypeTour,
+                                type: "GET",
+                                contentType: "application/json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                },
+                                dataType: "json",
+                                success: function (result) {
+                                    for (const type of result.data) {
+                                        if (type.tourId === localStorage.getItem("tourId")) {
+                                            typeTour += type.typeTourId;
+                                        }
+                                    }
+                                }
+                            });
+                            $("#image-update").val(`http://localhost:4444/${info.photo}`);
                             $("#tourCode-update").val(info.tourCode);
                             $("#tourName-update").val(info.tourName);
                             $("#location-update").val(info.location);
@@ -522,6 +616,7 @@
                             $("#endDate-update").val((info.endDate).toString().split("T")[0]);
                             $("#seat-update").val(info.seat);
                             $("#company-update").val(info.companyId);
+                            $("#typeTour-update").val(typeTour);
                             $("#child-update").val(info.child);
                             $("#adult-update").val(info.adult);
                             $("#note-update").val(info.note);
@@ -540,10 +635,9 @@
                     const tourId = localStorage.getItem("tourId");
                     const apiUrl = `http://localhost:4444/tour/${tourId}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-                    const selectBox = document.getElementById("company-update");
-                    const company = selectBox.options[selectBox.selectedIndex].value;
+                    const selectBoxCompany = document.getElementById("company-update");
+                    const company = selectBoxCompany.options[selectBoxCompany.selectedIndex].value;
                     const tourInfo = {
-                        tourCode: $("#tourCode-update").val(),
                         tourName: $("#tourName-update").val(),
                         location: $("#location-update").val(),
                         price: $("#price-update").val(),
@@ -564,8 +658,42 @@
                         headers: {
                             Authorization: 'Bearer ' + authenticate.token
                         },
-                        success: function async(data) {
-                            alert(data.message);
+                        success: function (result) {
+                            const apiUrlTour_TypeTourGetId = `http://localhost:4444/tour_typetour?tourId=${tourId}`;
+                            let tour_TypeTourId = '';
+                            $.ajax(apiUrlTour_TypeTourGetId, {
+                                type: "GET",
+                                contentType: "application/json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                },
+                                dataType: "json",
+                                success: function (result) {
+                                    for (const type of result) {
+                                        tour_TypeTourId += type.id;
+                                    }
+                                }
+                            });
+                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour/${tour_TypeTourId}`;
+                            const selectBoxTypeTour = document.getElementById("typeTour-update");
+                            const typeTour = selectBoxTypeTour.options[selectBoxTypeTour.selectedIndex].value;
+                            const tour_TypeTour = {
+                                tourId: tourId,
+                                typeTourId: typeTour
+                            };
+                            $.ajax(apiUrlTour_TypeTour, {
+                                type: "PUT",
+                                data: JSON.stringify(tour_TypeTour),
+                                contentType: "application/json",
+                                dataType: "json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                }
+                                , success: function (data) {
+                                    alert(data.message);
+                                }
+                            });
+                            alert(result.message);
                             localStorage.removeItem("tourId");
                             location.reload();
                         },
@@ -580,8 +708,8 @@
                 function createTour() {
                     const apiUrl = 'http://localhost:4444/tour';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-                    const selectBox = document.getElementById("company-create");
-                    const company = selectBox.options[selectBox.selectedIndex].value;
+                    const selectBoxCompany = document.getElementById("company-create");
+                    const company = selectBoxCompany.options[selectBoxCompany.selectedIndex].value;
                     const tourInfo = {
                         tourCode: $("#tourCode-create").val(),
                         tourName: $("#tourName-create").val(),
@@ -604,7 +732,26 @@
                         headers: {
                             Authorization: 'Bearer ' + authenticate.token
                         },
-                        success: function async(data) {
+                        success: function (data) {
+                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour`;
+                            const selectBoxTypeTour = document.getElementById("typeTour-update");
+                            const typeTour = selectBoxTypeTour.options[selectBoxTypeTour.selectedIndex].value;
+                            const tour_TypeTour = {
+                                tourId: data.data.id,
+                                typeTourId: typeTour
+                            };
+                            $.ajax(apiUrlTour_TypeTour, {
+                                type: "POST",
+                                data: JSON.stringify(tour_TypeTour),
+                                contentType: "application/json",
+                                dataType: "json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                }
+                                , success: function (data) {
+                                    alert(data.message);
+                                }
+                            });
                             alert(data.message);
                             location.reload();
                         },
@@ -625,7 +772,30 @@
                         headers: {
                             Authorization: 'Bearer ' + authenticate.token
                         },
-                        success: function async(data) {
+                        success: function (data) {
+                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour/s?tourId=${tourId}`;
+                            await $.ajax({
+                                url: apiUrlTour_TypeTour,
+                                type: "GET",
+                                contentType: "application/json",
+                                headers: {
+                                    Authorization: 'Bearer ' + authenticate.token
+                                },
+                                dataType: "json",
+                                success: function (result) {
+                                    for (const type of result.data) {
+                                        const apiUrlTour_TypeTourDelete = `http://localhost:4444/tour_typetour/${type.id}`;
+                                        $.ajax(apiUrlTour_TypeTourDelete, {
+                                            type: "DELETE",
+                                            contentType: "application/json",
+                                            dataType: "json",
+                                            headers: {
+                                                Authorization: 'Bearer ' + authenticate.token
+                                            }
+                                        });
+                                    }
+                                }
+                            });
                             alert(data.message);
                             localStorage.removeItem("tourId");
                             location.reload();
