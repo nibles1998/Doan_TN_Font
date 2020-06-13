@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from shmai.com/preview/travelco/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 04:14:53 GMT -->
+
 <head>
     <!-- META -->
     <meta charset="utf-8">
@@ -12,7 +13,7 @@
     <meta name="keywords" content="new, html, bootstrap, new html template, design, creative, clean, modern">
     <meta name="author" content="Nauman Anwar">
     <!--PAGE FAVICON-->
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
     <!-- PAGE TITLE -->
     <title>TravelCo</title>
     <!-- BOOTSTRAP CSS -->
@@ -26,7 +27,7 @@
     <link rel="stylesheet" href="assets/owlcarousel/css/owl.carousel.css">
     <link rel="stylesheet" href="assets/owlcarousel/css/owl.theme.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <!-- MAGNIFIC CSS -->
+    <!-- MAGNIFIC CSS -->
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <!-- ANIMATE CSS -->
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -71,7 +72,8 @@
                         <div class="mainmenu">
                             <div class="navbar navbar-nobg">
                                 <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                        data-target=".navbar-collapse">
                                         <span class="sr-only">Toggle navigation</span>
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
@@ -80,16 +82,24 @@
                                 </div>
                                 <div class="navbar-collapse collapse">
                                     <ul class="nav navbar-nav navbar-left">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">Tour<span class="caret"></span></a>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
+                                                href="#">Tour<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="tours.html">List</a></li>
-                                                <li><a href="activities.html">Activites</a></li> 
+                                                <li><a href="activities.html">Activites</a></li>
                                             </ul>
-                                    </li>
-                                     <li><a class="smoth-scroll" href="about.html">About</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                        </li>
+                                        <li><a class="smoth-scroll" href="about.html">About</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
                                     </ul>
+                                    <div class="pull-right" id="login">
+                                        <div id="login-right">
+                                            <a href="login.html">Login</a>
+                                            <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                                            <a href="register.html">Register</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +123,7 @@
                     </div>
                     <div class="site-page-breadcrumb">
                         <span>
-                            <a style="" href="#">Home </a> 
+                            <a style="" href="#">Home </a>
                             > Registration
                         </span>
                     </div>
@@ -138,36 +148,67 @@
                         </div>
                         <!-- START CONTACT FORM DESIGN AREA -->
                         <div class="login-form">
-                            <form id="login-form" method="post" enctype="multipart/form-data">
+                            <form id="login-form">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="clr-777">Enter Name</label>
-                                        <input type="text" name="name" class="form-control" id="first-name" placeholder="Name" required="required">
+                                        <label class="clr-777">Enter Email</label>
+                                        <input type="email" name="email" class="form-control" id="email"
+                                            placeholder="Email" required="required">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="clr-777">Enter Email</label>
-                                        <input type="email" name="email" class="form-control" id="first-name" placeholder="Email" required="required">
+                                        <label class="clr-777">Enter Name</label>
+                                        <input type="text" name="fullName" class="form-control" id="fullName"
+                                            placeholder="Full Name" required="required">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="clr-777">Enter Your Password</label>
-                                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required="required">
+                                        <input type="password" name="password" class="form-control" id="password"
+                                            placeholder="Password" required="required">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="clr-777">Enter Display Name</label>
+                                        <input type="text" name="displayName" class="form-control" id="displayName"
+                                            placeholder="Display Name" required="required">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="clr-777">Confirm Password</label>
-                                        <input type="password" name="cpassword" class="form-control" id="cpassword" placeholder="ConfirmPassword" required="required">
+                                        <input type="password" name="cpassword" class="form-control" id="cpassword"
+                                            placeholder="ConfirmPassword" required="required">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="clr-777">Enter Date Of Birth</label>
+                                        <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth"
+                                            required="required">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="clr-777">Enter Phone</label>
+                                        <input type="text" name="phone" class="form-control" id="phone"
+                                            placeholder="Phone" required="required">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="clr-777">Enter Country</label>
+                                        <input type="text" name="country" class="form-control" id="country"
+                                            placeholder="Country" required="required">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="clr-777">Enter Address</label>
+                                        <input type="text" name="address" class="form-control" id="address"
+                                            placeholder="Address" required="required">
                                     </div>
                                     <div class="col-md-12 text-center">
                                         <div class="form-group">
-                                            <input type="checkbox" name="remember"> I agree to the term to use and privacy
+                                            <input type="checkbox" name="remember"> I agree to the term to use and
+                                            privacy
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center login-btn">
                                         <div class="actions wow fadeInUp" data-wow-delay=".4s">
-                                            <input type="submit" value="Register" name="submit" id="submitButton" class="" title="Submit Your Message!">
-                                            <a href="login.html"><br/><br/>Already have an account?</a>
+                                            <input type="submit" value="Register" id="submitButton" class=""
+                                                title="Submit Your Message!">
+                                            <a href="login.html"><br /><br />Already have an account?</a>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </form>
                         </div>
@@ -184,9 +225,9 @@
             <div id="owl-brands" class="company-logo-list owl-carousel unicase-owl-carousel owl-outer-nav">
                 <div class="item">
                     <div class="item_inner">
-                       <img alt="image" src="assets/images/company-logo/company_1.png">
+                        <img alt="image" src="assets/images/company-logo/company_1.png">
                     </div>
-                    
+
                 </div>
 
                 <!-- /.item -->
@@ -214,11 +255,15 @@
                     </div>
                 </div>
             </div>
-            <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"></div><div class="owl-next"></div></div>
-            <!-- /.owl-carousel -->
+            <div class="owl-controls clickable">
+                <div class="owl-buttons">
+                    <div class="owl-prev"></div>
+                    <div class="owl-next"></div>
+                </div>
+                <!-- /.owl-carousel -->
             </div>
         </div>
-    </div>   <!-- / END COMPANY DESIGN AREA -->
+    </div> <!-- / END COMPANY DESIGN AREA -->
     <!-- START FOOTER DESIGN AREA -->
     <footer>
         <div class="footer-bottom">
@@ -230,14 +275,14 @@
                         </div>
                     </div>
                     <div style="text-align: right;color: white;">
-                        <i class="fa fa-map-marker" aria-hidden="true" ></i> 14 Tottenham Court Road, NewYork<br/>
-                            <i class="fa fa-phone" aria-hidden="true"></i> 1(784)-775-95-377,
-                                1(784)-678-26-567N<br/>
-                            
-                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                <a href="#">info@yoursite.com/
-                                    </a><a href="">www.TravelCo.com</a>
-                        </div>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> 14 Tottenham Court Road, NewYork<br />
+                        <i class="fa fa-phone" aria-hidden="true"></i> 1(784)-775-95-377,
+                        1(784)-678-26-567N<br />
+
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <a href="#">info@yoursite.com/
+                        </a><a href="">www.TravelCo.com</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -270,10 +315,53 @@
     <script src="assets/js/form-contact.js"></script>
     <script src="assets/js/venobox.min.js"></script>
     <script src="assets/js/color-switcher.js"></script>
-<!-- scripts js -->
+    <!-- scripts js -->
     <script src="assets/js/scripts.js"></script>
+
+    <script>
+        $("#submitButton").click(function () {
+            const pass = $("#password").val();
+            const cpass = $("#cpassword").val();
+            if (pass !== cpass) {
+                alert('Mật khẩu không giống nhau!');
+                // window.location.reload();
+            } else {
+                const user = {
+                    email: $("#email").val(),
+                    password: pass,
+                    address: $("#address").val(),
+                    phone: $("#phone").val(),
+                    country: $("#country").val(),
+                    fullName: $("#fullName").val(),
+                    displayName: $("#displayName").val(),
+                    dateOfBirth: $("#dateOfBirth").val(),
+                    roleId: "338d3bdb-fa49-44fb-84d0-98886610beb0",
+                    description: "",
+                    paymentMethod: ["Momo"]
+                };
+                const apiUrl = 'http://localhost:4444/user';
+                $.ajax(apiUrl, {
+                    type: "POST",
+                    data: JSON.stringify(user, null, 2),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function async(data) {
+                        alert(data.message);
+                        window.location.assign('http://localhos:4445/tour/login.html');
+                    },
+                    error: function (error) {
+                        alert(error.responseJSON.message);
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+    </script>
+
+
 </body>
 
 
 <!-- Mirrored from shmai.com/preview/travelco/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 04:14:53 GMT -->
+
 </html>

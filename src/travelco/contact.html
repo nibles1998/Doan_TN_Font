@@ -91,6 +91,9 @@
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
+                                    <div class="pull-right" id="login">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -320,6 +323,29 @@
     <script src="assets/js/color-switcher.js"></script>
 <!-- scripts js -->
     <script src="assets/js/scripts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            const dataLogin = localStorage.getItem("dataLoginClient");
+            let str = "";
+            if (!dataLogin) {
+                str += `<div id="login-right">
+                            <a href="login.html">Login</a>
+                            <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                            <a href="register.html">Register</a>
+                        </div>`;
+            } else {
+                str += `
+                <div style="display: flex;">
+                    <a style="margin: 0 10px;" href="myaccount.html" >Profile</a>
+                    <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                    <button onclick="killToken()"style="margin: 0 10px;background: none;font-weight: 500;">Logout</button>
+                </div>
+                `;
+            }
+            $("#login").html(str);
+        });
+    </script>
 </body>
 
 </html>

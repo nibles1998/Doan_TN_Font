@@ -243,10 +243,26 @@
 
         <script>
             $(document).ready(function () {
-                const dataLogin = localStorage.getItem("dataLogin");
-                if (dataLogin === null || dataLogin === undefined) {
-                    window.location.assign('http://localhost:4445/admin');
-                }
+                const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
+                const apiUrl = `http://localhost:4444/userrole/${dataLogin.roleId}`;
+                $.ajax(apiUrl, {
+                    type: "GET",
+                    contentType: "application/json",
+                    dataType: "json",
+                    headers: {
+                        Authorization: 'Bearer ' + dataLogin.token
+                    },
+                    success: async function (result) {
+                        const data = result.data;
+                        if (!data.type === "Admin") {
+                            window.location.assign('http://localhost:4445/admin');
+                        }
+                    },
+                    error: function (error) {
+                        window.location.assign('http://localhost:4445/admin');
+                    }
+                });
+
             });
         </script>
 

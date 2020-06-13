@@ -92,6 +92,13 @@
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
+                                    <div class="pull-right" id="login">
+                                        <div id="login-right">
+                                            <a href="login.html">Login</a>
+                                            <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                                            <a href="register.html">Register</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +151,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label>Enter Email or Phone No</label>
-                                        <input type="text" name="email" class="form-control" id="first-name"
+                                        <input type="email" name="email" class="form-control" id="email"
                                             placeholder="Email" required="required">
                                     </div>
                                     <div class="form-group col-md-12">
@@ -163,7 +170,7 @@
                                     </div>
                                     <div class="col-md-12 text-center login-btn">
                                         <div class="actions wow fadeInUp" data-wow-delay=".4s">
-                                            <input type="submit" value="Login " name="submit" id="submitButton" class=""
+                                            <input type="submit" value="Login " name="submit" id="btnLogin" class=""
                                                 title="Submit Your Message!">
                                         </div>
                                     </div>
@@ -275,6 +282,35 @@
     <script src="assets/js/color-switcher.js"></script>
     <!-- scripts js -->
     <script src="assets/js/scripts.js"></script>
+
+    <!-- Script by me -->
+    <script>
+        $(('#btnLogin')).click(async (e) => {
+            e.preventDefault();
+            const apiURL = 'http://localhost:4444/user/login';
+            const email = $('#email').val();
+            const password = $('#password').val();
+            const account = {
+                email,
+                password
+            };
+            const ajaxReq = $.ajax(apiURL, {
+                type: "POST",
+                data: JSON.stringify(account),
+                contentType: "application/json",
+                dataType: "json",
+                success: function async(data) {
+                    if (data && data.token) {
+                        localStorage.setItem("dataLoginClient", JSON.stringify(data));
+                    }
+                    window.location.assign("http://localhost:4445/tour/tours.html");
+                },
+                error: function (error) {
+                    alert(error.responseJSON.message);
+                }
+            });
+        });
+    </script>
 </body>
 
 
@@ -283,7 +319,7 @@
 </html>
 <<script>
     $('#submitButton').click(function () {
-        window.location.href = "file:///home/longvy/Downloads/Demo/preview/travelco/index.html"
+    window.location.href = "file:///home/longvy/Downloads/Demo/preview/travelco/index.html"
 
     })
-</script>
+    </script>

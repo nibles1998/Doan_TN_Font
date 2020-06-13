@@ -94,7 +94,9 @@
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
+                                    <div class="pull-right" id="login">
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -135,22 +137,42 @@
             <div class="row">
                 <div class="col-md-12 sidebar">
                     <div class="widget formwidget">
-                        <form class="tourform">
+                        <form class="tourform" onsubmit="return getTourList(event)">
                             <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Keywords</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Enter a Keyword">
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label>Where</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Choose Location">
+                                    <input type="text" class="form-control" id="location-search"
+                                        placeholder="Enter Location">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label>Start Date</label>
-                                    <input type="date" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Enter email">
+                                    <select name="Filter.SelectedDeparture" id="startedDate-search" class="form-control"
+                                        tabindex="0" aria-placeholder="What month?">
+                                        <option value="2020-01">January 2020</option>
+                                        <option value="2020-02">February 2020</option>
+                                        <option value="2020-03">March 2020</option>
+                                        <option value="2020-04">April 2020</option>
+                                        <option value="2020-05">May 2020</option>
+                                        <option value="2020-06">June 2020</option>
+                                        <option value="2020-07">July 2020</option>
+                                        <option value="2020-08">August 2020</option>
+                                        <option value="2020-09">September 2020</option>
+                                        <option value="2020-10">October 2020</option>
+                                        <option value="2020-11">November 2020</option>
+                                        <option value="2020-12">December 2020</option>
+                                        <option value="2021-01">January 2021</option>
+                                        <option value="2021-02">February 2021</option>
+                                        <option value="2021-03">March 2021</option>
+                                        <option value="2021-04">April 2021</option>
+                                        <option value="2021-05">May 2021</option>
+                                        <option value="2021-06">June 2021</option>
+                                        <option value="2021-07">July 2021</option>
+                                        <option value="2021-08">August 2021</option>
+                                        <option value="2021-09">September 2021</option>
+                                        <option value="2021-10">October 2021</option>
+                                        <option value="2021-11">November 2021</option>
+                                        <option value="2021-12">December 2021</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group text-center">
@@ -161,102 +183,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="tours-info">
-                            <img alt="image" src="assets/images/tours/tours1.jpg">
-                            <div class="tour-cost">$4500.00</div>
-                            <div class="tour-details">
-                                <h4 class="tour-title">Certo, Poland</h4>
-                                <div class="tour-hotel">Hotel: 5 star</div>
-                                <div class="tour-duration">Book Now and <span>save 30%*</span></div>
-                                <div class="tour-person">Person: 2<span>save 30%*</span></div>
-                                <div class="tour-btns">
-                                    <a href="booking-form.html" class="button align-right">Book Now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tours-info">
-                            <img alt="image" src="assets/images/tours/tours2.jpg">
-                            <div class="tour-cost">$4500.00</div>
-                            <div class="tour-details">
-                                <h4 class="tour-title">Certo, Poland</h4>
-                                <div class="tour-hotel">Hotel: 5 star</div>
-                                <div class="tour-duration">Book Now and <span>save 30%*</span></div>
-                                <div class="tour-person">Person: 2<span>save 30%*</span></div>
-                                <div class="tour-btns">
-                                    <a href="#" class="button align-right">Book Now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tours-info">
-                            <img alt="image" src="assets/images/tours/tours3.jpg">
-                            <div class="tour-cost">$4500.00</div>
-                            <div class="tour-details">
-                                <h4 class="tour-title">Certo, Poland</h4>
-                                <div class="tour-hotel">Hotel: 5 star</div>
-                                <div class="tour-duration">Book Now and <span>save 30%*</span></div>
-                                <div class="tour-person">Person: 2<span>save 30%*</span></div>
-                                <div class="tour-btns">
-                                    <a href="#" class="button align-right">Book Now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tours-info">
-                            <img alt="image" src="assets/images/tours/tours4.jpg">
-                            <div class="tour-cost">$4500.00</div>
-                            <div class="tour-details">
-                                <h4 class="tour-title">Certo, Poland</h4>
-                                <div class="tour-hotel">Hotel: 5 star</div>
-                                <div class="tour-duration">Book Now and <span>save 30%*</span></div>
-                                <div class="tour-person">Person: 2<span>save 30%*</span></div>
-                                <div class="tour-btns">
-                                    <a href="#" class="button align-right">Book Now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tours-info">
-                            <img alt="image" src="assets/images/tours/tours5.jpg">
-                            <div class="tour-cost">$4500.00</div>
-                            <div class="tour-details">
-                                <h4 class="tour-title">Certo, Poland</h4>
-                                <div class="tour-hotel">Hotel: 5 star</div>
-                                <div class="tour-duration">Book Now and <span>save 30%*</span></div>
-                                <div class="tour-person">Person: 2<span>save 30%*</span></div>
-                                <div class="tour-btns">
-                                    <a href="#" class="button align-right">Book Now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tours-info">
-                            <img alt="image" src="assets/images/tours/tours6.jpg">
-                            <div class="tour-cost">$4500.00</div>
-                            <div class="tour-details">
-                                <h4 class="tour-title">Certo, Poland</h4>
-                                <div class="tour-hotel">Hotel: 5 star</div>
-                                <div class="tour-duration">Book Now and <span>save 30%*</span></div>
-                                <div class="tour-person">Person: 2<span>save 30%*</span></div>
-                                <div class="tour-btns">
-                                    <a href="#" class="button align-right">Book Now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 ">
-                        <ul class="pagination">
-                            <li><a href="#"><i class="fa fa-long-arrow-left"></i>Prev Post</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">Next Post <i class="fa fa-long-arrow-right"></i></a></li>
-                        </ul>
-                    </div>
+                <div id="tourList" class="col-md-12">
+
                 </div>
             </div>
         </div>
@@ -364,6 +292,129 @@
     <script src="assets/js/color-switcher.js"></script>
     <!-- scripts js -->
     <script src="assets/js/scripts.js"></script>
+
+    <!-- Script by me -->
+
+    <script>
+        $(document).ready(function () {
+            const dataLogin = localStorage.getItem("dataLoginClient");
+            let str = "";
+            if (!dataLogin) {
+                str += `<div id="login-right">
+                            <a href="login.html">Login</a>
+                    <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                            <a href="register.html">Register</a>
+                        </div>`;
+            } else {
+                str += `
+                <div style="display: flex;">
+                    <a style="margin: 0 10px;" href="myaccount.html" >Profile</a>
+                    <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                    <button onclick="killToken()"style="margin: 0 10px;background: none;font-weight: 500;">Logout</button>
+                </div>
+                `;
+            }
+            $("#login").html(str);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            const url = new URL(window.location.href);
+            const searchParam = new URLSearchParams(url.search);
+            const begin = searchParam.get("begin");
+            const location = searchParam.get("location");
+            const searchFilterURL = `http://localhost:4444/tour/s?${location ? `location=${location}&` : ""}${begin ? `begin=${begin}` : ""}`
+            $.ajax(searchFilterURL, {
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function (result) {
+                let str = "";
+                const data = result.data;
+                if (data.length == 0) {
+                    str += `<h3 style="text-align: center;">Not Found</h3>`
+                } else {
+                    for (const i of data) {
+                        str += `
+                        <div class="col-md-6">
+                            <div class="tours-info" style="display: flex; flex-direction: column;">
+                                <img class="w-100" height="400px" src="http://localhost:4444/${i.photo}">
+                                <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
+                                <div class="tour-details">
+                                    <h4 class="tour-title">${i.tourName}</h4>
+                                    <div class="tour-person">Start Date: ${new Date(Date.parse(i.startedDate)).getDate()}/${new Date(Date.parse(i.startedDate)).getMonth() + 1}/${new Date(Date.parse(i.startedDate)).getFullYear()}</div>
+                                    <div class="tour-person">End Date: ${new Date(Date.parse(i.endDate)).getDate()}/${new Date(Date.parse(i.endDate)).getMonth() + 1}/${new Date(Date.parse(i.endDate)).getFullYear()}</div>
+                                    <div class="tour-duration">Book Now and <span>save 30%*</span></div>
+                                    <div class="tour-person">Person: 2<span>save 30%*</span></div>
+                                    <div class="tour-btns">
+                                    <button onclick="getTourDetail('${i.id}')" class="button align-right hover-effect">Book Now</button></div>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                }
+                $("#tourList").html(str);
+                $("#startedDate-search").val("");
+            });
+        });
+    </script>
+    <script>
+        function getTourDetail(id) {
+            window.location.assign(`http://localhost:4445/tour/booking-form.html?id=${id}`);
+        }
+    </script>
+    <script>
+        function getTourList(event) {
+            event.preventDefault();
+            let url = "http://localhost:4444/tour/s?"
+            let begin, location;
+
+            let selectTime = document.getElementById("startedDate-search");
+            selectTime = selectTime.options[selectTime.selectedIndex];
+            if (selectTime) {
+                begin = selectTime.value;
+                url += `begin=${begin}&`;
+            }
+
+            location = $("#location-search").val();
+            if (location) {
+                url += `location=${location}&`;
+            }
+            $.ajax(url, {
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    let str = "";
+                    const data = result.data;
+                    if (data.length == 0) {
+                        str += `<h3 style="text-align: center;">Not Found</h3>`
+                    } else {
+                        for (const i of data) {
+                            str += `
+                        <div class="col-md-6">
+                            <div class="tours-info" style="display: flex; flex-direction: column;">
+                                <img class="w-100" height="400px" src="http://localhost:4444/${i.photo}">
+                                <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
+                                <div class="tour-details">
+                                    <h4 class="tour-title">${i.tourName}</h4>
+                                    <div class="tour-person">Start Date: ${new Date(Date.parse(i.startedDate)).getDate()}/${new Date(Date.parse(i.startedDate)).getMonth() + 1}/${new Date(Date.parse(i.startedDate)).getFullYear()}</div>
+                                    <div class="tour-person">End Date: ${new Date(Date.parse(i.endDate)).getDate()}/${new Date(Date.parse(i.endDate)).getMonth() + 1}/${new Date(Date.parse(i.endDate)).getFullYear()}</div>
+                                    <div class="tour-duration">Book Now and <span>save 30%*</span></div>
+                                    <div class="tour-person">Person: 2<span>save 30%*</span></div>
+                                    <div class="tour-btns">
+                                    <a href="booking-form.html" onclick="getTourDetail(${i.id})" class="button align-right">Book Now</a></div>
+                                </div>
+                            </div>
+                        </div>`;
+                        }
+                    }
+
+                    $("#tourList").html(str);
+                }
+            });
+        }
+    </script>
 </body>
 
 

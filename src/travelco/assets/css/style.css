@@ -446,6 +446,7 @@ a.read-more:hover {
     height: 80px;
     padding: 0;
 }
+
 .header-go-btn{
     display: inline-block;
     text-align: center;
@@ -2609,6 +2610,29 @@ a.more-portfolio {
     border:1px solid #ccc;
 }
 
+button.button.hover-effect {
+    background: transparent;
+    color: #62ac1e;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border:1px solid #62ac1e;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 0px;
+    padding: 12px 25px;
+    text-transform: capitalize;
+    font-size: 14px;
+    display: inline-block;
+    float: right;
+}
+
+button.button.hover-effect:hover {
+    background-color: #62ac1e;
+    color: white;
+}
 
 
 
@@ -3098,18 +3122,15 @@ input[type="date"]::-webkit-inner-spin-button {
     box-shadow: 2px 2px 2px 2px solid;
 }
 .tour-cost {
-    position: absolute;
-    right: 0;
-    top: 210px;
+    margin: 10px 0px;
     background: rgba(256, 256, 256, .6);
-    padding: 7px;
     color: #62ac1e;
     font-size: 22px;
     font-weight: 500;
 }
 
 .tour-details {
-    padding: 20px;
+
 }
 
 .tour-hotel,
@@ -3874,7 +3895,7 @@ input[type='range']:nth-child(1)::-moz-slider-thumb {
 
 
 .owl-theme .owl-controls .owl-buttons div i {
-    padding 0px;
+    padding: 0px;
 }
 
 .guest-review .owl-buttons div.owl-next {
@@ -4849,7 +4870,7 @@ th.red {
 
 
 .owl-theme .owl-controls .owl-buttons div i {
-    padding 0px;
+    padding: 0px;
 }
 
 .customer-review .owl-buttons div.owl-next {

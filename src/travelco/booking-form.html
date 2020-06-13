@@ -95,6 +95,9 @@
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
+                                    <div class="pull-right" id="login">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -108,13 +111,14 @@
             <img src="assets/images/bg/bookingbg.jpg" alt="Inner Page Header" class="full-width">
             <div class="title-breadcrumb">
                 <div class="container">
-                    <div class="page-sub-title">
-                        <h4>Tour Details</h4>
+                    <div class="site-page-header clear-fix">
+                        <div class="site-title">
+                            <h2>Tours Details</h2>
+                        </div>
                     </div>
                     <div class="site-page-breadcrumb">
                         <span>
-                            <a style="" href="index.html">Home </a>
-                            > Tour Booking
+                            Home > Tour Booking
                         </span>
                     </div>
                 </div>
@@ -130,110 +134,53 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="booking-top">
-                    <div class="col-md-6">
-                        <div class="booking-details">
-                            <div class="col-md-5">
-                                <img src="assets/images/bookingdetail.jpg">
-                            </div>
-                            <div class="col-md-7">
-                                <h4 class="Default-clr">Astro Place hotel & Sites</h4>
-                                <p>Hot Deals
-                                    <span>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </span>
-                                </p>
-                                <p>greece stromini</p>
-                                <div class="col-md-6 padding-left-0">
-                                    <h5>Check in</h5>
-                                    <p>5 jan 2018</p>
-                                    <p>10:00 AM</p>
-                                </div>
-                                <div class="col-md-6 padding-left-0">
-                                    <h5>Check out</h5>
-                                    <p>5 feb 2018</p>
-                                    <p>10:00 AM</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="booking-other-details">
-                            <h3 class="Default-clr">Other Details</h3>
-                            <dl class="other-details">
-                                <dt class="feature">Tour</dt>
-                                <dd class="value">3 days</dd>
-                                <dt class="feature">Tour Type</dt>
-                                <dd class="value">Honeymoon</dd>
-                                <dt class="feature">Price</dt>
-                                <dd class="value">$1235</dd>
-                                <dt class="feature">Taxes</dt>
-                                <dd class="value">$250</dd>
-                                <dt class="total-price">Total</dt>
-                                <dd class="total-price-value">$1485.00</dd>
-                            </dl>
-                        </div>
-                    </div>
+                <div class="booking-top" id="tourDetail">
+
                 </div>
-                <section id="tour-booking" class="gray-area section-padding">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="section-title">
-                                    <h2>Descriptions</h2>
-                                    <div class="title-separator-outer ">
-                                        <div class="title-separator bg-primary style-liner"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
                 <div class="book-detailstour ">
                     <div class="book-detialsinfo ">
                         <div class="col-md-6">
                             <h3>Book now</h3>
                         </div>
                     </div>
-                    <form action="#" class="comment-form ">
+                    <form action="#" class="comment-form" id="booking-form" onsubmit="return booking(event)">
                         <div class="col-md-3">
                             <label for="availabledate">
                                 available on
                             </label>
-                            <input type="date" class="form-control mb-2 mr-sm-2" placeholder="Name"
-                                id="availabledate" />
+                            <input type="date" class="form-control mb-2 mr-sm-2" id="applyDate-booking"
+                                name="applyDate" />
                         </div>
                         <div class="col-md-2">
                             <label>
                                 adult
                             </label>
-                            <select class="form-control mb-2 mr-sm-2">
+                            <select class="form-control mb-2 mr-sm-2" id="adult-booking" name="adult">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
+                                <option value="5">5</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label>
                                 kids
                             </label>
-                            <select class="form-control mb-2 mr-sm-2">
+                            <select class="form-control mb-2 mr-sm-2" id="child-booking" name="child">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
+                                <option value="5">5</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label>
                                 Total Amount
                             </label>
-                            <input class="form-control mb-2 mr-sm-2 " type="text" readonly/>
+                            <input class="form-control mb-2 mr-sm-2 " type="text" id="total-booking" name="total"
+                                readonly />
                         </div>
                         <div class="col-md-3">
                             <input class="button mb-2 mr-sm-2 inline-book-btn" id="submitButton" type="submit"
@@ -340,15 +287,184 @@
     <script src="assets/js/color-switcher.js"></script>
     <!-- scripts js -->
     <script src="assets/js/scripts.js"></script>
+
+    <!-- Script by me -->
+    <script>
+        $(document).ready(function () {
+            const dataLogin = localStorage.getItem("dataLoginClient");
+            let str = "";
+            if (!dataLogin) {
+                str += `<div id="login-right">
+                            <a href="login.html">Login</a>
+                            <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                            <a href="register.html">Register</a>
+                        </div>`;
+            } else {
+                str += `
+                <div style="display: flex;">
+                    <a style="margin: 0 10px;" href="myaccount.html" >Profile</a>
+                    <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                    <button onclick="killToken()"style="margin: 0 10px;background: none;font-weight: 500;">Logout</button>
+                </div>
+                `;
+            }
+            $("#login").html(str);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            const url = new URL(window.location.href);
+            const searchParam = new URLSearchParams(url.search);
+            const id = searchParam.get("id");
+            const searchFilterURL = `http://localhost:4444/tour/${id}`;
+            $.ajax(searchFilterURL, {
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function (result) {
+                let str = "";
+                const data = result.data;
+                if (data) {
+                    str += `<div class="col-md-6">
+                        <div class="booking-details">
+                            <div class="col-md-5">
+                                <img src="http://localhost:4444/${data.photo}"/>
+                            </div>
+                            <div class="col-md-7">
+                                <h3 class="Default-clr">Details</h3>
+                                <div class="col-md-6 padding-left-0">
+                                    <h5>Tour Name</h5>
+                                    <p>${data.tourName}</p>
+                                </div>
+                                <div class="col-md-6 padding-left-0">
+                                    <h5>Location</h5>
+                                    <p>${data.location}</p>
+                                </div>
+                                <div class="col-md-6 padding-left-0">
+                                    <h5>Open Date</h5>
+                                    <p>${new Date(Date.parse(data.startedDate)).getDate()}/${new Date(Date.parse(data.startedDate)).getMonth() + 1}/${new Date(Date.parse(data.startedDate)).getFullYear()}</p>
+                                </div>
+                                <div class="col-md-6 padding-left-0">
+                                    <h5>Close Date</h5>
+                                    <p>${new Date(Date.parse(data.endDate)).getDate()}/${new Date(Date.parse(data.endDate)).getMonth() + 1}/${new Date(Date.parse(data.endDate)).getFullYear()}</p>
+                                </div>
+                                <div class="col-md-6 padding-left-0">
+                                    <h5>Time</h5>
+                                    <p>${data.time} day</p>
+                                </div>
+                                <div class="col-md-6 padding-left-0">
+                                    <h5>Seat</h5>
+                                    <p>${data.emptySeat} seat</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="booking-other-details">
+                            <h3 class="Default-clr">Other Details</h3>
+                            <dl class="other-details">
+                                <dt class="feature">Tour Type</dt>
+                                <dd class="value">${data.typeTours[0].type}</dd>
+                                <dt class="feature">Price</dt>
+                                <dd class="value">${Number(data.price).toLocaleString()} VND</dd>
+                                <dt class="feature">Child</dt>
+                                <dd class="value">${data.child} person</dd>
+                                <dt class="feature">Adult</dt>
+                                <dd class="value">${data.adult} person</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <section id="tour-booking" class="gray-area section-padding">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="section-title">
+                                        <h2>Descriptions</h2>
+                                        <div class="title-separator-outer ">
+                                            <div class="title-separator bg-primary style-liner"></div>
+                                        </div>
+                                        <p>${data.note}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>`;
+                    $("#tourDetail").html(str);
+                    $("#adult-booking").val("");
+                    $("#child-booking").val("");
+                    localStorage.setItem("booking", JSON.stringify(data));
+                } else {
+                    $("#tourDetail").html(`<h3>Not Fount!</h3>`);   
+                }
+            });
+        });
+    </script>
+    <script>
+        $("#adult-booking").change(function (e) {
+            const adult = e.target.value;
+            const child = $("#child-booking").val();
+            const booking = JSON.parse(localStorage.getItem("booking"));
+            let total = Number($("#total-booking").val()) || 0;
+            if (adult) {
+                total = Number(adult) * Number(booking.price) + Number(child) * Number(booking.price * 0.8);
+            }
+            $("#total-booking").val(total);
+        });
+        $("#child-booking").change(function (e) {
+            const child = e.target.value;
+            const adult = $("#adult-booking").val();
+            const booking = JSON.parse(localStorage.getItem("booking"));
+            let total = Number($("#total-booking").val()) || 0;
+            if (child) {
+                total = Number(adult) * Number(booking.price) + Number(child) * Number(booking.price * 0.8);
+            }
+            $("#total-booking").val(total);
+        });
+    </script>
+    <script>
+        function booking(event) {
+            event.preventDefault();
+            const dataLogin = localStorage.getItem("dataLoginClient");
+            if (dataLogin) {
+                let adult, child;
+
+                let adultBooking = document.getElementById("adult-booking");
+                adultBooking = adultBooking.options[adultBooking.selectedIndex];
+                if (adultBooking) {
+                    adult = adultBooking.value;
+                }
+
+                let childBooking = document.getElementById("child-booking");
+                childBooking = childBooking.options[childBooking.selectedIndex];
+                if (childBooking) {
+                    child = childBooking.value;
+                }
+
+                const applyDate = document.getElementById("applyDate-booking").value;
+                if (!applyDate) {
+                    return;
+                }
+
+                const totalPrice = document.getElementById("total-booking").value;
+
+                const booking = JSON.parse(localStorage.getItem("booking"));
+                booking.adultBooking = Number(adult);
+                booking.childBooking = Number(child);
+                booking.applyDateBooking = applyDate;
+                booking.totalBooking = Number(totalPrice);
+
+                localStorage.setItem("booking", JSON.stringify(booking));
+
+                window.location.assign('http://localhost:4445/tour/confirmation.html');
+            } else {
+                alert("Cần đăng nhập để đặt tour!");
+                window.location.assign('http://localhost:4445/tour/login.html');
+            }
+        }
+    </script>
 </body>
 
 
 <!-- Mirrored from shmai.com/preview/travelco/booking-form.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 04:24:10 GMT -->
 
 </html>
-<<script>
-    $('#submitButton').click(function () {
-    window.location.href = "file:///home/longvy/Downloads/Demo/preview/travelco/confirmation.html"
-
-    })
-    </script>

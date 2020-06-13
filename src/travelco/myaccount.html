@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from shmai.com/preview/travelco/myaccount.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 04:20:37 GMT -->
+
 <head>
     <!-- META -->
     <meta charset="utf-8">
@@ -12,7 +13,7 @@
     <meta name="keywords" content="new, html, bootstrap, new html template, design, creative, clean, modern">
     <meta name="author" content="Nauman Anwar">
     <!--PAGE FAVICON-->
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
     <!-- PAGE TITLE -->
     <title>TravelCo </title>
     <!-- BOOTSTRAP CSS -->
@@ -25,7 +26,7 @@
     <link rel="stylesheet" href="assets/owlcarousel/css/owl.carousel.css">
     <link rel="stylesheet" href="assets/owlcarousel/css/owl.theme.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <!-- MAGNIFIC CSS -->
+    <!-- MAGNIFIC CSS -->
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <!-- ANIMATE CSS -->
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -70,7 +71,8 @@
                         <div class="mainmenu">
                             <div class="navbar navbar-nobg">
                                 <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                        data-target=".navbar-collapse">
                                         <span class="sr-only">Toggle navigation</span>
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
@@ -79,17 +81,26 @@
                                 </div>
                                 <div class="navbar-collapse collapse no-padding">
                                     <ul class="nav navbar-nav navbar-left">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">Tour<span class="caret"></span></a>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
+                                                href="#">Tour<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="tours.html">List</a></li>
-                                                <li><a href="activities.html">Activites</a></li> 
+                                                <li><a href="activities.html">Activites</a></li>
                                             </ul>
-                                    </li>
-                                    <li><a class="smoth-scroll" href="about.html">About</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                        </li>
+                                        <li><a class="smoth-scroll" href="about.html">About</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
                                     </ul>
-                                </div>                            
+                                    <div class="pull-right" id="login">
+                                        <div style="display: flex;">
+                                            <a style="margin: 0 10px;" href="myaccount.html">Profile</a>
+                                            <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                                            <button onclick="killToken()"
+                                                style="margin: 0 10px;background: none;font-weight: 500;">Logout</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- END MENU DESIGN AREA -->
@@ -112,7 +123,7 @@
                     </div>
                     <div class="site-page-breadcrumb">
                         <span>
-                            <a style="" href="#">Home </a> 
+                            <a style="" href="#">Home </a>
                             > My ACcount
                         </span>
                     </div>
@@ -139,419 +150,29 @@
                         <div class="myaccount">
                             <nav>
                                 <div class="nav nav-tabs myaccount-nav" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true"><i class="fa fa-user"></i>Profile</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-booking" role="tab" aria-controls="nav-booking" aria-selected="false"><i class="fa fa-briefcase"></i>booking</a>
-                                    <a class="nav-item nav-link" id="nav-cards-tab" data-toggle="tab" href="#nav-cards" role="tab" aria-controls="nav-cards" aria-selected="false"><i class="fa fa-credit-card"></i>cards</a>
+                                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
+                                        href="#nav-profile" role="tab" aria-controls="nav-profile"
+                                        aria-selected="true"><i class="fa fa-user"></i>Profile</a>
+                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+                                        href="#nav-booking" role="tab" aria-controls="nav-booking"
+                                        aria-selected="false"><i class="fa fa-briefcase"></i>booking</a>
+                                    <a class="nav-item nav-link" id="nav-cards-tab" data-toggle="tab" href="#nav-cards"
+                                        role="tab" aria-controls="nav-cards" aria-selected="false"><i
+                                            class="fa fa-credit-card"></i>cards</a>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
-                                
-                                <div class="tab-pane fade active in " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                    <div class="profile-details">
-                                        <div class="head-profile">
-                                            <h3>My Profile</h3>
-                                        </div>
-                                        <div class="content-profile">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <img src="assets/images/profile.jpg">
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="info">
-                                                        <div class="col-md-1">
-                                                            <i class="fa fa-user-secret"></i>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <p class="title">
-                                                                Name:
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            Moniza
-                                                        </div>
-                                                    </div>
-                                                    <div class="info">
-                                                        <div class="col-md-1">
-                                                            <i class="fa fa-calendar-check-o"></i>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <p class="title">
-                                                                Date of Birth:
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            25 Jan 1985
-                                                        </div>
-                                                    </div>
-                                                    <div class="info">
-                                                        <div class="col-md-1">
-                                                            <i class="fa fa-envelope"></i>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <p class="title">
-                                                                Email:
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            example@example.com
-                                                        </div>
-                                                    </div>
-                                                    <div class="info">
-                                                        <div class="col-md-1">
-                                                            <i class="fa fa-phone"></i>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <p class="title">
-                                                                Phone:
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            +123-456-789
-                                                        </div>
-                                                    </div>
-                                                    <div class="info">
-                                                        <div class="col-md-1">
-                                                            <i class="fa fa-map-marker"></i>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <p class="title">
-                                                                Address:
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            23 Blok, Lorum Ipsum, Canada
-                                                        </div>
-                                                    </div>
-                                                    <div class="info">
-                                                        <div class="col-md-1">
-                                                            <i class="fa fa-globe"></i>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <p class="title">
-                                                                Country
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            Canada
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 text-right">
-                                                    <a href="#" class="button">Edit Profile</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="detail-profile">
-                                            <h3>About Me</h3>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
-                                            </p>
-                                        </div>
-                                    </div>
+
+                                <div class="tab-pane fade active in " id="nav-profile" role="tabpanel"
+                                    aria-labelledby="nav-profile-tab">
+
                                 </div>
-                                <div class="tab-pane fade" id="nav-booking" role="tabpanel" aria-labelledby="nav-booking-tab">
-                                    <div class="booking-details">
-                                        <div class="head-booking">
-                                            <h3>Trips You have Booked!</h3>
-                                        </div>
-                                        <div class="content-booking">
-                                            <div class="booking-info">
-                                                <div class="col-md-2">
-                                                    <div class="booking-date">
-                                                        <p class="date">
-                                                            15
-                                                        </p>
-                                                        <p class="month">
-                                                            august
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="booking-detail">
-                                                        <h3>
-                                                            Restuarent Details
-                                                        </h3>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-calendar-check-o"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    booking date:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                28:12:2018 at 3:20 AM
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-sticky-note"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    booking details:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                28:12:2018 at 3:20 AM
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-user-secret"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    client:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                Monica smith
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-envelope"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    Email:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                example@example.com
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-phone"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    Phone:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                +123-456-789
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="booking-action">
-                                                        <a class="btn-message bookbtn" href="#">
-                                                            Mesage
-                                                        </a>
-                                                        <a class="btn-apreove bookbtn" href="#">
-                                                            Aprove
-                                                        </a>
-                                                        <a class="btn-cancle bookbtn" href="#">
-                                                            Cancle
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="booking-info">
-                                                <div class="col-md-2">
-                                                    <div class="booking-date">
-                                                        <p class="date">
-                                                            15
-                                                        </p>
-                                                        <p class="month">
-                                                            august
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="booking-detail">
-                                                        <h3>
-                                                            Restuarent Details
-                                                        </h3>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-calendar-check-o"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    booking date:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                28:12:2018 at 3:20 AM
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-sticky-note"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    booking details:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                28:12:2018 at 3:20 AM
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-user-secret"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    client:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                Monica smith
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-envelope"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    Email:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                example@example.com
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-phone"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    Phone:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                +123-456-789
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="booking-action">
-                                                        <a class="btn-message bookbtn" href="#">
-                                                            Mesage
-                                                        </a>
-                                                        <a class="btn-apreove bookbtn" href="#">
-                                                            Aprove
-                                                        </a>
-                                                        <a class="btn-cancle bookbtn" href="#">
-                                                            Cancle
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="booking-info">
-                                                <div class="col-md-2">
-                                                    <div class="booking-date">
-                                                        <p class="date">
-                                                            15
-                                                        </p>
-                                                        <p class="month">
-                                                            august
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="booking-detail">
-                                                        <h3>
-                                                            Restuarent Details
-                                                        </h3>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-calendar-check-o"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    booking date:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                28:12:2018 at 3:20 AM
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-sticky-note"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    booking details:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                28:12:2018 at 3:20 AM
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-user-secret"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    client:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                Monica smith
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-envelope"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    Email:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                example@example.com
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-info">
-                                                            <div class="col-md-1">
-                                                                <i class="fa fa-phone"></i>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <p>
-                                                                    Phone:
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                +123-456-789
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="booking-action">
-                                                        <a class="btn-message bookbtn" href="#">
-                                                            Mesage
-                                                        </a>
-                                                        <a class="btn-apreove bookbtn" href="#">
-                                                            Aprove
-                                                        </a>
-                                                        <a class="btn-cancle bookbtn" href="#">
-                                                            Cancle
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="tab-pane fade" id="nav-booking" role="tabpanel"
+                                    aria-labelledby="nav-booking-tab">
+
                                 </div>
-                                <div class="tab-pane fade" id="nav-cards" role="tabpanel" aria-labelledby="nav-cards-tab">
+                                <div class="tab-pane fade" id="nav-cards" role="tabpanel"
+                                    aria-labelledby="nav-cards-tab">
                                     <h3 class="wishlist">Credit / Debit Cards</h3>
                                     <div class="ccards">
                                         <div class="settings">
@@ -563,7 +184,8 @@
                                             <p>
                                                 <input type="checkbox" name=""> Make my profile private</p>
                                             <p>
-                                                <input type="checkbox" name=""> Send me an email when some one replires to one of your comment</p>
+                                                <input type="checkbox" name=""> Send me an email when some one replires
+                                                to one of your comment</p>
                                             <h5>Who can Contact Me?</h5>
                                             <select class="form-control">
                                                 <option value="everyone">Every One</option>
@@ -602,10 +224,10 @@
                         </div>
                     </div>
                 </div>
-                        <!-- / END DASHBOARD AREA </div> -->
-                    </div>
-                </div>
+                <!-- / END DASHBOARD AREA </div> -->
             </div>
+        </div>
+        </div>
         </div>
     </section>
     <!-- / END CONTACT DESIGN AREA -->
@@ -615,9 +237,9 @@
             <div id="owl-brands" class="company-logo-list owl-carousel unicase-owl-carousel owl-outer-nav">
                 <div class="item">
                     <div class="item_inner">
-                       <img alt="image" src="assets/images/company-logo/company_1.png">
+                        <img alt="image" src="assets/images/company-logo/company_1.png">
                     </div>
-                    
+
                 </div>
 
                 <!-- /.item -->
@@ -645,11 +267,15 @@
                     </div>
                 </div>
             </div>
-            <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"></div><div class="owl-next"></div></div>
-            <!-- /.owl-carousel -->
+            <div class="owl-controls clickable">
+                <div class="owl-buttons">
+                    <div class="owl-prev"></div>
+                    <div class="owl-next"></div>
+                </div>
+                <!-- /.owl-carousel -->
             </div>
         </div>
-    </div>   <!-- / END COMPANY DESIGN AREA -->
+    </div> <!-- / END COMPANY DESIGN AREA -->
     <!-- START FOOTER DESIGN AREA -->
     <footer>
         <div class="footer-bottom">
@@ -661,14 +287,14 @@
                         </div>
                     </div>
                     <div style="text-align: right;color: white;">
-                        <i class="fa fa-map-marker" aria-hidden="true" ></i> 14 Tottenham Court Road, NewYork<br/>
-                            <i class="fa fa-phone" aria-hidden="true"></i> 1(784)-775-95-377,
-                                1(784)-678-26-567N<br/>
-                            
-                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                <a href="#">info@yoursite.com/
-                                    </a><a href="">www.TravelCo.com</a>
-                        </div>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> 14 Tottenham Court Road, NewYork<br />
+                        <i class="fa fa-phone" aria-hidden="true"></i> 1(784)-775-95-377,
+                        1(784)-678-26-567N<br />
+
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <a href="#">info@yoursite.com/
+                        </a><a href="">www.TravelCo.com</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -701,18 +327,326 @@
     <script src="assets/js/form-contact.js"></script>
     <script src="assets/js/venobox.min.js"></script>
     <script src="assets/js/color-switcher.js"></script>
-<!-- scripts js -->
+    <!-- scripts js -->
     <script src="assets/js/scripts.js"></script>
     <script type="text/javascript">
-    jQuery(document).ready(function() {
-        $('[data-toggle="tab"],[data-toggle="pill"]').click(function() {
-            $(this).parent().children('.active[data-toggle="tab"],.active[data-toggle="pill"]').removeClass('active');
-            $(this).addClass('active');
+        jQuery(document).ready(function () {
+            $('[data-toggle="tab"],[data-toggle="pill"]').click(function () {
+                $(this).parent().children('.active[data-toggle="tab"],.active[data-toggle="pill"]').removeClass('active');
+                $(this).addClass('active');
+            });
         });
-    });
+    </script>
+    <!-- Script by me -->
+    <script>
+        $(document).ready(function () {
+            const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
+            const apiUrlUser = `http://localhost:4444/user/${dataLogin.userId}`;
+            $.ajax(apiUrlUser, {
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                headers: {
+                    Authorization: 'Bearer ' + dataLogin.token
+                }, success: function (result) {
+                    const data = result.data;
+                    let str = `
+                    <div class="profile-details">
+                            <div class="head-profile">
+                                <h3>My Profile</h3>
+                            </div>
+                            <div class="content-profile">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="assets/images/profile.jpg">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="info">
+                                            <div class="col-md-1">
+                                                <i class="fa fa-user"></i>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="title">
+                                                    Full Name:
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                ${data.fullName}
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="col-md-1">
+                                                <i class="fa fa-user-secret"></i>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="title">
+                                                    Display Name:
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                ${data.displayName}
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="col-md-1">
+                                                <i class="fa fa-calendar-check-o"></i>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="title">
+                                                    Date of Birth:
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                ${new Date(Date.parse(data.dateOfBirth)).getDate()}/${new Date(Date.parse(data.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(data.dateOfBirth)).getFullYear()}
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="col-md-1">
+                                                <i class="fa fa-envelope"></i>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="title">
+                                                    Email:
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                ${data.email}
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="col-md-1">
+                                                <i class="fa fa-phone"></i>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="title">
+                                                    Phone:
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                ${data.phone}
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="col-md-1">
+                                                <i class="fa fa-map-marker"></i>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="title">
+                                                    Address:
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                ${data.address}
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="col-md-1">
+                                                <i class="fa fa-globe"></i>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="title">
+                                                    Country
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                ${data.country}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-right">
+                                        <a href="#" class="button">Edit Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-profile">
+                                <h3>About Me</h3>
+                                <p>
+                                    ${data.description}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    $("#nav-profile").html(str);
+
+                    const apiUrlBill = `http://localhost:4444/bill/s?userid=${dataLogin.userId}`;
+                    $.ajax(apiUrlBill, {
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + dataLogin.token
+                        }, success: function (result) {
+                            const list = result.data;
+                            let booking = '';
+                            if (list) {
+                                for (const i of list) {
+                                    booking += `
+                                <div class="clearfix"></div>
+                                <div class="booking-info">
+                                        <div class="col-md-2">
+                                            <div class="booking-date">
+                                                <p class="date">
+                                                    15
+                                                </p>
+                                                <p class="month">
+                                                    august
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="booking-detail">
+                                                <h3>
+                                                    Bill Details
+                                                </h3>
+                                                <div class="detail-info">
+                                                    <div class="col-md-1">
+                                                        <i class="fa fa-calendar-check-o"></i>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p>
+                                                            booking date:
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        ${new Date(Date.parse(i.createdAt)).getDate()}/${new Date(Date.parse(i.createdAt)).getMonth() + 1}/${new Date(Date.parse(i.createdAt)).getFullYear()}
+                                                    </div>
+                                                </div>
+                                                <div class="detail-info">
+                                                    <div class="col-md-1">
+                                                        <i class="fa fa-sticky-note"></i>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p>
+                                                            apply date:
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        ${new Date(Date.parse(i.applyDate)).getDate()}/${new Date(Date.parse(i.applyDate)).getMonth() + 1}/${new Date(Date.parse(i.applyDate)).getFullYear()}
+                                                    </div>
+                                                </div>
+                                                <div class="detail-info">
+                                                    <div class="col-md-1">
+                                                        <i class="fa fa-user-secret"></i>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p>
+                                                            full name:
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        ${data.fullName}
+                                                    </div>
+                                                </div>
+                                                <div class="detail-info">
+                                                    <div class="col-md-1">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p>
+                                                            Email:
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        ${data.email}
+                                                    </div>
+                                                </div>
+                                                <div class="detail-info">
+                                                    <div class="col-md-1">
+                                                        <i class="fa fa-phone"></i>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p>
+                                                            Phone:
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        ${data.phone}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="booking-action">
+                                                <button class="btn-success btn-apreove bookbtn" onclick="payForBill('${i._id}')">
+                                                    Aprove
+                                                </button>
+                                                <button class="btn-danger btn-cancle bookbtn" onclick="cancleBill('${i._id}')">
+                                                    Cancle
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                                }
+                            }else{
+                                booking+='<h3>Not Fount!</h3>'
+                            }
+
+                            let str = `
+                            <div class="booking-details">
+                                <div class="head-booking">
+                                    <h3>Trips You have Booked!</h3>
+                                </div>
+                                <div class="content-booking">
+                                    ${booking}
+                                </div>
+                            </div>
+                            `;
+                            $("#nav-booking").html(str);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function payForBill(_id) {
+            const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
+            const apiUrl = `http://localhost:4444/bill/${_id}`;
+            $.ajax(apiUrl, {
+                type: "PUT",
+                data: JSON.stringify({ hasPaied: true }),
+                contentType: "application/json",
+                dataType: "json",
+                headers: {
+                    Authorization: 'Bearer ' + dataLogin.token
+                },
+                success: function async(data) {
+                    alert(data.message);
+                    location.reload();
+                },
+                error: function (error) {
+                    alert(error.responseJSON.message);
+                    location.reload();
+                }
+            });
+        }
+        function cancleBill(_id) {
+            const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
+            const apiUrl = `http://localhost:4444/bill/${_id}`;
+            $.ajax(apiUrl, {
+                type: "PUT",
+                data: JSON.stringify({ hasCancel: true }),
+                contentType: "application/json",
+                dataType: "json",
+                headers: {
+                    Authorization: 'Bearer ' + dataLogin.token
+                },
+                success: function async(data) {
+                    alert(data.message);
+                    location.reload();
+                },
+                error: function (error) {
+                    alert(error.responseJSON.message);
+                    location.reload();
+                }
+            });
+        }
     </script>
 </body>
 
 
 <!-- Mirrored from shmai.com/preview/travelco/myaccount.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 04:20:46 GMT -->
+
 </html>
