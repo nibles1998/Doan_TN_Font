@@ -346,6 +346,13 @@
             $("#login").html(str);
         });
     </script>
+    <script>
+        function killToken() {
+            localStorage.removeItem("dataLoginClient");
+            localStorage.removeItem("booking");
+            window.location.assign('http://localhost:4445/tour');
+        };
+    </script>
 </body>
 
 </html>
