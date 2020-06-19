@@ -92,7 +92,7 @@
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
-                                    <div class="pull-right" id="login">
+                                    <div class="pull-right" style="margin-top: 2em;" id="login">
                                         <div style="display: flex;">
                                             <a style="margin: 0 10px;" href="myaccount.html">Profile</a>
                                             <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
@@ -123,8 +123,7 @@
                     </div>
                     <div class="site-page-breadcrumb">
                         <span>
-                            <a style="" href="#">Home </a>
-                            > My ACcount
+                            Home > My ACcount
                         </span>
                     </div>
                 </div>
@@ -149,7 +148,8 @@
                         <!-- START DASHBOARD AREA -->
                         <div class="myaccount">
                             <nav>
-                                <div class="nav nav-tabs myaccount-nav" id="nav-tab" role="tablist">
+                                <div style="font-weight: 500;" class="nav nav-tabs myaccount-nav" id="nav-tab"
+                                    role="tablist">
                                     <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
                                         href="#nav-profile" role="tab" aria-controls="nav-profile"
                                         aria-selected="true"><i class="fa fa-user"></i>Profile</a>
@@ -231,6 +231,74 @@
         </div>
     </section>
     <!-- / END CONTACT DESIGN AREA -->
+    <div class="modal fade" id="exampleModalCenter-Update" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Update User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="user">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="fullName-update">Full Name:</label>
+                                    <input type="text" class="form-control" id="fullName-update"
+                                        placeholder="Enter Full Name" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="displayName">Display Name:</label>
+                                    <input type="text" class="form-control" id="displayName-update"
+                                        placeholder="Enter Display Name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address-update">Address:</label>
+                            <input type="text" class="form-control" id="address-update" placeholder="Enter Address"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="phone-update">Phone:</label>
+                                    <input type="text" class="form-control" id="phone-update"
+                                        placeholder="Enter Phone Number" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="dateOfBirth-update">Date Of Birth:</label>
+                                    <input type="date" class="form-control" id="dateOfBirth-update"
+                                        placeholder="Enter BirthDay" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="country-update">Country:</label>
+                                    <input type="text" class="form-control" id="country-update"
+                                        placeholder="Enter Country" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="description-update">Description:</label>
+                                    <input type="text" class="form-control" id="description-update"
+                                        placeholder="Enter Description" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="updateUserInfo()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- START COMPANY DESIGN AREA -->
     <div class="company-logo-area  wow fadeInU">
         <div class="container">
@@ -350,6 +418,12 @@
                     Authorization: 'Bearer ' + dataLogin.token
                 }, success: function (result) {
                     const data = result.data;
+                    let description = '';
+                    if (data.description !== '') {
+                        description = data.description;
+                    } else {
+                        description = 'Notthing!'
+                    }
                     let str = `
                     <div class="profile-details">
                             <div class="head-profile">
@@ -454,19 +528,31 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-right">
-                                        <a href="#" class="button">Edit Profile</a>
+                                        <button class="userprofile" onclick="getData()" data-toggle="modal" data-target="#exampleModalCenter-Update">Edit Profile</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="detail-profile">
                                 <h3>About Me</h3>
                                 <p>
-                                    ${data.description}
+                                    ${description}
                                 </p>
                             </div>
                         </div>
                     `;
                     $("#nav-profile").html(str);
+
+                    let listTour;
+
+                    const apiUrlTour = `http://localhost:4444/tour/s`;
+                    $.ajax(apiUrlTour, {
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (result) {
+                            listTour = result.data;
+                        }
+                    });
 
                     const apiUrlBill = `http://localhost:4444/bill/s?userid=${dataLogin.userId}`;
                     $.ajax(apiUrlBill, {
@@ -480,23 +566,49 @@
                             let booking = '';
                             if (list) {
                                 for (const i of list) {
+                                    let tourInfo;
+                                    for (const j of listTour) {
+                                        if (i.tourId === j.id) {
+                                            tourInfo = j;
+                                        }
+                                    }
+                                    let check = '';
+                                    if (i.hasCancel) {
+                                        check += `
+                                        <h4 style="color: white;background: red;padding: 0.5em">Bill is Cancled</h4>
+                                        `;
+                                    } else {
+                                        if (i.hasPaied) {
+                                            check += `
+                                            <h4 style="color: white;background: rgb(102, 200, 0);padding: 0.5em">Bill is Paied</h4>
+                                            <button class="btn-danger btn-cancle bookbtn" onclick="cancleBill('${i._id}')">
+                                                Cancle
+                                            </button>
+                                            `;
+                                        } else {
+                                            check += `
+                                            <h4 style="color: white;background: blue;padding: 0.5em">Bill is Processing</h4>
+                                            <button class="btn-success btn-apreove bookbtn" onclick="payForBill('${i._id}')">
+                                                Aprove
+                                            </button>
+                                            <button class="btn-danger btn-cancle bookbtn" onclick="cancleBill('${i._id}')">
+                                                Cancle
+                                            </button>
+                                            `;
+                                        }
+                                    }
                                     booking += `
                                 <div class="clearfix"></div>
                                 <div class="booking-info">
                                         <div class="col-md-2">
-                                            <div class="booking-date">
-                                                <p class="date">
-                                                    15
-                                                </p>
-                                                <p class="month">
-                                                    august
-                                                </p>
+                                            <div class="booking-detail">
+                                                <img src="http://localhost:4444/${tourInfo.photo}">
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-7">
                                             <div class="booking-detail">
                                                 <h3>
-                                                    Bill Details
+                                                    ${tourInfo.tourName}
                                                 </h3>
                                                 <div class="detail-info">
                                                     <div class="col-md-1">
@@ -565,21 +677,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="booking-action">
-                                                <button class="btn-success btn-apreove bookbtn" onclick="payForBill('${i._id}')">
-                                                    Aprove
-                                                </button>
-                                                <button class="btn-danger btn-cancle bookbtn" onclick="cancleBill('${i._id}')">
-                                                    Cancle
-                                                </button>
+                                        <div class="flex: 1 1 auto;">
+                                            <div style="text-align: center; font-weight: 500;" class="col-md-3 text-center">
+                                            <div style="margin: auto;" class="booking-action">
+                                                ${check}
                                             </div>
+                                        </div>
                                         </div>
                                     </div>
                                 `;
                                 }
-                            }else{
-                                booking+='<h3>Not Fount!</h3>'
+                            } else {
+                                booking += '<h3>Not Fount!</h3>'
                             }
 
                             let str = `
@@ -598,6 +707,70 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        function getData() {
+            const authenticate = JSON.parse(localStorage.getItem("dataLoginClient"));
+            const apiUrl = `http://localhost:4444/user/${authenticate.userId}`;
+            $.ajax({
+                url: apiUrl,
+                type: "GET",
+                contentType: "application/json",
+                headers: {
+                    Authorization: 'Bearer ' + authenticate.token
+                },
+                dataType: "json",
+                success: function async(data) {
+                    const info = data.data;
+                    $("#fullName-update").val(info.fullName);
+                    $("#displayName-update").val(info.displayName);
+                    $("#dateOfBirth-update").val((info.dateOfBirth).toString().split("T")[0]);
+                    $("#address-update").val(info.address);
+                    $("#email-update").val(info.email);
+                    $("#phone-update").val(info.phone);
+                    $("#country-update").val(info.country);
+                    $("#description-update").val(info.description);
+                },
+                error: function (error) {
+                    alert(error.responseJSON.message);
+                }
+            })
+        }
+
+        function updateUserInfo() {
+            const authenticate = JSON.parse(localStorage.getItem("dataLoginClient"));
+            const apiUrl = `http://localhost:4444/user/${authenticate.userId}`;
+            const userInfo = {
+                fullName: $("#fullName-update").val(),
+                address: $("#address-update").val(),
+                phone: $("#phone-update").val(),
+                dateOfBirth: $("#dateOfBirth-update").val(),
+                country: $("#country-update").val(),
+                displayName: $("#displayName-update").val(),
+                description: $("#description-update").val(),
+                roleId: authenticate.roleId,
+                paymentMethod: ["Momo"]
+            };
+            $.ajax(apiUrl, {
+                type: "PUT",
+                data: JSON.stringify(userInfo),
+                contentType: "application/json",
+                dataType: "json",
+                headers: {
+                    Authorization: 'Bearer ' + authenticate.token
+                },
+                success: function async(data) {
+                    alert(data.message);
+                    localStorage.removeItem("userId");
+                    location.reload();
+                },
+                error: function (error) {
+                    localStorage.removeItem("userId");
+                    alert(error.responseJSON.message);
+                }
+            });
+        }
     </script>
 
     <script>

@@ -10760,6 +10760,28 @@ Myaccount
     border: 1px solid;
     padding: 10px;
     margin-bottom: 10px;
+    margin: auto;
+}
+
+.userprofile {
+    background-color: #083063;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+    padding: 12px 25px;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 0px;
+}
+
+.userprofile:hover {
+    background-color: #66a91e;
+    color: #fff;
+    transform: scale(1.1);
 }
 
 .btn-message {
@@ -10774,7 +10796,7 @@ Myaccount
 
 .btn-cancle {
     color: #fff;
-    border-color: #bf1b19;
+    /* border-color: #bf1b19; */
     background: #bf1b19;
 }
 
