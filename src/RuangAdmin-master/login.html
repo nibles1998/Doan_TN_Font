@@ -59,7 +59,7 @@
   <script type="text/javascript">
     $(('#btnLogin')).click(async (e) => {
       e.preventDefault();
-      const apiURL = 'http://localhost:4444/user/login';
+      const apiURL = 'http://3.23.96.19:4444/user/login';
       const email = $('#exampleInputEmail').val();
       const password = $('#exampleInputPassword').val();
       const account = {
@@ -75,7 +75,7 @@
           if (data && data.token) {
             localStorage.setItem("dataLogin", JSON.stringify(data))
           }
-          window.location.assign('http://localhost:4445/admin/dashboard.html');
+          document.location.pathname = '/admin/dashboard.html';
         },
         error: function (error) {
           alert(error.responseJSON.message);

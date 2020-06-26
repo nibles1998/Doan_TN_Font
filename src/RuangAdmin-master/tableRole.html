@@ -354,7 +354,7 @@
 
             <script>
                 $(document).ready(function () {
-                    const apiUrl = 'http://localhost:4444/userrole/s';
+                    const apiUrl = 'http://3.23.96.19:4444/userrole/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
                         url: apiUrl,
@@ -395,7 +395,7 @@
                 function getData(index) {
                     localStorage.setItem("roleId", $(`#roleId-${index}`).html());
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-                    const apiUrl = `http://localhost:4444/userrole/${localStorage.getItem("roleId")}`;
+                    const apiUrl = `http://3.23.96.19:4444/userrole/${localStorage.getItem("roleId")}`;
                     $.ajax({
                         url: apiUrl,
                         type: "GET",
@@ -440,7 +440,7 @@
 
                 function updateRoleInfo() {
                     const roleId = localStorage.getItem("roleId");
-                    const apiUrl = `http://localhost:4444/userrole/${roleId}`;
+                    const apiUrl = `http://3.23.96.19:4444/userrole/${roleId}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const selectBoxCreate = document.getElementById("create-update");
                     const create = selectBoxCreate.options[selectBoxCreate.selectedIndex].value;
@@ -479,7 +479,7 @@
                 }
 
                 function createRole() {
-                    const apiUrl = 'http://localhost:4444/userrole';
+                    const apiUrl = 'http://3.23.96.19:4444/userrole';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const roleInfo = {
                         type: $("#type-create").val(),
@@ -508,7 +508,7 @@
                 }
 
                 function deleteRole() {
-                    const apiUrl = `http://localhost:4444/userrole/${localStorage.getItem("roleId")}`;
+                    const apiUrl = `http://3.23.96.19:4444/userrole/${localStorage.getItem("roleId")}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax(apiUrl, {
                         type: "DELETE",

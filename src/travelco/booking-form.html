@@ -316,7 +316,7 @@
             const url = new URL(window.location.href);
             const searchParam = new URLSearchParams(url.search);
             const id = searchParam.get("id");
-            const searchFilterURL = `http://localhost:4444/tour/${id}`;
+            const searchFilterURL = `http://3.23.96.19:4444/tour/${id}`;
             $.ajax(searchFilterURL, {
                 type: "GET",
                 contentType: "application/json",
@@ -328,7 +328,7 @@
                     str += `<div class="col-md-6">
                         <div class="booking-details">
                             <div class="col-md-5">
-                                <img src="http://localhost:4444/${data.photo}"/>
+                                <img src="http://3.23.96.19:4444/${data.photo}"/>
                             </div>
                             <div class="col-md-7">
                                 <h3 class="Default-clr">Details</h3>
@@ -394,7 +394,7 @@
                     $("#child-booking").val("");
                     localStorage.setItem("booking", JSON.stringify(data));
                 } else {
-                    $("#tourDetail").html(`<h3>Not Fount!</h3>`);   
+                    $("#tourDetail").html(`<h3>Not Fount!</h3>`);
                 }
             });
         });
@@ -455,10 +455,10 @@
 
                 localStorage.setItem("booking", JSON.stringify(booking));
 
-                window.location.assign('http://localhost:4445/tour/confirmation.html');
+                document.location.pathname = '/tour/confirmation.html';
             } else {
                 alert("Cần đăng nhập để đặt tour!");
-                window.location.assign('http://localhost:4445/tour/login.html');
+                document.location.pathname = '/tour/login.html';
             }
         }
     </script>
@@ -466,7 +466,7 @@
         function killToken() {
             localStorage.removeItem("dataLoginClient");
             localStorage.removeItem("booking");
-            window.location.assign('http://localhost:4445/tour');
+            document.location.pathname = '/tour';
         };
     </script>
 </body>

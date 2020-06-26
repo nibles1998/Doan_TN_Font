@@ -279,7 +279,7 @@
 
             <script>
                 $(document).ready(function () {
-                    const apiUrl = 'http://localhost:4444/typetour/s';
+                    const apiUrl = 'http://3.23.96.19:4444/typetour/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
                         url: apiUrl,
@@ -316,7 +316,7 @@
                 function getData(index) {
                     localStorage.setItem("typeTourId", $(`#typeTourId-${index}`).html());
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-                    const apiUrl = `http://localhost:4444/typetour/${localStorage.getItem("typeTourId")}`;
+                    const apiUrl = `http://3.23.96.19:4444/typetour/${localStorage.getItem("typeTourId")}`;
                     $.ajax({
                         url: apiUrl,
                         type: "GET",
@@ -341,7 +341,7 @@
 
                 function updateTypeTourInfo() {
                     const typeTourId = localStorage.getItem("typeTourId");
-                    const apiUrl = `http://localhost:4444/typetour/${typeTourId}`;
+                    const apiUrl = `http://3.23.96.19:4444/typetour/${typeTourId}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const typeTourInfo = {
                         type: $("#type-update").val()
@@ -368,7 +368,7 @@
                 }
 
                 function createTypeTour() {
-                    const apiUrl = 'http://localhost:4444/typetour';
+                    const apiUrl = 'http://3.23.96.19:4444/typetour';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const typeTourInfo = {
                         type: $("#type-create").val()
@@ -393,7 +393,7 @@
                 }
 
                 function deleteTypeTour() {
-                    const apiUrl = `http://localhost:4444/typeTour/${localStorage.getItem("typeTourId")}`;
+                    const apiUrl = `http://3.23.96.19:4444/typeTour/${localStorage.getItem("typeTourId")}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax(apiUrl, {
                         type: "DELETE",

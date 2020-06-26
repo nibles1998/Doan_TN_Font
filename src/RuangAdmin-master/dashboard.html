@@ -244,7 +244,7 @@
         <script>
             $(document).ready(function () {
                 const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
-                const apiUrl = `http://localhost:4444/userrole/${dataLogin.roleId}`;
+                const apiUrl = `http://3.23.96.19:4444/userrole/${dataLogin.roleId}`;
                 $.ajax(apiUrl, {
                     type: "GET",
                     contentType: "application/json",
@@ -255,11 +255,11 @@
                     success: async function (result) {
                         const data = result.data;
                         if (!data.type === "Admin") {
-                            window.location.assign('http://localhost:4445/admin');
+                            document.location.pathname = '/admin';
                         }
                     },
                     error: function (error) {
-                        window.location.assign('http://localhost:4445/admin');
+                        document.location.pathname = '/admin';
                     }
                 });
 
@@ -269,7 +269,7 @@
         <!---- Get data for Dashboard ---->
         <script type="text/javascript">
             $(document).ready(function () {
-                const apiUrlBill = 'http://localhost:4444/bill/s';
+                const apiUrlBill = 'http://3.23.96.19:4444/bill/s';
                 const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
 
                 $.ajax({
@@ -300,7 +300,7 @@
                                 status += '</td><td><span class="badge badge-primary">Processing</span>'
                             }
                         }
-                        const apiUrlUser = `http://localhost:4444/user/${i.userId}`;
+                        const apiUrlUser = `http://3.23.96.19:4444/user/${i.userId}`;
                         let userName = "";
                         await $.ajax({
                             url: apiUrlUser,
@@ -313,7 +313,7 @@
                                 userName += data.data.fullName;
                             }
                         });
-                        const apiUrlTour = `http://localhost:4444/tour/${i.tourId}`;
+                        const apiUrlTour = `http://3.23.96.19:4444/tour/${i.tourId}`;
                         let tourName = "";
                         await $.ajax({
                             url: apiUrlTour,
@@ -343,7 +343,7 @@
 
                 });
 
-                const apiUrlUser = 'http://localhost:4444/user/s';
+                const apiUrlUser = 'http://3.23.96.19:4444/user/s';
                 $.ajax({
                     url: apiUrlUser,
                     type: "GET",
@@ -369,7 +369,7 @@
                     totalUser.innerHTML = (data ? data.length : 0).toLocaleString();
                 });
 
-                const apiUrlCompany = 'http://localhost:4444/company/s';
+                const apiUrlCompany = 'http://3.23.96.19:4444/company/s';
                 $.ajax({
                     url: apiUrlCompany,
                     type: "GET",

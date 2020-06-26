@@ -373,7 +373,7 @@
         $(document).ready(function () {
             const booking = JSON.parse(localStorage.getItem("booking"));
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
-            const apiUrlUser = `http://localhost:4444/user/${dataLogin.userId}`;
+            const apiUrlUser = `http://3.23.96.19:4444/user/${dataLogin.userId}`;
             $.ajax(apiUrlUser, {
                 type: "GET",
                 contentType: "application/json",
@@ -425,11 +425,11 @@
 
     <script>
         function goHome() {
-            window.location.assign('http://localhost:4445/tour/index.html');
+            document.location.pathname = '/tour/index.html';
         }
 
         function createBill() {
-            const apiUrl = 'http://localhost:4444/bill';
+            const apiUrl = 'http://3.23.96.19:4444/bill';
             const booking = JSON.parse(localStorage.getItem("booking"));
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
             const selectBox = document.getElementById("paymentMethod");
@@ -454,11 +454,11 @@
                 },
                 success: function async(data) {
                     alert(data.message);
-                    window.location.assign('http://localhost:4445/tour/index.html');
+                    document.location.pathname = '/tour/index.html';
                 },
                 error: function (error) {
                     alert(error.responseJSON.message);
-                    window.location.assign('http://localhost:4445/tour/index.html');
+                    document.location.pathname = '/tour/index.html';
                 }
             });
         }
@@ -467,7 +467,7 @@
         function killToken() {
             localStorage.removeItem("dataLoginClient");
             localStorage.removeItem("booking");
-            window.location.assign('http://localhost:4445/tour');
+            document.location.pathname = '/tour';
         };
     </script>
 </body>
