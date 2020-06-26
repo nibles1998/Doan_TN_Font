@@ -216,7 +216,7 @@
         <!---- Get data for Dashboard ---->
         <script type="text/javascript">
             const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-            const apiUrlUser = `http://3.23.96.19:4444/user/${authenticate.userId}`;
+            const apiUrlUser = `http://api.nibles-tour.ga/user/${authenticate.userId}`;
             $.ajax({
                 url: apiUrlUser,
                 type: "GET",

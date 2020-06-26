@@ -316,7 +316,7 @@
             const url = new URL(window.location.href);
             const searchParam = new URLSearchParams(url.search);
             const id = searchParam.get("id");
-            const searchFilterURL = `http://3.23.96.19:4444/tour/${id}`;
+            const searchFilterURL = `http://api.nibles-tour.ga/tour/${id}`;
             $.ajax(searchFilterURL, {
                 type: "GET",
                 contentType: "application/json",
@@ -328,7 +328,7 @@
                     str += `<div class="col-md-6">
                         <div class="booking-details">
                             <div class="col-md-5">
-                                <img src="http://3.23.96.19:4444/${data.photo}"/>
+                                <img src="http://api.nibles-tour.ga/${data.photo}"/>
                             </div>
                             <div class="col-md-7">
                                 <h3 class="Default-clr">Details</h3>

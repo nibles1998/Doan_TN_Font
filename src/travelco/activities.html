@@ -295,7 +295,7 @@
     <script>
         $(document).ready(function () {
             const now = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`;
-            const apiUrl = `http://3.23.96.19:4444/tour/s?active=${now}`;
+            const apiUrl = `http://api.nibles-tour.ga/tour/s?active=${now}`;
             $.ajax(apiUrl, {
                 type: "GET",
                 contentType: "application/json",
@@ -312,7 +312,7 @@
                                 <div class="activity-contnet">
                                     <div class="col-md-4">
                                         <div class="listitem2" style="display: flex; flex-direction: column;">
-                                            <img class="w-100" height="250px" src="http://3.23.96.19:4444/${i.photo}" alt=""></a>                     
+                                            <img class="w-100" height="250px" src="http://api.nibles-tour.ga/${i.photo}" alt=""></a>                     
                                         </div>
                                     </div>
                                     <div class="col-md-8 ">
@@ -354,7 +354,7 @@
     <script>
         function getTourList(event) {
             event.preventDefault();
-            let url = "http://3.23.96.19:4444/tour/s?"
+            let url = "http://api.nibles-tour.ga/tour/s?"
             let begin, location;
 
             location = $("#location-search").val();
@@ -377,7 +377,7 @@
                                 <div class="activity-contnet">
                                     <div class="col-md-4">
                                         <div class="listitem2" style="display: flex; flex-direction: column;">
-                                            <img class="w-100" height="250px" src="http://3.23.96.19:4444/${i.photo}" alt=""></a>                     
+                                            <img class="w-100" height="250px" src="http://api.nibles-tour.ga/${i.photo}" alt=""></a>                     
                                         </div>
                                     </div>
                                     <div class="col-md-8 ">

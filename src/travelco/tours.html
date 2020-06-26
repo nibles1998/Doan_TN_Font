@@ -323,7 +323,7 @@
             const searchParam = new URLSearchParams(url.search);
             const begin = searchParam.get("begin");
             const location = searchParam.get("location");
-            const searchFilterURL = `http://3.23.96.19:4444/tour/s?${location ? `location=${location}&` : ""}${begin ? `active=${begin}` : ""}`
+            const searchFilterURL = `http://api.nibles-tour.ga/tour/s?${location ? `location=${location}&` : ""}${begin ? `active=${begin}` : ""}`
             $.ajax(searchFilterURL, {
                 type: "GET",
                 contentType: "application/json",
@@ -338,7 +338,7 @@
                         str += `
                         <div class="col-md-6">
                             <div class="tours-info" style="display: flex; flex-direction: column;">
-                                <img class="w-100" height="400px" src="http://3.23.96.19:4444/${i.photo}">
+                                <img class="w-100" height="400px" src="http://api.nibles-tour.ga/${i.photo}">
                                 <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
                                 <div class="tour-details">
                                     <h4 class="tour-title">${i.tourName}</h4>
@@ -366,7 +366,7 @@
     <script>
         function getTourList(event) {
             event.preventDefault();
-            let url = "http://3.23.96.19:4444/tour/s?"
+            let url = "http://api.nibles-tour.ga/tour/s?"
             let begin, location;
 
             let selectTime = document.getElementById("startedDate-search");
@@ -394,7 +394,7 @@
                             str += `
                         <div class="col-md-6">
                             <div class="tours-info" style="display: flex; flex-direction: column;">
-                                <img class="w-100" height="400px" src="http://3.23.96.19:4444/${i.photo}">
+                                <img class="w-100" height="400px" src="http://api.nibles-tour.ga/${i.photo}">
                                 <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
                                 <div class="tour-details">
                                     <h4 class="tour-title">${i.tourName}</h4>
