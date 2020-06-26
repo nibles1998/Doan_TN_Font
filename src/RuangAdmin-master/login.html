@@ -75,7 +75,7 @@
           if (data && data.token) {
             localStorage.setItem("dataLogin", JSON.stringify(data))
           }
-          document.location.pathname = '/admin/dashboard.html';
+          document.location.pathname = '/dashboard.html';
         },
         error: function (error) {
           alert(error.responseJSON.message);
