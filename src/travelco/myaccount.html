@@ -575,14 +575,14 @@
                                     let check = '';
                                     if (i.hasCancel) {
                                         check += `
-                                        <h4 style="color: white;background: red;padding: 0.5em">Bill is Cancled</h4>
+                                        <h4 style="color: white;background: red;padding: 0.5em">Bill is Cancel</h4>
                                         `;
                                     } else {
                                         if (i.hasPaied) {
                                             check += `
                                             <h4 style="color: white;background: rgb(102, 200, 0);padding: 0.5em">Bill is Paied</h4>
                                             <button class="btn-danger btn-cancle bookbtn" onclick="cancleBill('${i._id}')">
-                                                Cancle
+                                                Cancel
                                             </button>
                                             `;
                                         } else {
@@ -592,7 +592,7 @@
                                                 Aprove
                                             </button>
                                             <button class="btn-danger btn-cancle bookbtn" onclick="cancleBill('${i._id}')">
-                                                Cancle
+                                                Cancel
                                             </button>
                                             `;
                                         }

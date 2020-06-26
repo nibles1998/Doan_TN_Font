@@ -88,7 +88,7 @@
                                                 href="#">Tour<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="tours.html">List</a></li>
-                                                <li><a href="tours.html">Activites</a></li>
+                                                <li><a href="activities.html">Activites</a></li>
                                             </ul>
                                         </li>
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
@@ -323,7 +323,7 @@
             const searchParam = new URLSearchParams(url.search);
             const begin = searchParam.get("begin");
             const location = searchParam.get("location");
-            const searchFilterURL = `http://localhost:4444/tour/s?${location ? `location=${location}&` : ""}${begin ? `begin=${begin}` : ""}`
+            const searchFilterURL = `http://localhost:4444/tour/s?${location ? `location=${location}&` : ""}${begin ? `active=${begin}` : ""}`
             $.ajax(searchFilterURL, {
                 type: "GET",
                 contentType: "application/json",
@@ -373,7 +373,7 @@
             selectTime = selectTime.options[selectTime.selectedIndex];
             if (selectTime) {
                 begin = selectTime.value;
-                url += `begin=${begin}&`;
+                url += `active=${begin}&`;
             }
 
             location = $("#location-search").val();

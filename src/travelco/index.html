@@ -994,7 +994,7 @@
             selectTime = selectTime.options[selectTime.selectedIndex];
             if (selectTime) {
                 begin = selectTime.value;
-                url += `begin=${begin}&`;
+                url += `active=${begin}&`;
             }
 
             location = $("#location-search").val();
