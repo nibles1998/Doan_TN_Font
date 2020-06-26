@@ -255,11 +255,11 @@
                     success: async function (result) {
                         const data = result.data;
                         if (!data.type === "Admin") {
-                            document.location.pathname = '/admin';
+                            document.location.pathname = '/';
                         }
                     },
                     error: function (error) {
-                        document.location.pathname = '/admin';
+                        document.location.pathname = '/';
                     }
                 });
 
