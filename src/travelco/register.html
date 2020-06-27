@@ -346,7 +346,7 @@
                     dataType: "json",
                     success: function async(data) {
                         alert(data.message);
-                        window.location.assign('http://localhos:4445/tour/login.html');
+                        document.location.pathname = '/login';
                     },
                     error: function (error) {
                         alert(error.responseJSON.message);
