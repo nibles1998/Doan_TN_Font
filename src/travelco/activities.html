@@ -388,6 +388,7 @@
                                             </div>
                                             <div class="act-content-left">
                                                 <h4>${i.tourName}</h4>
+                                                <h5>Location: ${i.location}</h5>
                                                 <p class="grey size14 lh6">
                                                     ${i.note}
                                                 </p>
@@ -413,7 +414,7 @@
         function killToken() {
             localStorage.removeItem("dataLoginClient");
             localStorage.removeItem("booking");
-            document.location.pathname='/tour';
+            document.location.pathname = '/tour';
         };
     </script>
 </body>

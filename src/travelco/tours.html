@@ -398,6 +398,7 @@
                                 <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
                                 <div class="tour-details">
                                     <h4 class="tour-title">${i.tourName}</h4>
+                                    <h5 class="tour-title">Location: ${i.location}</h5>
                                     <div class="tour-person">Start Date: ${new Date(Date.parse(i.startedDate)).getDate()}/${new Date(Date.parse(i.startedDate)).getMonth() + 1}/${new Date(Date.parse(i.startedDate)).getFullYear()}</div>
                                     <div class="tour-person">End Date: ${new Date(Date.parse(i.endDate)).getDate()}/${new Date(Date.parse(i.endDate)).getMonth() + 1}/${new Date(Date.parse(i.endDate)).getFullYear()}</div>
                                     <div class="tour-duration">Book Now and <span>save 30%*</span></div>
