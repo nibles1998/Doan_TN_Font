@@ -203,7 +203,7 @@
             $(document).ready(function () {
                 const dataLogin = localStorage.getItem("dataLogin");
                 if (dataLogin === null || dataLogin === undefined) {
-                    document.location.pathname = '/';
+                    document.location.pathname = '/admin';
                 }
             });
         </script>
@@ -216,7 +216,7 @@
         <!---- Get data for Dashboard ---->
         <script type="text/javascript">
             const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-            const apiUrlUser = `http://api.nibles-tour.ga/user/${authenticate.userId}`;
+            const apiUrlUser = `http://localhost:4444/user/${authenticate.userId}`;
             $.ajax({
                 url: apiUrlUser,
                 type: "GET",

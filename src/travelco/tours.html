@@ -94,7 +94,7 @@
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
-                                    <div class="pull-right" style="margin-top: 2em;" id="login">
+                                    <div class="pull-right" style="margin-top: -1.5em;" id="login">
 
                                     </div>
                                 </div>
@@ -297,24 +297,46 @@
 
     <script>
         $(document).ready(function () {
-            const dataLogin = localStorage.getItem("dataLoginClient");
+            const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
             let str = "";
             if (!dataLogin) {
                 str += `<div id="login-right">
                             <a href="login.html">Login</a>
-                    <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
+                            <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
                             <a href="register.html">Register</a>
                         </div>`;
+                $("#login").html(str);
             } else {
-                str += `
-                <div style="display: flex;">
-                    <a style="margin: 0 10px;" href="myaccount.html" >Profile</a>
-                    <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
-                    <button onclick="killToken()"style="margin: 0 10px;background: none;font-weight: 500;">Logout</button>
-                </div>
-                `;
+                const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+                $.ajax(apiUrl, {
+                    type: "GET",
+                    contentType: "application/json",
+                    dataType: "json",
+                    headers: {
+                        Authorization: 'Bearer ' + dataLogin.token
+                    }, success: function (result) {
+                        const data = result.data;
+                        str += `
+                        <ul class="navbar-nav navbar-left">
+                        <li class="nav-item dropdown no-arrow">
+                            <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
+                                    href="#"><img class="img-profile rounded-circle" src="images/none_avatar.png" style="max-width: 40px;border-radius: 50%!important;">   <span>${data.displayName}</span></a>
+                            <ul class="dropdown-menu" style="background-color: white;color: gray">
+                                <li><a href="myaccount.html">
+                                    Profile
+                                </a></li>
+                                <li><a id="killToken" href="login.html">
+                                    Logout
+                                </a></li>
+                            </ul>
+                        </li>
+                        </li>
+                        </ul>
+                        `;
+                        $("#login").html(str);
+                    }
+                });
             }
-            $("#login").html(str);
         });
     </script>
     <script>
@@ -323,7 +345,7 @@
             const searchParam = new URLSearchParams(url.search);
             const begin = searchParam.get("begin");
             const location = searchParam.get("location");
-            const searchFilterURL = `http://api.nibles-tour.ga/tour/s?${location ? `location=${location}&` : ""}${begin ? `active=${begin}` : ""}`
+            const searchFilterURL = `http://localhost:4444/tour/s?${location ? `location=${location}&` : ""}${begin ? `active=${begin}` : ""}`
             $.ajax(searchFilterURL, {
                 type: "GET",
                 contentType: "application/json",
@@ -338,7 +360,7 @@
                         str += `
                         <div class="col-md-6">
                             <div class="tours-info" style="display: flex; flex-direction: column;">
-                                <img class="w-100" height="400px" src="http://api.nibles-tour.ga/${i.photo}">
+                                <img class="w-100" height="400px" src="http://localhost:4444/${i.photo}">
                                 <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
                                 <div class="tour-details">
                                     <h4 class="tour-title">${i.tourName}</h4>
@@ -360,13 +382,13 @@
     </script>
     <script>
         function getTourDetail(id) {
-            window.location.assign(`http://nibles-tour.ga/booking-form.html?id=${id}`);
+            window.location.assign(`http://localhost:4445/tour/booking-form.html?id=${id}`);
         }
     </script>
     <script>
         function getTourList(event) {
             event.preventDefault();
-            let url = "http://api.nibles-tour.ga/tour/s?"
+            let url = "http://localhost:4444/tour/s?"
             let begin, location;
 
             let selectTime = document.getElementById("startedDate-search");
@@ -394,7 +416,7 @@
                             str += `
                         <div class="col-md-6">
                             <div class="tours-info" style="display: flex; flex-direction: column;">
-                                <img class="w-100" height="400px" src="http://api.nibles-tour.ga/${i.photo}">
+                                <img class="w-100" height="400px" src="http://localhost:4444/${i.photo}">
                                 <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
                                 <div class="tour-details">
                                     <h4 class="tour-title">${i.tourName}</h4>
@@ -420,7 +442,7 @@
         function killToken() {
             localStorage.removeItem("dataLoginClient");
             localStorage.removeItem("booking");
-            document.location.pathname = '/';
+            document.location.pathname = '/tour';
         };
     </script>
 </body>

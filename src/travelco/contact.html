@@ -94,7 +94,7 @@
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
-                                    <div class="pull-right" style="margin-top: 2em;" id="login">
+                                    <div class="pull-right" style="margin-top: -1.5em;" id="login">
 
                                     </div>
                                 </div>
@@ -342,31 +342,53 @@
 
         <script>
             $(document).ready(function () {
-                const dataLogin = localStorage.getItem("dataLoginClient");
+                const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
                 let str = "";
                 if (!dataLogin) {
-                    str += `<div id="login-right">
+                str += `<div id="login-right">
                             <a href="login.html">Login</a>
                             <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
                             <a href="register.html">Register</a>
                         </div>`;
-                } else {
-                    str += `
-                <div style="display: flex;">
-                    <a style="margin: 0 10px;" href="myaccount.html" >Profile</a>
-                    <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
-                    <button onclick="killToken()"style="margin: 0 10px;background: none;font-weight: 500;">Logout</button>
-                </div>
-                `;
-                }
                 $("#login").html(str);
+            } else {
+                const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+                $.ajax(apiUrl, {
+                    type: "GET",
+                    contentType: "application/json",
+                    dataType: "json",
+                    headers: {
+                        Authorization: 'Bearer ' + dataLogin.token
+                    }, success: function (result) {
+                        const data = result.data;
+                        str += `
+                        <ul class="navbar-nav navbar-left">
+                        <li class="nav-item dropdown no-arrow">
+                            <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
+                                    href="#"><img class="img-profile rounded-circle" src="images/none_avatar.png" style="max-width: 40px;border-radius: 50%!important;">   <span>${data.displayName}</span></a>
+                            <ul class="dropdown-menu" style="background-color: white;color: gray">
+                                <li><a href="myaccount.html">
+                                    Profile
+                                </a></li>
+                                <li><a id="killToken" href="login.html">
+                                    Logout
+                                </a></li>
+                            </ul>
+                        </li>
+                        </li>
+                        </ul>
+                        `;
+                        $("#login").html(str);
+                    }
+                });
+            }
             });
         </script>
         <script>
             function killToken() {
                 localStorage.removeItem("dataLoginClient");
                 localStorage.removeItem("booking");
-                document.location.pathname = '/';
+                document.location.pathname = '/tour';
             };
         </script>
 </body>

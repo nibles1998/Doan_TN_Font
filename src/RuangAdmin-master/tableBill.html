@@ -389,8 +389,8 @@
 
             <script>
                 $(document).ready(function () {
-                    const apiUrlUser = 'http://api.nibles-tour.ga/user/s';
-                    const apiUrlTour = 'http://api.nibles-tour.ga/tour/s';
+                    const apiUrlUser = 'http://localhost:4444/user/s';
+                    const apiUrlTour = 'http://localhost:4444/tour/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
                         url: apiUrlUser,
@@ -433,7 +433,7 @@
 
             <script>
                 $(document).ready(function () {
-                    const apiUrl = 'http://api.nibles-tour.ga/bill/s';
+                    const apiUrl = 'http://localhost:4444/bill/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
                         url: apiUrl,
@@ -459,7 +459,7 @@
                                 }
                             }
 
-                            const apiUrlUser = `http://api.nibles-tour.ga/user/${i.userId}`;
+                            const apiUrlUser = `http://localhost:4444/user/${i.userId}`;
                             let userName = "";
                             await $.ajax({
                                 url: apiUrlUser,
@@ -472,7 +472,7 @@
                                     userName += data.data.fullName;
                                 }
                             });
-                            const apiUrlTour = `http://api.nibles-tour.ga/tour/${i.tourId}`;
+                            const apiUrlTour = `http://localhost:4444/tour/${i.tourId}`;
                             let tourName = "";
                             await $.ajax({
                                 url: apiUrlTour,
@@ -514,7 +514,7 @@
                 function getData(index) {
                     localStorage.setItem("billId", $(`#billId-${index}`).html());
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-                    const apiUrl = `http://api.nibles-tour.ga/bill/${localStorage.getItem("billId")}`;
+                    const apiUrl = `http://localhost:4444/bill/${localStorage.getItem("billId")}`;
                     $.ajax({
                         url: apiUrl,
                         type: "GET",
@@ -549,7 +549,7 @@
 
                 function updateBillInfo() {
                     const billId = localStorage.getItem("billId");
-                    const apiUrl = `http://api.nibles-tour.ga/bill/${billId}`;
+                    const apiUrl = `http://localhost:4444/bill/${billId}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const selectBoxPaied = document.getElementById("hasPaied-update");
                     const hasPaied = selectBoxPaied.options[selectBoxPaied.selectedIndex].value;
@@ -585,7 +585,7 @@
                 }
 
                 function createBill() {
-                    const apiUrl = 'http://api.nibles-tour.ga/bill';
+                    const apiUrl = 'http://localhost:4444/bill';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const selectBox = document.getElementById("hasPaied-create");
                     const hasPaied = selectBox.options[selectBox.selectedIndex].value;
@@ -619,7 +619,7 @@
                 }
 
                 function deleteBill() {
-                    const apiUrl = `http://api.nibles-tour.ga/bill/${localStorage.getItem("billId")}`;
+                    const apiUrl = `http://localhost:4444/bill/${localStorage.getItem("billId")}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax(apiUrl, {
                         type: "DELETE",
@@ -645,7 +645,7 @@
                     const selectBox = document.getElementById("tourId-create");
                     const id = selectBox.options[selectBox.selectedIndex].value;
 
-                    const apiUrl = `http://api.nibles-tour.ga/tour/${id}`;
+                    const apiUrl = `http://localhost:4444/tour/${id}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
                         url: apiUrl,

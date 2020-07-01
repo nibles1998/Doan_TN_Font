@@ -104,12 +104,27 @@
                                         <li><a class="smoth-scroll" href="about.html">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
-                                    <div class="pull-right" style="margin-top: 2em;" id="login">
+                                    <div class="pull-right" style="margin-top: -1.5em;" id="login">
                                         <div style="display: flex;">
-                                            <a style="margin: 0 10px;" href="myaccount.html">Profile</a>
-                                            <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
-                                            <button onclick="killToken()"
-                                                style="margin: 0 10px;background: none;font-weight: 500;">Logout</button>
+                                            <ul class="navbar-nav navbar-left">
+                                                <li class="nav-item dropdown no-arrow">
+                                                <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
+                                                        href="#"><img class="img-profile rounded-circle"
+                                                            src="images/none_avatar.png"
+                                                            style="max-width: 40px;border-radius: 50%!important;">
+                                                        <span>${data.displayName}</span></a>
+                                                    <ul class="dropdown-menu"
+                                                        style="background-color: white;color: gray">
+                                                        <li><a href="myaccount.html">
+                                                                Profile
+                                                            </a></li>
+                                                        <li><a id="killToken" href="login.html">
+                                                                Logout
+                                                            </a></li>
+                                                    </ul>
+                                                </li>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -373,7 +388,7 @@
         $(document).ready(function () {
             const booking = JSON.parse(localStorage.getItem("booking"));
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
-            const apiUrlUser = `http://api.nibles-tour.ga/user/${dataLogin.userId}`;
+            const apiUrlUser = `http://localhost:4444/user/${dataLogin.userId}`;
             $.ajax(apiUrlUser, {
                 type: "GET",
                 contentType: "application/json",
@@ -425,11 +440,11 @@
 
     <script>
         function goHome() {
-            document.location.pathname = '/index.html';
+            document.location.pathname = '/tour/index.html';
         }
 
         function createBill() {
-            const apiUrl = 'http://api.nibles-tour.ga/bill';
+            const apiUrl = 'http://localhost:4444/bill';
             const booking = JSON.parse(localStorage.getItem("booking"));
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
             const selectBox = document.getElementById("paymentMethod");
@@ -454,11 +469,11 @@
                 },
                 success: function async(data) {
                     alert(data.message);
-                    document.location.pathname = '/index.html';
+                    document.location.pathname = '/tour/index.html';
                 },
                 error: function (error) {
                     alert(error.responseJSON.message);
-                    document.location.pathname = '/index.html';
+                    document.location.pathname = '/tour/index.html';
                 }
             });
         }
@@ -467,7 +482,7 @@
         function killToken() {
             localStorage.removeItem("dataLoginClient");
             localStorage.removeItem("booking");
-            document.location.pathname = '/';
+            document.location.pathname = '/tour';
         };
     </script>
 </body>
