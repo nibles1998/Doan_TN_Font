@@ -441,7 +441,7 @@
 
     <script>
         function goHome() {
-            document.location.pathname = '/tour/index.html';
+            document.location.pathname = '/index.html';
         }
 
         function createBill() {
@@ -470,11 +470,11 @@
                 },
                 success: function async(data) {
                     alert(data.message);
-                    document.location.pathname = '/tour/index.html';
+                    document.location.pathname = '/index.html';
                 },
                 error: function (error) {
                     alert(error.responseJSON.message);
-                    document.location.pathname = '/tour/index.html';
+                    document.location.pathname = '/index.html';
                 }
             });
         }
