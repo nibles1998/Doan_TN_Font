@@ -1051,7 +1051,7 @@
 
                 localStorage.setItem("booking", JSON.stringify(booking));
 
-                document.location.pathname = '/tour/confirmation.html';
+                document.location.pathname = '/confirmation.html';
             } else {
                 alert("Cần đăng nhập để đặt tour!");
             }
@@ -1061,7 +1061,7 @@
         function killToken() {
             localStorage.removeItem("dataLoginClient");
             localStorage.removeItem("booking");
-            document.location.pathname = '/tour';
+            document.location.pathname = '/';
         };
     </script>
 </body>
