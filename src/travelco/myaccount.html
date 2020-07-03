@@ -422,7 +422,7 @@
     <script>
         $(document).ready(function () {
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
-            const apiUrlUser = `http://localhost:4444/user/${dataLogin.userId}`;
+            const apiUrlUser = `api.nibles-tour.ga/user/${dataLogin.userId}`;
             $.ajax(apiUrlUser, {
                 type: "GET",
                 contentType: "application/json",
@@ -440,7 +440,7 @@
                     }
                     let imgSrc = '';
                     if (data.photo !== "") {
-                        imgSrc += `http://localhost:4444/${data.photo}`;
+                        imgSrc += `api.nibles-tour.ga/${data.photo}`;
                     } else {
                         imgSrc += 'images/none_avatar.png';
                     }
@@ -606,7 +606,7 @@
                     $("#login").html(loginInfo);
                     let listTour;
 
-                    const apiUrlTour = `http://localhost:4444/tour/s`;
+                    const apiUrlTour = `api.nibles-tour.ga/tour/s`;
                     $.ajax(apiUrlTour, {
                         type: "GET",
                         contentType: "application/json",
@@ -616,7 +616,7 @@
                         }
                     });
 
-                    const apiUrlBill = `http://localhost:4444/bill/s?userid=${dataLogin.userId}`;
+                    const apiUrlBill = `api.nibles-tour.ga/bill/s?userid=${dataLogin.userId}`;
                     $.ajax(apiUrlBill, {
                         type: "GET",
                         contentType: "application/json",
@@ -664,7 +664,7 @@
                                 <div class="booking-info">
                                         <div class="col-md-2">
                                             <div class="booking-detail">
-                                                <img src="http://localhost:4444/${tourInfo.photo}">
+                                                <img src="api.nibles-tour.ga/${tourInfo.photo}">
                                             </div>
                                         </div>
                                         <div class="col-md-7">
@@ -774,7 +774,7 @@
     <script>
         function getData() {
             const authenticate = JSON.parse(localStorage.getItem("dataLoginClient"));
-            const apiUrl = `http://localhost:4444/user/${authenticate.userId}`;
+            const apiUrl = `api.nibles-tour.ga/user/${authenticate.userId}`;
             $.ajax({
                 url: apiUrl,
                 type: "GET",
@@ -789,7 +789,7 @@
                     if (info.photo === "") {
                         $("#image-pre-update").attr("src", '');
                     } else {
-                        $("#image-pre-update").attr("src", `http://localhost:4444/${info.photo}`);
+                        $("#image-pre-update").attr("src", `api.nibles-tour.ga/${info.photo}`);
                     }
                     $("#gender-update").val(`${info.gender}`);
                     $("#fullName-update").val(info.fullName);
@@ -810,7 +810,7 @@
         function updateUserInfo(event) {
             event.preventDefault();
             const authenticate = JSON.parse(localStorage.getItem("dataLoginClient"));
-            const apiUrl = `http://localhost:4444/user/${authenticate.userId}`;
+            const apiUrl = `api.nibles-tour.ga/user/${authenticate.userId}`;
             const selectBoxGender = document.getElementById("gender-update");
             const gender = selectBoxGender.options[selectBoxGender.selectedIndex].value;
             const userData = new FormData(event.target);
@@ -839,7 +839,7 @@
     <script>
         function payForBill(_id) {
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
-            const apiUrl = `http://localhost:4444/bill/${_id}`;
+            const apiUrl = `api.nibles-tour.ga/bill/${_id}`;
             $.ajax(apiUrl, {
                 type: "PUT",
                 data: JSON.stringify({ hasPaied: true }),
@@ -860,7 +860,7 @@
         }
         function cancleBill(_id) {
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
-            const apiUrl = `http://localhost:4444/bill/${_id}`;
+            const apiUrl = `api.nibles-tour.ga/bill/${_id}`;
             $.ajax(apiUrl, {
                 type: "PUT",
                 data: JSON.stringify({ hasCancel: true }),

@@ -211,7 +211,7 @@
         <script>
             const displayName = JSON.parse(localStorage.getItem("displayName"));
             const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
-            const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+            const apiUrl = `api.nibles-tour.ga/user/${dataLogin.userId}`;
             $.ajax(apiUrl, {
                 type: "GET",
                 contentType: "application/json",
@@ -237,7 +237,7 @@
             `;
                     } else {
                         menuUser += `
-                <img class="img-profile rounded-circle" src="http://localhost:4444/${data.photo}" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="api.nibles-tour.ga/${data.photo}" style="max-width: 60px">
                 <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small">${displayName}</span>
             `;
                     }
@@ -249,7 +249,7 @@
         <!---- Get data for Dashboard ---->
         <script type="text/javascript">
             const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-            const apiUrlUser = `http://localhost:4444/user/${authenticate.userId}`;
+            const apiUrlUser = `api.nibles-tour.ga/user/${authenticate.userId}`;
             $.ajax({
                 url: apiUrlUser,
                 type: "GET",
@@ -261,7 +261,7 @@
             }).done((result) => {
                 const data = result.data;
                 if (data.photo !== '') {
-                    $("#photo-info").attr("src", `http://localhost:4444/${data.photo}`);
+                    $("#photo-info").attr("src", `api.nibles-tour.ga/${data.photo}`);
                 } else {
                     if (data.gender) {
                         $("#photo-info").attr("src", `img/boy.png`);

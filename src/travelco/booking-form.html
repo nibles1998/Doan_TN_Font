@@ -375,7 +375,7 @@
                 $("#login").html(str);
                 $("#formComment").html(formComment);
                 $(`#one-star-create`).prop('checked', true);
-                const apiUrlReviewAll = 'http://localhost:4444/review/s';
+                const apiUrlReviewAll = 'api.nibles-tour.ga/review/s';
                 $.ajax(apiUrlReviewAll, {
                     type: "GET",
                     contentType: "application/json",
@@ -387,7 +387,7 @@
                             if (result[i].tourId === tourId) {
                                 let userDisplayName;
                                 let srcPhoto;
-                                const apiUrlUser = `http://localhost:4444/user/${result[i].userId}`;
+                                const apiUrlUser = `api.nibles-tour.ga/user/${result[i].userId}`;
                                 $.ajax(apiUrlUser, {
                                     type: "GET",
                                     contentType: "application/json",
@@ -400,7 +400,7 @@
                                 });
                                 let mainPhoto = '';
                                 if (srcPhoto !== "") {
-                                    mainPhoto += `http://localhost:4444/${srcPhoto}`;
+                                    mainPhoto += `api.nibles-tour.ga/${srcPhoto}`;
                                 } else {
                                     mainPhoto += 'images/none_avatar.png';
                                 }
@@ -476,7 +476,7 @@
                     }
                 });
             } else {
-                const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+                const apiUrl = `api.nibles-tour.ga/user/${dataLogin.userId}`;
                 $.ajax(apiUrl, {
                     type: "GET",
                     contentType: "application/json",
@@ -492,7 +492,7 @@
                         if (data.photo === "") {
                             imgSrc += 'images/none_avatar.png';
                         } else {
-                            imgSrc += `http://localhost:4444/${data.photo}`;
+                            imgSrc += `api.nibles-tour.ga/${data.photo}`;
                         }
                         str += `
                         <ul class="navbar-nav navbar-left">
@@ -545,7 +545,7 @@
                         $(`#one-star-create`).prop('checked', true);
                     }
                 });
-                const apiUrlReviewAll = 'http://localhost:4444/review/s';
+                const apiUrlReviewAll = 'api.nibles-tour.ga/review/s';
                 $.ajax(apiUrlReviewAll, {
                     type: "GET",
                     contentType: "application/json",
@@ -557,7 +557,7 @@
                             if (result[i].tourId === tourId) {
                                 let userDisplayName;
                                 let srcPhoto;
-                                const apiUrlUser = `http://localhost:4444/user/${result[i].userId}`;
+                                const apiUrlUser = `api.nibles-tour.ga/user/${result[i].userId}`;
                                 $.ajax(apiUrlUser, {
                                     type: "GET",
                                     contentType: "application/json",
@@ -570,7 +570,7 @@
                                 });
                                 let mainPhoto = '';
                                 if (srcPhoto !== "") {
-                                    mainPhoto += `http://localhost:4444/${srcPhoto}`;
+                                    mainPhoto += `api.nibles-tour.ga/${srcPhoto}`;
                                 } else {
                                     mainPhoto += 'images/none_avatar.png';
                                 }
@@ -682,7 +682,7 @@
                 const comment = $("#userComment-create").val();
                 if (comment !== '') {
                     review.comment = comment;
-                    const apiUrlReviewCreate = `http://localhost:4444/review`;
+                    const apiUrlReviewCreate = `api.nibles-tour.ga/review`;
                     $.ajax(apiUrlReviewCreate, {
                         type: "POST",
                         data: JSON.stringify(review),
@@ -692,7 +692,7 @@
                             Authorization: 'Bearer ' + dataLogin.token
                         },
                         success: function async(data) {
-                            const apiUrlReviewAll = 'http://localhost:4444/review/s';
+                            const apiUrlReviewAll = 'api.nibles-tour.ga/review/s';
                             $.ajax(apiUrlReviewAll, {
                                 type: "GET",
                                 contentType: "application/json",
@@ -707,7 +707,7 @@
                                         if (result[i].tourId === tourId) {
                                             let userDisplayName;
                                             let srcPhoto;
-                                            const apiUrlUser = `http://localhost:4444/user/${result[i].userId}`;
+                                            const apiUrlUser = `api.nibles-tour.ga/user/${result[i].userId}`;
                                             $.ajax(apiUrlUser, {
                                                 type: "GET",
                                                 contentType: "application/json",
@@ -723,7 +723,7 @@
                                             });
                                             let mainPhoto = '';
                                             if (srcPhoto !== "") {
-                                                mainPhoto += `http://localhost:4444/${srcPhoto}`;
+                                                mainPhoto += `api.nibles-tour.ga/${srcPhoto}`;
                                             } else {
                                                 mainPhoto += 'images/none_avatar.png';
                                             }
@@ -859,7 +859,7 @@
             const comment = $(`#userComment-view-${id}`).val();
             if (comment !== '') {
                 review.comment = comment;
-                const apiUrlReviewUpdate = `http://localhost:4444/review/${id}`;
+                const apiUrlReviewUpdate = `api.nibles-tour.ga/review/${id}`;
                 $.ajax(apiUrlReviewUpdate, {
                     type: "PUT",
                     data: JSON.stringify(review),
@@ -886,7 +886,7 @@
             const url = new URL(window.location.href);
             const searchParam = new URLSearchParams(url.search);
             const tourId = searchParam.get("id");
-            const apiUrl = `http://localhost:4444/review/${localStorage.getItem("reviewId")}`;
+            const apiUrl = `api.nibles-tour.ga/review/${localStorage.getItem("reviewId")}`;
             const authenticate = JSON.parse(localStorage.getItem("dataLoginClient"));
             $.ajax(apiUrl, {
                 type: "DELETE",
@@ -912,7 +912,7 @@
             const url = new URL(window.location.href);
             const searchParam = new URLSearchParams(url.search);
             const id = searchParam.get("id");
-            const searchFilterURL = `http://localhost:4444/tour/${id}`;
+            const searchFilterURL = `api.nibles-tour.ga/tour/${id}`;
             $.ajax(searchFilterURL, {
                 type: "GET",
                 contentType: "application/json",
@@ -924,7 +924,7 @@
                     str += `<div class="col-md-6">
                         <div class="booking-details">
                             <div class="col-md-5">
-                                <img src="http://localhost:4444/${data.photo}"/>
+                                <img src="api.nibles-tour.ga/${data.photo}"/>
                             </div>
                             <div class="col-md-7">
                                 <h3 class="Default-clr">Details</h3>

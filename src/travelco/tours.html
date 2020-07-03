@@ -307,7 +307,7 @@
                         </div>`;
                 $("#login").html(str);
             } else {
-                const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+                const apiUrl = `api.nibles-tour.ga/user/${dataLogin.userId}`;
                 $.ajax(apiUrl, {
                     type: "GET",
                     contentType: "application/json",
@@ -320,7 +320,7 @@
                         if (data.photo === "") {
                             imgSrc += 'images/none_avatar.png';
                         } else {
-                            imgSrc += `http://localhost:4444/${data.photo}`;
+                            imgSrc += `api.nibles-tour.ga/${data.photo}`;
                         }
                         str += `
                         <ul class="navbar-nav navbar-left">
@@ -351,7 +351,7 @@
             const searchParam = new URLSearchParams(url.search);
             const begin = searchParam.get("begin");
             const location = searchParam.get("location");
-            const searchFilterURL = `http://localhost:4444/tour/s?${location ? `location=${location}&` : ""}${begin ? `active=${begin}` : ""}`
+            const searchFilterURL = `api.nibles-tour.ga/tour/s?${location ? `location=${location}&` : ""}${begin ? `active=${begin}` : ""}`
             $.ajax(searchFilterURL, {
                 type: "GET",
                 contentType: "application/json",
@@ -366,7 +366,7 @@
                         str += `
                         <div class="col-md-6">
                             <div class="tours-info" style="display: flex; flex-direction: column;">
-                                <img class="w-100" height="400px" src="http://localhost:4444/${i.photo}">
+                                <img class="w-100" height="400px" src="api.nibles-tour.ga/${i.photo}">
                                 <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
                                 <div class="tour-details">
                                     <h4 class="tour-title">${i.tourName}</h4>
@@ -388,13 +388,13 @@
     </script>
     <script>
         function getTourDetail(id) {
-            window.location.assign(`http://localhost:4445/tour/booking-form.html?id=${id}`);
+            document.location.pathname = `/booking-form.html?id=${id}`;
         }
     </script>
     <script>
         function getTourList(event) {
             event.preventDefault();
-            let url = "http://localhost:4444/tour/s?"
+            let url = "api.nibles-tour.ga/tour/s?"
             let begin, location;
 
             let selectTime = document.getElementById("startedDate-search");
@@ -422,7 +422,7 @@
                             str += `
                         <div class="col-md-6">
                             <div class="tours-info" style="display: flex; flex-direction: column;">
-                                <img class="w-100" height="400px" src="http://localhost:4444/${i.photo}">
+                                <img class="w-100" height="400px" src="api.nibles-tour.ga/${i.photo}">
                                 <div class="tour-cost">${Number(i.price).toLocaleString()} VND</div>
                                 <div class="tour-details">
                                     <h4 class="tour-title">${i.tourName}</h4>

@@ -452,7 +452,7 @@
             <script>
                 const displayName = JSON.parse(localStorage.getItem("displayName"));
                 const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
-                const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+                const apiUrl = `api.nibles-tour.ga/user/${dataLogin.userId}`;
                 $.ajax(apiUrl, {
                     type: "GET",
                     contentType: "application/json",
@@ -478,7 +478,7 @@
             `;
                         } else {
                             menuUser += `
-                <img class="img-profile rounded-circle" src="http://localhost:4444/${data.photo}" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="api.nibles-tour.ga/${data.photo}" style="max-width: 60px">
                 <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small">${displayName}</span>
             `;
                         }
@@ -489,8 +489,8 @@
 
             <script>
                 $(document).ready(function () {
-                    const apiUrlCompany = 'http://localhost:4444/company/s';
-                    const apiUrlTypeTour = 'http://localhost:4444/typetour/s';
+                    const apiUrlCompany = 'api.nibles-tour.ga/company/s';
+                    const apiUrlTypeTour = 'api.nibles-tour.ga/typetour/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
                         url: apiUrlCompany,
@@ -535,7 +535,7 @@
 
             <script>
                 $(document).ready(function () {
-                    const apiUrl = 'http://localhost:4444/tour/s';
+                    const apiUrl = 'api.nibles-tour.ga/tour/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
                         url: apiUrl,
@@ -550,8 +550,8 @@
                         const data = result.data;
                         let currentIndex = 0;
                         for (const i of data) {
-                            const apiUrlCompany = `http://localhost:4444/company/${i.companyId}`;
-                            const apiUrlTypeTour = `http://localhost:4444/typetour/${i.typeTours[0].id}`;
+                            const apiUrlCompany = `api.nibles-tour.ga/company/${i.companyId}`;
+                            const apiUrlTypeTour = `api.nibles-tour.ga/typetour/${i.typeTours[0].id}`;
                             let companyName = "";
                             await $.ajax({
                                 url: apiUrlCompany,
@@ -581,7 +581,7 @@
                                 + '</td><td>'
                                 + `<button id="btnUpdate-${currentIndex}" type="button" onclick="getData(${currentIndex})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-Update">Update</button>`
                                 + '</td>'
-                                + `</td><td><img class="w-100" src="http://localhost:4444/${i.photo}"/>`
+                                + `</td><td><img class="w-100" src="api.nibles-tour.ga/${i.photo}"/>`
                                 + `<td><span id="tourId-${currentIndex}">` + i.id
                                 + '</td><td>' + i.tourCode
                                 + '</td><td> ' + i.tourName
@@ -612,7 +612,7 @@
                 function getData(index) {
                     localStorage.setItem("tourId", $(`#tourId-${index}`).html());
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-                    const apiUrl = `http://localhost:4444/tour/${localStorage.getItem("tourId")}`;
+                    const apiUrl = `api.nibles-tour.ga/tour/${localStorage.getItem("tourId")}`;
                     $.ajax({
                         url: apiUrl,
                         type: "GET",
@@ -623,7 +623,7 @@
                         dataType: "json",
                         success: async function (data) {
                             const info = data.data;
-                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour/s`;
+                            const apiUrlTour_TypeTour = `api.nibles-tour.ga/tour_typetour/s`;
                             let typeTour = '';
                             await $.ajax({
                                 url: apiUrlTour_TypeTour,
@@ -641,7 +641,7 @@
                                     }
                                 }
                             });
-                            $("#image-pre-update").attr("src", `http://localhost:4444/${info.photo}`);
+                            $("#image-pre-update").attr("src", `api.nibles-tour.ga/${info.photo}`);
                             $("#tourCode-update").val(info.tourCode);
                             $("#tourName-update").val(info.tourName);
                             $("#location-update").val(info.location);
@@ -668,7 +668,7 @@
 
                 function updateTourInfo(event) {
                     event.preventDefault();
-                    const apiUrl = `http://localhost:4444/tour/${localStorage.getItem("tourId")}`;
+                    const apiUrl = `api.nibles-tour.ga/tour/${localStorage.getItem("tourId")}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const selectBoxCompany = document.getElementById("company-update");
                     const company = selectBoxCompany.options[selectBoxCompany.selectedIndex].value;
@@ -683,7 +683,7 @@
                             Authorization: 'Bearer ' + authenticate.token
                         },
                         success: async function (result) {
-                            const apiUrlTour_TypeTourGetId = `http://localhost:4444/tour_typetour/s?tourid=${localStorage.getItem("tourId")}`;
+                            const apiUrlTour_TypeTourGetId = `api.nibles-tour.ga/tour_typetour/s?tourid=${localStorage.getItem("tourId")}`;
                             let tour_TypeTourId = '';
                             await $.ajax(apiUrlTour_TypeTourGetId, {
                                 type: "GET",
@@ -698,7 +698,7 @@
                                     }
                                 }
                             });
-                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour/${tour_TypeTourId}`;
+                            const apiUrlTour_TypeTour = `api.nibles-tour.ga/tour_typetour/${tour_TypeTourId}`;
                             const selectBoxTypeTour = document.getElementById("typeTour-update");
                             const typeTour = selectBoxTypeTour.options[selectBoxTypeTour.selectedIndex].value;
                             const tour_TypeTour = {
@@ -731,7 +731,7 @@
 
                 function createTour(event) {
                     event.preventDefault();
-                    const apiUrl = 'http://localhost:4444/tour';
+                    const apiUrl = 'api.nibles-tour.ga/tour';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const selectBoxCompany = document.getElementById("company-create");
                     const company = selectBoxCompany.options[selectBoxCompany.selectedIndex].value;
@@ -746,7 +746,7 @@
                         processData: false,
                         contentType: false,
                         success: function (data) {
-                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour`;
+                            const apiUrlTour_TypeTour = `api.nibles-tour.ga/tour_typetour`;
                             const selectBoxTypeTour = document.getElementById("typeTour-update");
                             const typeTour = selectBoxTypeTour.options[selectBoxTypeTour.selectedIndex].value;
                             const tour_TypeTour = {
@@ -776,7 +776,7 @@
                 }
 
                 function deleteTour() {
-                    const apiUrl = `http://localhost:4444/tour/${localStorage.getItem("tourId")}`;
+                    const apiUrl = `api.nibles-tour.ga/tour/${localStorage.getItem("tourId")}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax(apiUrl, {
                         type: "DELETE",
@@ -786,7 +786,7 @@
                             Authorization: 'Bearer ' + authenticate.token
                         },
                         success: async function (data) {
-                            const apiUrlTour_TypeTour = `http://localhost:4444/tour_typetour/s?tourid=${localStorage.getItem("tourId")}`;
+                            const apiUrlTour_TypeTour = `api.nibles-tour.ga/tour_typetour/s?tourid=${localStorage.getItem("tourId")}`;
                             await $.ajax({
                                 url: apiUrlTour_TypeTour,
                                 type: "GET",
@@ -797,7 +797,7 @@
                                 dataType: "json",
                                 success: function (result) {
                                     for (const type of result.data) {
-                                        const apiUrlTour_TypeTourDelete = `http://localhost:4444/tour_typetour/${type.id}`;
+                                        const apiUrlTour_TypeTourDelete = `api.nibles-tour.ga/tour_typetour/${type.id}`;
                                         $.ajax(apiUrlTour_TypeTourDelete, {
                                             type: "DELETE",
                                             contentType: "application/json",

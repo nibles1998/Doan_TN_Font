@@ -352,7 +352,7 @@
                         </div>`;
                     $("#login").html(str);
                 } else {
-                    const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+                    const apiUrl = `api.nibles-tour.ga/user/${dataLogin.userId}`;
                     $.ajax(apiUrl, {
                         type: "GET",
                         contentType: "application/json",
@@ -365,7 +365,7 @@
                             if (data.photo === "") {
                                 imgSrc += 'images/none_avatar.png';
                             } else {
-                                imgSrc += `http://localhost:4444/${data.photo}`;
+                                imgSrc += `api.nibles-tour.ga/${data.photo}`;
                             }
                             str += `
                         <ul class="navbar-nav navbar-left">
