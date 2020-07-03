@@ -281,7 +281,7 @@
                         </div>`;
                 $("#login").html(str);
             } else {
-                const apiUrl = `api.nibles-tour.ga/user/${dataLogin.userId}`;
+                const apiUrl = `http://api.nibles-tour.ga/user/${dataLogin.userId}`;
                 $.ajax(apiUrl, {
                     type: "GET",
                     contentType: "application/json",
@@ -294,7 +294,7 @@
                         if (data.photo === "") {
                             imgSrc += 'images/none_avatar.png';
                         } else {
-                            imgSrc += `api.nibles-tour.ga/${data.photo}`;
+                            imgSrc += `http://api.nibles-tour.ga/${data.photo}`;
                         }
                         str += `
                         <ul class="navbar-nav navbar-left">
@@ -322,7 +322,7 @@
     <script>
         $(document).ready(function () {
             const now = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`;
-            const apiUrl = `api.nibles-tour.ga/tour/s?active=${now}`;
+            const apiUrl = `http://api.nibles-tour.ga/tour/s?active=${now}`;
             $.ajax(apiUrl, {
                 type: "GET",
                 contentType: "application/json",
@@ -334,7 +334,7 @@
                         str += `<h3 style="text-align: center;">Not Found</h3>`
                     } else {
                         for (const i of data) {
-                            const apirUrlReview = `api.nibles-tour.ga/review/s?tourid=${i.id}`;
+                            const apirUrlReview = `http://api.nibles-tour.ga/review/s?tourid=${i.id}`;
                             $.ajax(apirUrlReview, {
                                 type: "GET",
                                 contentType: "application/json",
@@ -353,7 +353,7 @@
                                 <div class="activity-contnet">
                                     <div class="col-md-4">
                                         <div class="listitem2" style="display: flex; flex-direction: column;">
-                                            <img class="w-100" height="250px" src="api.nibles-tour.ga/${i.photo}" alt=""></a>                     
+                                            <img class="w-100" height="250px" src="http://api.nibles-tour.ga/${i.photo}" alt=""></a>                     
                                         </div>
                                     </div>
                                     <div class="col-md-8 ">
@@ -397,7 +397,7 @@
     <script>
         function getTourList(event) {
             event.preventDefault();
-            let url = "api.nibles-tour.ga/tour/s?"
+            let url = "http://api.nibles-tour.ga/tour/s?"
             let begin, location;
 
             location = $("#location-search").val();
@@ -420,7 +420,7 @@
                                 <div class="activity-contnet">
                                     <div class="col-md-4">
                                         <div class="listitem2" style="display: flex; flex-direction: column;">
-                                            <img class="w-100" height="250px" src="api.nibles-tour.ga/${i.photo}" alt=""></a>                     
+                                            <img class="w-100" height="250px" src="http://api.nibles-tour.ga/${i.photo}" alt=""></a>                     
                                         </div>
                                     </div>
                                     <div class="col-md-8 ">

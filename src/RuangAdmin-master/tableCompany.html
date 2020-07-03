@@ -313,7 +313,7 @@
             <script>
                 const displayName = JSON.parse(localStorage.getItem("displayName"));
                 const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
-                const apiUrl = `api.nibles-tour.ga/user/${dataLogin.userId}`;
+                const apiUrl = `http://api.nibles-tour.ga/user/${dataLogin.userId}`;
                 $.ajax(apiUrl, {
                     type: "GET",
                     contentType: "application/json",
@@ -339,7 +339,7 @@
             `;
                         } else {
                             menuUser += `
-                <img class="img-profile rounded-circle" src="api.nibles-tour.ga/${data.photo}" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="http://api.nibles-tour.ga/${data.photo}" style="max-width: 60px">
                 <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small">${displayName}</span>
             `;
                         }
@@ -350,7 +350,7 @@
 
             <script>
                 $(document).ready(function () {
-                    const apiUrl = 'api.nibles-tour.ga/company/s';
+                    const apiUrl = 'http://api.nibles-tour.ga/company/s';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax({
                         url: apiUrl,
@@ -390,7 +390,7 @@
                 function getData(index) {
                     localStorage.setItem("companyId", $(`#companyId-${index}`).html());
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-                    const apiUrl = `api.nibles-tour.ga/company/${localStorage.getItem("companyId")}`;
+                    const apiUrl = `http://api.nibles-tour.ga/company/${localStorage.getItem("companyId")}`;
                     $.ajax({
                         url: apiUrl,
                         type: "GET",
@@ -418,7 +418,7 @@
 
                 function updateCompanyInfo() {
                     const companyId = localStorage.getItem("companyId");
-                    const apiUrl = `api.nibles-tour.ga/company/${companyId}`;
+                    const apiUrl = `http://api.nibles-tour.ga/company/${companyId}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const companyInfo = {
                         companyName: $("#companyName-update").val(),
@@ -448,7 +448,7 @@
                 }
 
                 function createCompany() {
-                    const apiUrl = 'api.nibles-tour.ga/company';
+                    const apiUrl = 'http://api.nibles-tour.ga/company';
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     const companyInfo = {
                         companyName: $("#companyName-create").val(),
@@ -476,7 +476,7 @@
                 }
 
                 function deleteCompany() {
-                    const apiUrl = `api.nibles-tour.ga/company/${localStorage.getItem("companyId")}`;
+                    const apiUrl = `http://api.nibles-tour.ga/company/${localStorage.getItem("companyId")}`;
                     const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
                     $.ajax(apiUrl, {
                         type: "DELETE",
