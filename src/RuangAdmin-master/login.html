@@ -59,7 +59,7 @@
   <script type="text/javascript">
     $(('#btnLogin')).click(async (e) => {
       e.preventDefault();
-      const apiURL = 'api.nibles-tour.ga/user/login';
+      const apiURL = 'http://api.nibles-tour.ga/user/login';
       const email = $('#exampleInputEmail').val();
       const password = $('#exampleInputPassword').val();
       const account = {
@@ -75,7 +75,7 @@
           if (data && data.token) {
             localStorage.setItem("dataLogin", JSON.stringify(data))
           }
-          document.location.pathname = '/admin/dashboard.html';
+          document.location.pathname = '/dashboard.html';
         },
         error: function (error) {
           alert(error.responseJSON.message);
