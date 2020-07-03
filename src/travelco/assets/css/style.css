@@ -71,6 +71,46 @@ h6 {
     font-family: "Rubik", sans-serif;
 }
 
+.rating {
+    float:left;
+}
+.rating:not(:checked) > input {
+    position:absolute;
+    clip:rect(0, 0, 0, 0);
+}
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0, 0, 0, .5);
+}
+.rating:not(:checked) > label:before {
+    content: #9733;
+}
+.rating > input:checked ~ label {
+    color: #62ac1e;
+    text-shadow:1px 1px #62ac1e, 2px 2px #62ac1e, .1em .1em .2em rgba(0, 0, 0, .5);
+}
+.rating:not(:checked) > label:hover, .rating:not(:checked) > label:hover ~ label {
+    color: #62ac1e;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+}
+.rating> input:checked + label:hover, .rating> input:checked + label:hover ~ label, .rating> input:checked ~ label:hover, .rating> input:checked ~ label:hover ~ label, .rating> label:hover ~ input:checked ~ label {
+    color: #62ac1e;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+}
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+
 a {
     text-decoration: none;
     -webkit-transition: all 0.4s;
@@ -646,7 +686,7 @@ li.dropdown ul.dropdown-menu li a{
 
 
 
-.mainmenu .navbar-nav li .dropdown-menu a:hover,
+.mainmenu .navbar-nav li .dropdown-menu a:hover
  {
     border-bottom: 0;
     color: #66a91e;

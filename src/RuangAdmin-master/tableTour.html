@@ -110,8 +110,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                                <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small"></span>
+                                <div id="menu-user-info">
+
+                                </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
@@ -450,8 +451,40 @@
             <!-- Page level custom scripts -->
             <script>
                 const displayName = JSON.parse(localStorage.getItem("displayName"));
-                const userNameLogin = document.getElementById("userNameLogin");
-                userNameLogin.innerHTML = displayName;
+                const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
+                const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+                $.ajax(apiUrl, {
+                    type: "GET",
+                    contentType: "application/json",
+                    dataType: "json",
+                    headers: {
+                        Authorization: 'Bearer ' + dataLogin.token
+                    },
+                    async: false,
+                    success: function (user) {
+                        const data = user.data;
+                        const photo = data.photo;
+                        let menuUser = '';
+                        if (photo === "") {
+                            let type = '';
+                            if (data.gender) {
+                                type += 'img/boy.png';
+                            } else {
+                                type += 'img/girl.png';
+                            }
+                            menuUser += `
+                <img class="img-profile rounded-circle" src="${type}" style="max-width: 60px">
+                <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small">${displayName}</span>
+            `;
+                        } else {
+                            menuUser += `
+                <img class="img-profile rounded-circle" src="http://localhost:4444/${data.photo}" style="max-width: 60px">
+                <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small">${displayName}</span>
+            `;
+                        }
+                        $("#menu-user-info").html(menuUser);
+                    }
+                });
             </script>
 
             <script>

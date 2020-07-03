@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- RESPONSIVE CSS -->
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.6/css/star-rating.min.css" media="all"
+        rel="stylesheet" type="text/css" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -188,8 +190,46 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <hr>
+            <!-- Review -->
+            <div>
+                <!-- Form review -->
+                <div id="formComment">
+
+                </div>
+                <hr>
+                <!-- List all review -->
+                <div id="listReview">
+
+                </div>
+            </div>
+        </div>
     </section>
-    <hr style="full-width;">
+
+    <!-- Modal Delete -->
+    <div class="modal fade" id="exampleModalCenter-Delete" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>Do you want delete?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancel-modal" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteComment()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- START COMPANY DESIGN AREA -->
     <div class="company-logo-area  wow fadeInU">
         <div class="container">
@@ -287,19 +327,154 @@
     <script src="assets/js/color-switcher.js"></script>
     <!-- scripts js -->
     <script src="assets/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.6/js/star-rating.min.js"
+        type="text/javascript"></script>
 
     <!-- Script by me -->
     <script>
         $(document).ready(function () {
+            const url = new URL(window.location.href);
+            const searchParam = new URLSearchParams(url.search);
+            const tourId = searchParam.get("id");
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
+            let formComment = "";
             let str = "";
             if (!dataLogin) {
-                str += `<div id="login-right">
+                str += `<div style="margin-top: 3.5em;" id="login-right">
                             <a href="login.html">Login</a>
                             <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
                             <a href="register.html">Register</a>
                         </div>`;
+                formComment += `
+                        <form>
+                            <div class="row">
+                                <div style="text-align: center;" class="col-md-2">
+                                    <img style="border-radius: 50%!important;max-height: 80px; border:2px solid lavender;"
+                                        src="images/none_avatar.png">
+                                    <p><b>None Login</b></p>
+                                    <div class="rating" style="max-height:50px;">
+                                        <input type="radio" name="rating-create" value="5" id="five-star-create">
+                                        <label for="five-star-create"><span>&#9733</span></label>
+                                        <input type="radio" name="rating-create" value="4" id="four-star-create">
+                                        <label for="four-star-create"><span>&#9733</span></label>
+                                        <input type="radio" name="rating-create" value="3" id="three-star-create">
+                                        <label for="three-star-create"><span>&#9733</span></label>
+                                        <input type="radio" name="rating-create" value="2" id="two-star-create">
+                                        <label for="two-star-create"><span>&#9733</span></label>
+                                        <input type="radio" name="rating-create" value="1" id="one-star-create">
+                                        <label for="one-star-create"><span>&#9733</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea id="userComment-create" class="form-control ng-pristine ng-invalid ng-touched"></textarea>
+                                    <button class="btn btn-primary" type="button" onclick="comment()">Comment</button>
+                                </div>
+                            </div>
+                        </form>
+                `;
                 $("#login").html(str);
+                $("#formComment").html(formComment);
+                $(`#one-star-create`).prop('checked', true);
+                const apiUrlReviewAll = 'http://localhost:4444/review/s';
+                $.ajax(apiUrlReviewAll, {
+                    type: "GET",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+                        const result = data.data;
+                        let str = '';
+                        for (let i = result.length - 1; i >= 0; i--) {
+                            if (result[i].tourId === tourId) {
+                                let userDisplayName;
+                                let srcPhoto;
+                                const apiUrlUser = `http://localhost:4444/user/${result[i].userId}`;
+                                $.ajax(apiUrlUser, {
+                                    type: "GET",
+                                    contentType: "application/json",
+                                    dataType: "json",
+                                    async: false,
+                                    success: function (user) {
+                                        userDisplayName = user.data.displayName;
+                                        srcPhoto = user.data.photo;
+                                    }
+                                });
+                                let mainPhoto = '';
+                                if (srcPhoto !== "") {
+                                    mainPhoto += `http://localhost:4444/${srcPhoto}`;
+                                } else {
+                                    mainPhoto += 'images/none_avatar.png';
+                                }
+                                str += `
+                        <div>
+                            <!-- Left -->
+                            <div class="row">
+                                <div style="text-align: center;" class="col-md-2">
+                                    <img style="border-radius: 50%!important;max-height: 80px; border:2px solid lavender;"
+                                        src="${mainPhoto}">
+                                    <p><b>${userDisplayName}</b></p>
+                                </div>
+                                <!-- Body -->
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <!-- Star -->
+                                        <div class="col-md-12">
+                                            <div id="rating-view-${result[i]._id}" class="rating" style="max-height:50px;">
+                                                <input type="radio" name="rating${i}" value="5" id="five-star-view-${result[i]._id}">
+                                                <label for="five-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="4" id="four-star-view-${result[i]._id}">
+                                                <label for="four-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="3" id="three-star-view-${result[i]._id}">
+                                                <label for="three-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="2" id="two-star-view-${result[i]._id}">
+                                                <label for="two-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="1" id="one-star-view-${result[i]._id}">
+                                                <label for="one-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                            </div>
+                                        </div>
+                                        <!-- Comment -->
+                                        <div class="col-md-12">
+                                            <textarea id="userComment-view-${result[i]._id}" class="form-control ng-pristine ng-invalid ng-touched" readonly>${result[i].comment}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        `;
+                                $("#listReview").html(str);
+                                for (let i = 0; i < result.length; i++) {
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="one-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="two-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="three-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="four-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="five-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                    switch (result[i].rating) {
+                                        case 1:
+                                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="one-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                            break;
+                                        case 2:
+                                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="two-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                            break;
+                                        case 3:
+                                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="three-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                            break;
+                                        case 4:
+                                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="four-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                            break;
+                                        case 5:
+                                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="five-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                            break;
+                                    }
+                                }
+
+                            }
+                        }
+                        if (str === '') {
+                            str += 'Not comment!';
+                            $("#listReview").html(str);
+                        }
+                    }
+                });
             } else {
                 const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
                 $.ajax(apiUrl, {
@@ -309,17 +484,26 @@
                     headers: {
                         Authorization: 'Bearer ' + dataLogin.token
                     }, success: function (result) {
+                        const url = new URL(window.location.href);
+                        const searchParam = new URLSearchParams(url.search);
+                        const tourId = searchParam.get("id");
                         const data = result.data;
+                        let imgSrc = '';
+                        if (data.photo === "") {
+                            imgSrc += 'images/none_avatar.png';
+                        } else {
+                            imgSrc += `http://localhost:4444/${data.photo}`;
+                        }
                         str += `
                         <ul class="navbar-nav navbar-left">
                         <li class="nav-item dropdown no-arrow">
                             <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
-                                    href="#"><img class="img-profile rounded-circle" src="images/none_avatar.png" style="max-width: 40px;border-radius: 50%!important;">   <span>${data.displayName}</span></a>
+                                    href="#"><img class="img-profile rounded-circle" src="${imgSrc}" style="max-width: 40px;border-radius: 50%!important;">   <span>${data.displayName}</span></a>
                             <ul class="dropdown-menu" style="background-color: white;color: gray">
                                 <li><a href="myaccount.html">
                                     Profile
                                 </a></li>
-                                <li><a id="killToken" href="login.html">
+                                <li><a onclick="killToken()" href="login.html">
                                     Logout
                                 </a></li>
                             </ul>
@@ -328,11 +512,401 @@
                         </ul>
                         `;
                         $("#login").html(str);
+                        formComment += `
+                        <form>
+                            <input id="userIdComment" type="hidden" name="userId" value="${data.id}">
+                            <input id="tourIdComment" type="hidden" name="tourId" value="${tourId}">
+                            <div class="row">
+                                <div style="text-align: center;" class="col-md-2">
+                                    <img style="border-radius: 50%!important;max-height: 80px; border:2px solid lavender;"
+                                        src="${imgSrc}">
+                                    <p><b>${data.displayName}</b></p>
+                                    <div class="rating" style="max-height:50px;">
+                                        <input type="radio" name="rating-create" value="5" id="five-star-create">
+                                        <label for="five-star-create"><span>&#9733</span></label>
+                                        <input type="radio" name="rating-create" value="4" id="four-star-create">
+                                        <label for="four-star-create"><span>&#9733</span></label>
+                                        <input type="radio" name="rating-create" value="3" id="three-star-create">
+                                        <label for="three-star-create"><span>&#9733</span></label>
+                                        <input type="radio" name="rating-create" value="2" id="two-star-create">
+                                        <label for="two-star-create"><span>&#9733</span></label>
+                                        <input type="radio" name="rating-create" value="1" id="one-star-create">
+                                        <label for="one-star-create"><span>&#9733</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea id="userComment-create" class="form-control ng-pristine ng-invalid ng-touched"></textarea>
+                                    <button type="button" class="btn btn-success" onclick="comment()">Comment</button>
+                                </div>
+                            </div>
+                        </form>
+                        `;
+                        $("#formComment").html(formComment);
+                        $(`#one-star-create`).prop('checked', true);
+                    }
+                });
+                const apiUrlReviewAll = 'http://localhost:4444/review/s';
+                $.ajax(apiUrlReviewAll, {
+                    type: "GET",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+                        const result = data.data;
+                        let str = '';
+                        for (let i = result.length - 1; i >= 0; i--) {
+                            if (result[i].tourId === tourId) {
+                                let userDisplayName;
+                                let srcPhoto;
+                                const apiUrlUser = `http://localhost:4444/user/${result[i].userId}`;
+                                $.ajax(apiUrlUser, {
+                                    type: "GET",
+                                    contentType: "application/json",
+                                    dataType: "json",
+                                    async: false,
+                                    success: function (user) {
+                                        userDisplayName = user.data.displayName;
+                                        srcPhoto = user.data.photo;
+                                    }
+                                });
+                                let mainPhoto = '';
+                                if (srcPhoto !== "") {
+                                    mainPhoto += `http://localhost:4444/${srcPhoto}`;
+                                } else {
+                                    mainPhoto += 'images/none_avatar.png';
+                                }
+                                str += `
+                        <div>
+                            <!-- Left -->
+                            <div class="row">
+                                <div style="text-align: center;" class="col-md-2">
+                                    <img style="border-radius: 50%!important;max-height: 80px; border:2px solid lavender;"
+                                    src="${mainPhoto}">
+                                    <p><b>${userDisplayName}</b></p>
+                                </div>
+                                <!-- Body -->
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <!-- Star -->
+                                        <div class="col-md-12">
+                                            <div id="rating-view-${result[i]._id}" class="rating" style="max-height:50px;">
+                                                <input type="radio" name="rating${i}" value="5" id="five-star-view-${result[i]._id}">
+                                                <label for="five-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="4" id="four-star-view-${result[i]._id}">
+                                                <label for="four-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="3" id="three-star-view-${result[i]._id}">
+                                                <label for="three-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="2" id="two-star-view-${result[i]._id}">
+                                                <label for="two-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="1" id="one-star-view-${result[i]._id}">
+                                                <label for="one-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                            </div>
+                                        </div>`;
+                                if (result[i].userId === dataLogin.userId) {
+                                    str += `
+                                    <!-- Comment -->
+                                        <div class="col-md-12">
+                                            <textarea id="userComment-view-${result[i]._id}" class="form-control ng-pristine ng-invalid ng-touched" readonly>${result[i].comment}</textarea>
+                                            <div id="change-button-${result[i]._id}">
+                                                <button class="btn btn-primary" onclick="getReviewId('${result[i]._id}', '${i}', 'update')">Edit</button>
+                                                <button class="btn btn-danger" onclick="getReviewId('${result[i]._id}', '${i}', 'delete')" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        `;
+                                } else {
+                                    str += `
+                                    <!-- Comment -->
+                                        <div class="col-md-12">
+                                            <textarea id="userComment-view-${result[i]._id}" class="form-control ng-pristine ng-invalid ng-touched" readonly>${result[i].comment}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        `;
+                                }
+                            }
+                        }
+                        if (str === '') {
+                            str += 'Not comment!';
+                        }
+                        $("#listReview").html(str);
+                        for (let i = 0; i < result.length; i++) {
+                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="one-star-view-${result[i]._id}"]`).attr("disabled", true);
+                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="two-star-view-${result[i]._id}"]`).attr("disabled", true);
+                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="three-star-view-${result[i]._id}"]`).attr("disabled", true);
+                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="four-star-view-${result[i]._id}"]`).attr("disabled", true);
+                            $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="five-star-view-${result[i]._id}"]`).attr("disabled", true);
+                            switch (result[i].rating) {
+                                case 1:
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="one-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                    break;
+                                case 2:
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="two-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                    break;
+                                case 3:
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="three-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                    break;
+                                case 4:
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="four-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                    break;
+                                case 5:
+                                    $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="five-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                    break;
+                            }
+                        }
                     }
                 });
             }
         });
     </script>
+
+    <script>
+        function comment() {
+            const url = new URL(window.location.href);
+            const searchParam = new URLSearchParams(url.search);
+            const tourId = searchParam.get("id");
+            const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
+            if (!dataLogin) {
+                alert("Cần đăng nhập để đặt bình luận!");
+            } else {
+                const review = {};
+                review.userId = $("#userIdComment").val();
+                review.tourId = $("#tourIdComment").val();
+                review.rating = $('input[name="rating-create"]:checked').val();
+                const comment = $("#userComment-create").val();
+                if (comment !== '') {
+                    review.comment = comment;
+                    const apiUrlReviewCreate = `http://localhost:4444/review`;
+                    $.ajax(apiUrlReviewCreate, {
+                        type: "POST",
+                        data: JSON.stringify(review),
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + dataLogin.token
+                        },
+                        success: function async(data) {
+                            const apiUrlReviewAll = 'http://localhost:4444/review/s';
+                            $.ajax(apiUrlReviewAll, {
+                                type: "GET",
+                                contentType: "application/json",
+                                dataType: "json",
+                                headers: {
+                                    Authorization: 'Bearer ' + dataLogin.token
+                                },
+                                success: function (review) {
+                                    const result = review.data;
+                                    let str = '';
+                                    for (let i = result.length - 1; i >= 0; i--) {
+                                        if (result[i].tourId === tourId) {
+                                            let userDisplayName;
+                                            let srcPhoto;
+                                            const apiUrlUser = `http://localhost:4444/user/${result[i].userId}`;
+                                            $.ajax(apiUrlUser, {
+                                                type: "GET",
+                                                contentType: "application/json",
+                                                dataType: "json",
+                                                headers: {
+                                                    Authorization: 'Bearer ' + dataLogin.token
+                                                },
+                                                async: false,
+                                                success: function (user) {
+                                                    userDisplayName = user.data.displayName;
+                                                    srcPhoto = user.data.photo;
+                                                }
+                                            });
+                                            let mainPhoto = '';
+                                            if (srcPhoto !== "") {
+                                                mainPhoto += `http://localhost:4444/${srcPhoto}`;
+                                            } else {
+                                                mainPhoto += 'images/none_avatar.png';
+                                            }
+                                            str += `
+                        <div>
+                            <!-- Left -->
+                            <div class="row">
+                                <div style="text-align: center;" class="col-md-2">
+                                    <img style="border-radius: 50%!important;max-height: 80px; border:2px solid lavender;"
+                                    src="${mainPhoto}">
+                                    <p><b>${userDisplayName}</b></p>
+                                </div>
+                                <!-- Body -->
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <!-- Star -->
+                                        <div class="col-md-12">
+                                            <div id="rating-view-${result[i]._id}" class="rating" style="max-height:50px;">
+                                                <input type="radio" name="rating${i}" value="5" id="five-star-view-${result[i]._id}">
+                                                <label for="five-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="4" id="four-star-view-${result[i]._id}">
+                                                <label for="four-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="3" id="three-star-view-${result[i]._id}">
+                                                <label for="three-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="2" id="two-star-view-${result[i]._id}">
+                                                <label for="two-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                                <input type="radio" name="rating${i}" value="1" id="one-star-view-${result[i]._id}">
+                                                <label for="one-star-view-${result[i]._id}"><span>&#9733</span></label>
+                                            </div>
+                                        </div>`;
+                                            if (result[i].userId === dataLogin.userId) {
+                                                str += `
+                                    <!-- Comment -->
+                                        <div class="col-md-12">
+                                            <textarea id="userComment-view-${result[i]._id}" class="form-control ng-pristine ng-invalid ng-touched" readonly>${result[i].comment}</textarea>
+                                            <div id="change-button-${result[i]._id}">
+                                                <button class="btn btn-primary" onclick="getReviewId('${result[i]._id}', '${i}', 'update')">Edit</button>
+                                                <button class="btn btn-danger" onclick="getReviewId('${result[i]._id}', '${i}', 'delete')" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        `;
+                                            } else {
+                                                str += `
+                                    <!-- Comment -->
+                                        <div class="col-md-12">
+                                            <textarea id="userComment-view-${result[i]._id}" class="form-control ng-pristine ng-invalid ng-touched" readonly>${result[i].comment}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        `;
+                                            }
+                                        }
+                                    }
+                                    if (str === '') {
+                                        str += 'Not comment!';
+                                    }
+                                    $("#listReview").html(str);
+                                    for (let i = 0; i < result.length; i++) {
+                                        $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="one-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                        $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="two-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                        $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="three-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                        $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="four-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                        $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="five-star-view-${result[i]._id}"]`).attr("disabled", true);
+                                        switch (result[i].rating) {
+                                            case 1:
+                                                $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="one-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                                break;
+                                            case 2:
+                                                $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="two-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                                break;
+                                            case 3:
+                                                $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="three-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                                break;
+                                            case 4:
+                                                $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="four-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                                break;
+                                            case 5:
+                                                $(`#rating-view-${result[i]._id} > input:radio[name="rating${i}"][id="five-star-view-${result[i]._id}"]`).attr("checked", "checked");
+                                                break;
+                                        }
+                                    }
+                                    $(`#one-star-create`).prop('checked', true);
+                                    $("textarea#userComment-create").val('');
+                                }
+                            });
+                        },
+                        error: function (error) {
+                            alert(error.responseJSON.message);
+                        }
+                    });
+                } else {
+                    alert("Chưa nhập bình luận!");
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function getReviewId(id, index, action) {
+            localStorage.setItem("reviewId", id);
+            if (action === 'update') {
+                $(`#userComment-view-${id}`).attr("readonly", false);
+                $(`#rating-view-${id} > input:radio[name="rating${index}"][id="one-star-view-${id}"]`).attr("disabled", false);
+                $(`#rating-view-${id} > input:radio[name="rating${index}"][id="two-star-view-${id}"]`).attr("disabled", false);
+                $(`#rating-view-${id} > input:radio[name="rating${index}"][id="three-star-view-${id}"]`).attr("disabled", false);
+                $(`#rating-view-${id} > input:radio[name="rating${index}"][id="four-star-view-${id}"]`).attr("disabled", false);
+                $(`#rating-view-${id} > input:radio[name="rating${index}"][id="five-star-view-${id}"]`).attr("disabled", false);
+                let str = `
+                    <button class="btn btn-success" onclick="updateReview('${id}', '${index}')" >Edit</button>
+                    <button class="btn btn-warning" onclick="reverse()">Cancel</button>
+                `;
+                $(`#change-button-${id}`).html(str);
+            }
+        }
+
+        function updateReview(id, index) {
+            const url = new URL(window.location.href);
+            const searchParam = new URLSearchParams(url.search);
+            const tourId = searchParam.get("id");
+            const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
+            const review = {};
+            review.userId = dataLogin.userId;
+            review.tourId = tourId;
+            review.rating = $(`input[name="rating${index}"]:checked`).val();
+            const comment = $(`#userComment-view-${id}`).val();
+            if (comment !== '') {
+                review.comment = comment;
+                const apiUrlReviewUpdate = `http://localhost:4444/review/${id}`;
+                $.ajax(apiUrlReviewUpdate, {
+                    type: "PUT",
+                    data: JSON.stringify(review),
+                    contentType: "application/json",
+                    dataType: "json",
+                    headers: {
+                        Authorization: 'Bearer ' + dataLogin.token
+                    },
+                    success: function (review) {
+                        alert(review.message);
+                        window.location.reload();
+                    }
+                });
+            } else {
+                alert("Chưa nhập bình luận!");
+            }
+        }
+
+        function reverse() {
+            window.location.reload();
+        }
+
+        function deleteComment() {
+            const url = new URL(window.location.href);
+            const searchParam = new URLSearchParams(url.search);
+            const tourId = searchParam.get("id");
+            const apiUrl = `http://localhost:4444/review/${localStorage.getItem("reviewId")}`;
+            const authenticate = JSON.parse(localStorage.getItem("dataLoginClient"));
+            $.ajax(apiUrl, {
+                type: "DELETE",
+                contentType: "application/json",
+                dataType: "json",
+                headers: {
+                    Authorization: 'Bearer ' + authenticate.token
+                },
+                success: function async(data) {
+                    localStorage.removeItem("reviewId");
+                    window.location.reload();
+                },
+                error: function (error) {
+                    alert(error.responseJSON.message);
+                    localStorage.removeItem("reviewId");
+                }
+            });
+        }
+    </script>
+
     <script>
         $(document).ready(function () {
             const url = new URL(window.location.href);
@@ -480,7 +1054,6 @@
                 document.location.pathname = '/tour/confirmation.html';
             } else {
                 alert("Cần đăng nhập để đặt tour!");
-                document.location.pathname = '/tour/login.html';
             }
         }
     </script>

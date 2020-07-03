@@ -118,7 +118,7 @@
                     </div>
                     <div class="site-page-breadcrumb">
                         <span>
-                            <a style="" href="#">Home </a>
+                            Home
                             <i class="fa fa-angle-double-right"></i> activities
                         </span>
                     </div>
@@ -274,7 +274,7 @@
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
             let str = "";
             if (!dataLogin) {
-                str += `<div id="login-right">
+                str += `<div style="margin-top: 3.5em;" id="login-right">
                             <a href="login.html">Login</a>
                             <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
                             <a href="register.html">Register</a>
@@ -290,16 +290,22 @@
                         Authorization: 'Bearer ' + dataLogin.token
                     }, success: function (result) {
                         const data = result.data;
+                        let imgSrc = '';
+                        if (data.photo === "") {
+                            imgSrc += 'images/none_avatar.png';
+                        } else {
+                            imgSrc += `http://localhost:4444/${data.photo}`;
+                        }
                         str += `
                         <ul class="navbar-nav navbar-left">
                         <li class="nav-item dropdown no-arrow">
                             <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
-                                    href="#"><img class="img-profile rounded-circle" src="images/none_avatar.png" style="max-width: 40px;border-radius: 50%!important;">   <span>${data.displayName}</span></a>
+                                    href="#"><img class="img-profile rounded-circle" src="${imgSrc}" style="max-width: 40px;border-radius: 50%!important;">   <span>${data.displayName}</span></a>
                             <ul class="dropdown-menu" style="background-color: white;color: gray">
                                 <li><a href="myaccount.html">
                                     Profile
                                 </a></li>
-                                <li><a id="killToken" href="login.html">
+                                <li><a onclick="killToken()" href="login.html">
                                     Logout
                                 </a></li>
                             </ul>
@@ -313,7 +319,6 @@
             }
         });
     </script>
-    <!-- Lm tiep cho xong phan actives -->
     <script>
         $(document).ready(function () {
             const now = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`;
@@ -329,7 +334,21 @@
                         str += `<h3 style="text-align: center;">Not Found</h3>`
                     } else {
                         for (const i of data) {
-                            str += `
+                            const apirUrlReview = `http://localhost:4444/review/s?tourid=${i.id}`;
+                            $.ajax(apirUrlReview, {
+                                type: "GET",
+                                contentType: "application/json",
+                                dataType: "json",
+                                async: false,
+                                success: function (review) {
+                                    const data = review.data;
+                                    const totalReview = data.length;
+                                    let rating = 0;
+                                    for (const item of data) {
+                                        rating += item.rating;
+                                    }
+                                    rating = Math.round(rating / (5 * totalReview) * 100);
+                                    str += `
                             <div class="clearfix"></div>
                                 <div class="activity-contnet">
                                     <div class="col-md-4">
@@ -350,14 +369,16 @@
                                                 </p>
                                                 <br>
                                                 <div class="feedback">
-                                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
-                                                    <span class="review">75 reviews</span>
+                                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container"><span style="width: ${rating}%;" class="five-stars"></span></div><br>
+                                                    <span class="review">Total: ${totalReview} reviews</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             `;
+                                }
+                            });
                         }
                     }
 

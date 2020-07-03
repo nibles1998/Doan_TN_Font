@@ -93,27 +93,7 @@
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                     <div class="pull-right" style="margin-top: -1.5em;" id="login">
-                                        <div style="display: flex;">
-                                            <ul class="navbar-nav navbar-left">
-                                                <li class="nav-item dropdown no-arrow">
-                                                <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
-                                                        href="#"><img class="img-profile rounded-circle"
-                                                            src="images/none_avatar.png"
-                                                            style="max-width: 40px;border-radius: 50%!important;">
-                                                        <span id="displayNameClient"></span></a>
-                                                    <ul class="dropdown-menu"
-                                                        style="background-color: white;color: gray">
-                                                        <li><a href="myaccount.html">
-                                                                Profile
-                                                            </a></li>
-                                                        <li><a id="killToken" href="login.html">
-                                                                Logout
-                                                            </a></li>
-                                                    </ul>
-                                                </li>
-                                                </li>
-                                            </ul>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -257,37 +237,48 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="user">
+                    <form class="user" onsubmit="return updateUserInfo(event)">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="fullName-update">Full Name:</label>
                                     <input type="text" class="form-control" id="fullName-update"
-                                        placeholder="Enter Full Name" required>
+                                        placeholder="Enter Full Name" name="fullName" required>
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="displayName">Display Name:</label>
                                     <input type="text" class="form-control" id="displayName-update"
-                                        placeholder="Enter Display Name" required>
+                                        placeholder="Enter Display Name" name="displayName" required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="address-update">Address:</label>
-                            <input type="text" class="form-control" id="address-update" placeholder="Enter Address"
-                                required>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="address-update">Address:</label>
+                                    <input type="text" class="form-control" id="address-update"
+                                        placeholder="Enter Address" name="address" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="gender-update">Gender:</label>
+                                    <select class="form-control" id="gender-update" name="gender">
+                                        <option value="true">Nam</option>
+                                        <option value="false">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="phone-update">Phone:</label>
                                     <input type="text" class="form-control" id="phone-update"
-                                        placeholder="Enter Phone Number" required>
+                                        placeholder="Enter Phone Number" name="phone" required>
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="dateOfBirth-update">Date Of Birth:</label>
                                     <input type="date" class="form-control" id="dateOfBirth-update"
-                                        placeholder="Enter BirthDay" required>
+                                        placeholder="Enter BirthDay" name="dateOfBirth" required>
                                 </div>
                             </div>
                         </div>
@@ -296,20 +287,27 @@
                                 <div class="col-lg-6">
                                     <label for="country-update">Country:</label>
                                     <input type="text" class="form-control" id="country-update"
-                                        placeholder="Enter Country" required>
+                                        placeholder="Enter Country" name="country" required>
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="description-update">Description:</label>
                                     <input type="text" class="form-control" id="description-update"
-                                        placeholder="Enter Description" required>
+                                        placeholder="Enter Description" name="description" required>
+                                    <input type="hidden" name="paymentMethod" value="['Momo']">
+                                    <input id="rolePreUpdate" type="hidden" name="roleId">
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <img class="w-100" id="image-pre-update" src="">
+                            <label for="image-update">Image:</label>
+                            <input type="file" class="form-control" id="image-update" name="photo">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="updateUserInfo()">Update</button>
                 </div>
             </div>
         </div>
@@ -433,12 +431,24 @@
                     Authorization: 'Bearer ' + dataLogin.token
                 }, success: function (result) {
                     const data = result.data;
-                    $("#displayNameClient").html(data.displayName);
+                    $("#rolePreUpdate").val(data.roleId);
                     let description = '';
                     if (data.description !== '') {
                         description = data.description;
                     } else {
                         description = 'Notthing!'
+                    }
+                    let imgSrc = '';
+                    if (data.photo !== "") {
+                        imgSrc += `http://localhost:4444/${data.photo}`;
+                    } else {
+                        imgSrc += 'images/none_avatar.png';
+                    }
+                    let genderInfo = '';
+                    if (data.gender) {
+                        genderInfo += 'Nam';
+                    } else {
+                        genderInfo += 'Nữ';
                     }
                     let str = `
                     <div class="profile-details">
@@ -448,7 +458,7 @@
                             <div class="content-profile">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <img style="border-radius: 50%!important;border: 1px solid slategray;" src="images/none_avatar.png" alt="No Image Available">
+                                        <img style="border-radius: 50%!important;border: 1px solid slategray;" src="${imgSrc}">
                                     </div>
                                     <div class="col-md-9">
                                         <div class="info">
@@ -488,6 +498,19 @@
                                             </div>
                                             <div class="col-md-6">
                                                 ${new Date(Date.parse(data.dateOfBirth)).getDate()}/${new Date(Date.parse(data.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(data.dateOfBirth)).getFullYear()}
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="col-md-1">
+                                                <i class="fa fa-transgender-alt"></i>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="title">
+                                                    Gender:
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                ${genderInfo}
                                             </div>
                                         </div>
                                         <div class="info">
@@ -557,7 +580,30 @@
                         </div>
                     `;
                     $("#nav-profile").html(str);
-
+                    let loginInfo = `
+                        <div style="display: flex;">
+                            <ul class="navbar-nav navbar-left">
+                                <li class="nav-item dropdown no-arrow">
+                                <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
+                                        href="#"><img class="img-profile rounded-circle"
+                                            src="${imgSrc}"
+                                            style="max-width: 40px;border-radius: 50%!important;">
+                                        <span id="displayNameClient">${data.displayName}</span></a>
+                                    <ul class="dropdown-menu"
+                                        style="background-color: white;color: gray">
+                                        <li><a href="myaccount.html">
+                                                Profile
+                                            </a></li>
+                                        <li><a onclick="killToken()" href="login.html">
+                                                Logout
+                                            </a></li>
+                                    </ul>
+                                </li>
+                                </li>
+                            </ul>
+                        </div>
+                    `;
+                    $("#login").html(loginInfo);
                     let listTour;
 
                     const apiUrlTour = `http://localhost:4444/tour/s`;
@@ -737,8 +783,15 @@
                     Authorization: 'Bearer ' + authenticate.token
                 },
                 dataType: "json",
+                async: false,
                 success: function async(data) {
                     const info = data.data;
+                    if (info.photo === "") {
+                        $("#image-pre-update").attr("src", '');
+                    } else {
+                        $("#image-pre-update").attr("src", `http://localhost:4444/${info.photo}`);
+                    }
+                    $("#gender-update").val(`${info.gender}`);
                     $("#fullName-update").val(info.fullName);
                     $("#displayName-update").val(info.displayName);
                     $("#dateOfBirth-update").val((info.dateOfBirth).toString().split("T")[0]);
@@ -754,25 +807,19 @@
             })
         }
 
-        function updateUserInfo() {
+        function updateUserInfo(event) {
+            event.preventDefault();
             const authenticate = JSON.parse(localStorage.getItem("dataLoginClient"));
             const apiUrl = `http://localhost:4444/user/${authenticate.userId}`;
-            const userInfo = {
-                fullName: $("#fullName-update").val(),
-                address: $("#address-update").val(),
-                phone: $("#phone-update").val(),
-                dateOfBirth: $("#dateOfBirth-update").val(),
-                country: $("#country-update").val(),
-                displayName: $("#displayName-update").val(),
-                description: $("#description-update").val(),
-                roleId: authenticate.roleId,
-                paymentMethod: ["Momo"]
-            };
+            const selectBoxGender = document.getElementById("gender-update");
+            const gender = selectBoxGender.options[selectBoxGender.selectedIndex].value;
+            const userData = new FormData(event.target);
+
             $.ajax(apiUrl, {
                 type: "PUT",
-                data: JSON.stringify(userInfo),
-                contentType: "application/json",
-                dataType: "json",
+                data: userData,
+                processData: false,
+                contentType: false,
                 headers: {
                     Authorization: 'Bearer ' + authenticate.token
                 },

@@ -112,13 +112,13 @@
                                                         href="#"><img class="img-profile rounded-circle"
                                                             src="images/none_avatar.png"
                                                             style="max-width: 40px;border-radius: 50%!important;">
-                                                        <span>${data.displayName}</span></a>
+                                                        <span id="displayNameUser"></span></a>
                                                     <ul class="dropdown-menu"
                                                         style="background-color: white;color: gray">
                                                         <li><a href="myaccount.html">
                                                                 Profile
                                                             </a></li>
-                                                        <li><a id="killToken" href="login.html">
+                                                        <li><a onclick="killToken()" href="login.html">
                                                                 Logout
                                                             </a></li>
                                                     </ul>
@@ -150,7 +150,7 @@
                     </div>
                     <div class="site-page-breadcrumb">
                         <span>
-                            <a style="" href="#">Home </a>
+                            Home
                             > Confirmation
                         </span>
                     </div>
@@ -432,6 +432,7 @@
                     </div>
                     `;
                     $("#bookingDetail").html(str);
+                    $("#displayNameUser").html(data.displayName);
                 }
             });
 

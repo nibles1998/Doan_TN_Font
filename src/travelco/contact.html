@@ -120,7 +120,7 @@
                     </div>
                     <div class="site-page-breadcrumb">
                         <span>
-                            <a style="" href="#">Home </a>
+                            Home
                             <i class="fa fa-angle-double-right"></i> Contact Us
                         </span>
                     </div>
@@ -345,32 +345,38 @@
                 const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
                 let str = "";
                 if (!dataLogin) {
-                str += `<div id="login-right">
+                    str += `<div style="margin-top: 3.5em;" id="login-right">
                             <a href="login.html">Login</a>
                             <span style="border: 1px solid #fff; margin: 6px 0px;"></span>
                             <a href="register.html">Register</a>
                         </div>`;
-                $("#login").html(str);
-            } else {
-                const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
-                $.ajax(apiUrl, {
-                    type: "GET",
-                    contentType: "application/json",
-                    dataType: "json",
-                    headers: {
-                        Authorization: 'Bearer ' + dataLogin.token
-                    }, success: function (result) {
-                        const data = result.data;
-                        str += `
+                    $("#login").html(str);
+                } else {
+                    const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
+                    $.ajax(apiUrl, {
+                        type: "GET",
+                        contentType: "application/json",
+                        dataType: "json",
+                        headers: {
+                            Authorization: 'Bearer ' + dataLogin.token
+                        }, success: function (result) {
+                            const data = result.data;
+                            let imgSrc = '';
+                            if (data.photo === "") {
+                                imgSrc += 'images/none_avatar.png';
+                            } else {
+                                imgSrc += `http://localhost:4444/${data.photo}`;
+                            }
+                            str += `
                         <ul class="navbar-nav navbar-left">
                         <li class="nav-item dropdown no-arrow">
                             <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
-                                    href="#"><img class="img-profile rounded-circle" src="images/none_avatar.png" style="max-width: 40px;border-radius: 50%!important;">   <span>${data.displayName}</span></a>
+                                    href="#"><img class="img-profile rounded-circle" src="${imgSrc}" style="max-width: 40px;border-radius: 50%!important;">   <span>${data.displayName}</span></a>
                             <ul class="dropdown-menu" style="background-color: white;color: gray">
                                 <li><a href="myaccount.html">
                                     Profile
                                 </a></li>
-                                <li><a id="killToken" href="login.html">
+                                <li><a onclick="killToken()" href="login.html">
                                     Logout
                                 </a></li>
                             </ul>
@@ -378,10 +384,10 @@
                         </li>
                         </ul>
                         `;
-                        $("#login").html(str);
-                    }
-                });
-            }
+                            $("#login").html(str);
+                        }
+                    });
+                }
             });
         </script>
         <script>
