@@ -158,6 +158,7 @@
                           <th>DisplayName</th>
                           <th>FullName</th>
                           <th>DateOfBirth</th>
+                          <th>Gender</th>
                           <th>Address</th>
                           <th>Mail</th>
                           <th>Phone</th>
@@ -215,9 +216,20 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="address-create">Address:</label>
-                          <input type="text" class="form-control" id="address-create" placeholder="Enter Address"
-                            required>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <label for="address-create">Address:</label>
+                              <input type="text" class="form-control" id="address-create" placeholder="Enter Address"
+                                required>
+                            </div>
+                            <div class="col-lg-6">
+                              <label for="gender-create">Gender:</label>
+                              <select class="form-control" id="gender-create">
+                                <option value="true">Nam</option>
+                                <option value="false">Nữ</option>
+                              </select>
+                            </div>
+                          </div>
                         </div>
                         <div class="form-group">
                           <div class="row">
@@ -227,7 +239,7 @@
                                 required>
                             </div>
                             <div class="col-lg-6">
-                              <label for="dateOfBirth">Date Of Birth:</label>
+                              <label for="dateOfBirth-create">Date Of Birth:</label>
                               <input type="date" class="form-control" id="dateOfBirth-create"
                                 placeholder="Enter BirthDay" required>
                             </div>
@@ -286,9 +298,20 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="address-update">Address:</label>
-                          <input type="text" class="form-control" id="address-update" placeholder="Enter Address"
-                            required>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <label for="address-update">Address:</label>
+                              <input type="text" class="form-control" id="address-update" placeholder="Enter Address"
+                                required>
+                            </div>
+                            <div class="col-lg-6">
+                              <label for="gender-update">Gender:</label>
+                              <select class="form-control" id="gender-update">
+                                <option value="true">Nam</option>
+                                <option value="false">Nữ</option>
+                              </select>
+                            </div>
+                          </div>
                         </div>
                         <div class="form-group">
                           <div class="row">
@@ -464,6 +487,13 @@
                   userRole += data.data.type;
                 }
               });
+              let genderInfo = '';
+              let gender = i.gender;
+              if (gender) {
+                genderInfo += 'Nam';
+              } else {
+                genderInfo += 'Nữ';
+              }
 
               str += '<tr><td>'
                 + `<button type="button" id="btnDelete-${currentIndex}" onclick="getUserId(${currentIndex})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter-Delete">Delete</button>`
@@ -473,6 +503,7 @@
                 + '</span></td><td>' + i.displayName
                 + '</td><td>' + i.fullName
                 + `</td><td>${new Date(Date.parse(i.dateOfBirth)).getDate()}/${new Date(Date.parse(i.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(i.dateOfBirth)).getFullYear()}`
+                + `</td><td>` + genderInfo
                 + '</td><td>' + i.address
                 + '</td><td>' + i.email
                 + '</td><td>' + i.phone
@@ -504,6 +535,7 @@
             dataType: "json",
             success: function async(data) {
               const info = data.data;
+              $("#gender-update").val(`${info.gender}`);
               $("#fullName-update").val(info.fullName);
               $("#displayName-update").val(info.displayName);
               $("#dateOfBirth-update").val((info.dateOfBirth).toString().split("T")[0]);
@@ -529,6 +561,8 @@
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
           const selectBox = document.getElementById("role-update");
           const role = selectBox.options[selectBox.selectedIndex].value;
+          const selectBoxGender = document.getElementById("gender-update");
+          const gender = selectBoxGender.options[selectBoxGender.selectedIndex].value;
           const userInfo = {
             fullName: $("#fullName-update").val(),
             address: $("#address-update").val(),
@@ -537,6 +571,7 @@
             country: $("#country-update").val(),
             displayName: $("#displayName-update").val(),
             roleId: role,
+            gender,
             paymentMethod: ["Momo"]
           };
           $.ajax(apiUrl, {
@@ -567,6 +602,8 @@
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
           const selectBox = document.getElementById("role-create");
           const role = selectBox.options[selectBox.selectedIndex].value;
+          const selectBoxGender = document.getElementById("gender-create");
+          const gender = selectBoxGender.options[selectBoxGender.selectedIndex].value;
           const userInfo = {
             fullName: $("#fullName-create").val(),
             address: $("#address-create").val(),
@@ -577,6 +614,7 @@
             country: $("#country-create").val(),
             displayName: $("#displayName-create").val(),
             roleId: role,
+            gender,
             description: "",
             paymentMethod: ["Momo"]
           };

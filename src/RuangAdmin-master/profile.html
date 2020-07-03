@@ -148,6 +148,12 @@
                                     </div>
                                     <br />
                                     <div class="row">
+                                        <div class="col-md-1"><i class="fa fa-transgender-alt"></i></div>
+                                        <div class="col-md-3"><b>Gender:</b></div>
+                                        <div class="col-md-8" id="gender-info"></div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
                                         <div class="col-md-1"><i class="fa fa-envelope"></i></div>
                                         <div class="col-md-3"><b>Email:</b></div>
                                         <div class="col-md-8" id="email-info"></div>
@@ -260,15 +266,19 @@
                 },
             }).done((result) => {
                 const data = result.data;
+                let genderInfo = '';
                 if (data.photo !== '') {
                     $("#photo-info").attr("src", `http://api.nibles-tour.ga/${data.photo}`);
                 } else {
                     if (data.gender) {
                         $("#photo-info").attr("src", `img/boy.png`);
+                        genderInfo += 'Nam';
                     } else {
                         $("#photo-info").attr("src", `img/girl.png`);
+                        genderInfo += 'Nữ';
                     }
                 }
+                $("#gender-info").html(genderInfo);
                 $("#fullName-info").html(data.fullName);
                 $("#displayName-info").html(data.displayName);
                 $("#dateOfBirth-info").html(`${new Date(Date.parse(data.dateOfBirth)).getDate()}/${new Date(Date.parse(data.dateOfBirth)).getMonth() + 1}/${new Date(Date.parse(data.dateOfBirth)).getFullYear()}`);
