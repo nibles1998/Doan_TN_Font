@@ -470,10 +470,12 @@
                 },
                 success: function async(data) {
                     alert(data.message);
+                    localStorage.removeItem('booking');
                     document.location.pathname = '/index.html';
                 },
                 error: function (error) {
                     alert(error.responseJSON.message);
+                    localStorage.removeItem('booking');
                     document.location.pathname = '/index.html';
                 }
             });
