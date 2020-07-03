@@ -388,7 +388,7 @@
     </script>
     <script>
         function getTourDetail(id) {
-            window.location.assign = `/booking-form.html?id=${id}`;
+            window.location.assign = `http://nibles-tour.ga/booking-form.html?id=${id}`;
         }
     </script>
     <script>
@@ -433,7 +433,7 @@
                                     <div class="tour-duration">Book Now and <span>save 30%*</span></div>
                                     <div class="tour-person">Person: 2<span>save 30%*</span></div>
                                     <div class="tour-btns">
-                                    <a href="booking-form.html" onclick="getTourDetail(${i.id})" class="button align-right">Book Now</a></div>
+                                        <button onclick="getTourDetail('${i.id}')" class="button align-right hover-effect">Book Now</button></div>
                                 </div>
                             </div>
                         </div>`;
