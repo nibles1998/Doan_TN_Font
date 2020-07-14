@@ -109,8 +109,8 @@
                                             <ul class="navbar-nav navbar-left">
                                                 <li class="nav-item dropdown no-arrow">
                                                 <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"
-                                                        href="#"><img class="img-profile rounded-circle"
-                                                            src="images/none_avatar.png"
+                                                        href="#"><img id="image-login" class="img-profile rounded-circle"
+                                                            src=""
                                                             style="max-width: 40px;border-radius: 50%!important;">
                                                         <span id="displayNameUser"></span></a>
                                                     <ul class="dropdown-menu"
@@ -431,6 +431,11 @@
                         </div>
                     </div>
                     `;
+                    if(data.photo){
+                        $("#image-login").attr('src', `http://localhost:4444/${data.photo}`);
+                    }else{
+                        $("#image-login").attr('src', 'images/none_avatar.png');
+                    }
                     $("#bookingDetail").html(str);
                     $("#displayNameUser").html(data.displayName);
                 }
