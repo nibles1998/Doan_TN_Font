@@ -388,7 +388,7 @@
         $(document).ready(function () {
             const booking = JSON.parse(localStorage.getItem("booking"));
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
-            const apiUrlUser = `http://api.nibles-tour.ga/user/${dataLogin.userId}`;
+            const apiUrlUser = `http://localhost:4444/user/${dataLogin.userId}`;
             $.ajax(apiUrlUser, {
                 type: "GET",
                 contentType: "application/json",
@@ -445,7 +445,7 @@
         }
 
         function createBill() {
-            const apiUrl = 'http://api.nibles-tour.ga/bill';
+            const apiUrl = 'http://localhost:4444/bill';
             const booking = JSON.parse(localStorage.getItem("booking"));
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
             const selectBox = document.getElementById("paymentMethod");

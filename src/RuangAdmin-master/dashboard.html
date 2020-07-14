@@ -245,7 +245,7 @@
         <script>
             $(document).ready(function () {
                 const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
-                const apiUrl = `http://api.nibles-tour.ga/userrole/${dataLogin.roleId}`;
+                const apiUrl = `http://localhost:4444/userrole/${dataLogin.roleId}`;
                 $.ajax(apiUrl, {
                     type: "GET",
                     contentType: "application/json",
@@ -270,7 +270,7 @@
         <script>
             const displayName = JSON.parse(localStorage.getItem("displayName"));
             const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
-            const apiUrl = `http://api.nibles-tour.ga/user/${dataLogin.userId}`;
+            const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
             $.ajax(apiUrl, {
                 type: "GET",
                 contentType: "application/json",
@@ -296,7 +296,7 @@
             `;
                     } else {
                         menuUser += `
-                <img class="img-profile rounded-circle" src="http://api.nibles-tour.ga/${data.photo}" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="http://localhost:4444/${data.photo}" style="max-width: 60px">
                 <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small">${displayName}</span>
             `;
                     }
@@ -308,7 +308,7 @@
         <!---- Get data for Dashboard ---->
         <script type="text/javascript">
             $(document).ready(function () {
-                const apiUrlBill = 'http://api.nibles-tour.ga/bill/s';
+                const apiUrlBill = 'http://localhost:4444/bill/s';
                 const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
 
                 $.ajax({
@@ -339,7 +339,7 @@
                                 status += '</td><td><span class="badge badge-primary">Processing</span>'
                             }
                         }
-                        const apiUrlUser = `http://api.nibles-tour.ga/user/${i.userId}`;
+                        const apiUrlUser = `http://localhost:4444/user/${i.userId}`;
                         let userName = "";
                         await $.ajax({
                             url: apiUrlUser,
@@ -352,7 +352,7 @@
                                 userName += data.data.fullName;
                             }
                         });
-                        const apiUrlTour = `http://api.nibles-tour.ga/tour/${i.tourId}`;
+                        const apiUrlTour = `http://localhost:4444/tour/${i.tourId}`;
                         let tourName = "";
                         await $.ajax({
                             url: apiUrlTour,
@@ -382,7 +382,7 @@
 
                 });
 
-                const apiUrlUser = 'http://api.nibles-tour.ga/user/s';
+                const apiUrlUser = 'http://localhost:4444/user/s';
                 $.ajax({
                     url: apiUrlUser,
                     type: "GET",
@@ -408,7 +408,7 @@
                     totalUser.innerHTML = (data ? data.length : 0).toLocaleString();
                 });
 
-                const apiUrlCompany = 'http://api.nibles-tour.ga/company/s';
+                const apiUrlCompany = 'http://localhost:4444/company/s';
                 $.ajax({
                     url: apiUrlCompany,
                     type: "GET",

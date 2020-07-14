@@ -394,7 +394,7 @@
       <script>
         const displayName = JSON.parse(localStorage.getItem("displayName"));
         const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
-        const apiUrl = `http://api.nibles-tour.ga/user/${dataLogin.userId}`;
+        const apiUrl = `http://localhost:4444/user/${dataLogin.userId}`;
         $.ajax(apiUrl, {
           type: "GET",
           contentType: "application/json",
@@ -420,7 +420,7 @@
             `;
             } else {
               menuUser += `
-                <img class="img-profile rounded-circle" src="http://api.nibles-tour.ga/${data.photo}" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="http://localhost:4444/${data.photo}" style="max-width: 60px">
                 <span id="userNameLogin" class="ml-2 d-none d-lg-inline text-white small">${displayName}</span>
             `;
             }
@@ -431,7 +431,7 @@
 
       <script>
         $(document).ready(function () {
-          const apiUrl = 'http://api.nibles-tour.ga/userrole/s';
+          const apiUrl = 'http://localhost:4444/userrole/s';
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
           $.ajax({
             url: apiUrl,
@@ -458,7 +458,7 @@
       <!-- Get data in table -->
       <script>
         $(document).ready(function () {
-          const apiUrl = 'http://api.nibles-tour.ga/user/s';
+          const apiUrl = 'http://localhost:4444/user/s';
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
           $.ajax({
             url: apiUrl,
@@ -474,7 +474,7 @@
             let currentIndex = 0;
             for (const i of data) {
 
-              const apiUrlUser = `http://api.nibles-tour.ga/userrole/${i.roleId}`;
+              const apiUrlUser = `http://localhost:4444/userrole/${i.roleId}`;
               let userRole = "";
               await $.ajax({
                 url: apiUrlUser,
@@ -524,7 +524,7 @@
         function getData(index) {
           localStorage.setItem("userId", $(`#userId-${index}`).html());
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
-          const apiUrl = `http://api.nibles-tour.ga/user/${localStorage.getItem("userId")}`;
+          const apiUrl = `http://localhost:4444/user/${localStorage.getItem("userId")}`;
           $.ajax({
             url: apiUrl,
             type: "GET",
@@ -557,7 +557,7 @@
 
         function updateUserInfo() {
           const userId = localStorage.getItem("userId");
-          const apiUrl = `http://api.nibles-tour.ga/user/${userId}`;
+          const apiUrl = `http://localhost:4444/user/${userId}`;
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
           const selectBox = document.getElementById("role-update");
           const role = selectBox.options[selectBox.selectedIndex].value;
@@ -598,7 +598,7 @@
         }
 
         function createUser() {
-          const apiUrl = 'http://api.nibles-tour.ga/user';
+          const apiUrl = 'http://localhost:4444/user';
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
           const selectBox = document.getElementById("role-create");
           const role = selectBox.options[selectBox.selectedIndex].value;
@@ -638,7 +638,7 @@
         }
 
         function deleteUser() {
-          const apiUrl = `http://api.nibles-tour.ga/user/${localStorage.getItem("userId")}`;
+          const apiUrl = `http://localhost:4444/user/${localStorage.getItem("userId")}`;
           const authenticate = JSON.parse(localStorage.getItem("dataLogin"));
           $.ajax(apiUrl, {
             type: "DELETE",
