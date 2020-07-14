@@ -303,7 +303,7 @@
                     if (data && data.token) {
                         localStorage.setItem("dataLoginClient", JSON.stringify(data));
                     }
-                    document.location.pathname = '/tours.html';
+                    document.location.pathname = '/tour/tours.html';
                 },
                 error: function (error) {
                     alert(error.responseJSON.message);
