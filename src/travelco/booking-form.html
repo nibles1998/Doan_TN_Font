@@ -673,7 +673,7 @@
             const tourId = searchParam.get("id");
             const dataLogin = JSON.parse(localStorage.getItem("dataLoginClient"));
             if (!dataLogin) {
-                alert("Cần đăng nhập để đặt bình luận!");
+                alert("Login required to comment!");
             } else {
                 const review = {};
                 review.userId = $("#userIdComment").val();
@@ -823,7 +823,7 @@
                         }
                     });
                 } else {
-                    alert("Chưa nhập bình luận!");
+                    alert("No comments yet!");
                 }
             }
         }
@@ -874,7 +874,7 @@
                     }
                 });
             } else {
-                alert("Chưa nhập bình luận!");
+                alert("No comments yet!");
             }
         }
 
@@ -1053,7 +1053,7 @@
 
                 document.location.pathname = '/confirmation.html';
             } else {
-                alert("Cần đăng nhập để đặt tour!");
+                alert("Login required to book tour!");
             }
         }
     </script>
